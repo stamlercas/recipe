@@ -41373,15 +41373,22 @@ var homepage = new Vue({
         inventory: [],
         userID: String,
         search: '',
+        addfield: '',
         columns: ['item'],
         actions: [{ name: 'edit-item', icon: 'fa-pencil-square-o', class: '' }, { name: 'delete-item', icon: 'fa-times', class: '' }]
     },
     created: function created() {
-        this.inventory = [{ item: 'carrots' }];
+        //this.inventory = [{ item: 'carrots' }];
+        this.inventory = inventory;
 
         __WEBPACK_IMPORTED_MODULE_0__bus_action_bus_js__["a" /* ActionBus */].$on('table-action', this.fireAction);
     },
     methods: {
+        addItem: function addItem() {
+            this.$http.post(inventory_create_url).then(function (response) {
+                console.log(response);
+            });
+        },
         fireAction: function fireAction(data) {
             switch (data.action) {
                 case 'delete-item':

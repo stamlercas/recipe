@@ -12,6 +12,7 @@ const homepage = new Vue({
     	],
     	userID: String,
     	search: '',
+    	addfield: '',
     	columns: [
     		'item'
     	],
@@ -21,14 +22,17 @@ const homepage = new Vue({
     	]
     },
     created: function() {
-    	this.inventory = [{ item: 'carrots' }];
+    	//this.inventory = [{ item: 'carrots' }];
+    	this.inventory = inventory;
 
     	ActionBus.$on('table-action', this.fireAction);
     },
     methods: {
-    	addItem: function(item) {
-    		//TODO;
-    	}
+    	addItem: function() {
+    		this.$http.post(inventory_create_url, ).then((response) => {
+		        			console.log(response);
+		        		});
+    	},
     	fireAction: function(data) {
     		switch(data.action) {
     			case 'delete-item':

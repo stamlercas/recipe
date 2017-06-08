@@ -43,3 +43,9 @@ Route::get('/inventory/delete/{inventory_id}', [
     'as' => 'inventory.delete',
     'middleware' => 'auth'
 ]);
+
+Route::post('/inventory/create', [
+    'uses' => 'InventoryController@create',
+    'as' => 'inventory.create',
+    'middleware' => 'auth'
+]);

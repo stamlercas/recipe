@@ -10,9 +10,11 @@
         <div class="row">
         	<div class="col-md-6">
 			  <div class="input-group">
-			    <input type="email" class="form-control" id="item" placeholder="Add Item">
+			    <input type="email" class="form-control" id="item" placeholder="Add Item" v-model="addfield">
 			    <span class="input-group-btn">
-			    	<button type="submit" class="btn btn-success"><i class="fa fa-plus-circle"></i> Add</button>
+			    	<button type="submit" class="btn btn-success" @click="addItem()">
+			    		<i class="fa fa-plus-circle"></i> Add
+		    		</button>
 	    		</span>
 			  </div>
 		  </div>
@@ -29,6 +31,7 @@
     <script>
     	var inventory = {{ json_encode($inventory) }};
     	var inventory_delete_url = "{{ route('inventory.delete', ['inventory_id' => ''])  }}" + "/";
+    	var inventory_create_url = "{{ route('inventory.create') }}";
     </script>
     <script src="{{ asset('js/inventory.js') }}"></script>
 @endsection

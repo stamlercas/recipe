@@ -21,7 +21,7 @@
 </template>
 
 <script>
-// Import the EventBus we just created.
+
 import { ActionBus } from '../bus/action-bus.js';
 
 export default {

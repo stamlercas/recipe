@@ -24,6 +24,24 @@ class InventoryController extends Controller
         return view('inventory', ['inventory' => $inventory]);
     }
 
+    public function create(Request $request)
+    {
+        //validation
+        $this->validate($request, [
+            'item' => 'required|max:20',
+        ]);
+        $inventory = new Inventory();
+        $inventory->item = $request['item'];
+        
+        $message = 'There was an error.';
+        if ($request->user()->inventory()->save($inventory)) //save post in relation to user
+        {
+            $message = 'Item successfully added!';
+            return response()->json(['success' => true, 'item' => $inventory, 'message' => $message], 200);
+        }
+        return response()->json(['success' => false, 'message' => $message], 200);
+    }
+
     public function delete($inventory_id)
     {
         $item = Post::where('id', $inventory_id)->first();
