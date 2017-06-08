@@ -30,7 +30,7 @@
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-sm-3 col-lg-2">
-                            @include('includes.header')
+                            @include('includes.nav')
                         </div>
                         <div class="col-sm-9 col-lg-10">
                             @yield('content')

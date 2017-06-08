@@ -11,6 +11,9 @@
 // Bootstrap override
 @import "bootstrap-override";
 
+// Navbar Fixed Side
+@import "navbar-fixed-side";
+
 nav ul li a {
 	text-align:center;
 }
@@ -19,7 +22,15 @@ nav ul li a {
     position: absolute;
     bottom: 0;
     text-align:center;
-  }
+}
+
+.home-bg {
+    background-color: #0F5276;
+    background-size: contain;
+    background-image: -webkit-radial-gradient(0 0,circle,#0F5276,#87D7CD);
+    background-image: radial-gradient(circle at 0 0,#0F5276,#87D7CD);
+    z-index: -1;
+}
 
 .vertical-center {
   position: absolute;

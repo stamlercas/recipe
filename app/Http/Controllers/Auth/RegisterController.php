@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace Recipr\Http\Controllers\Auth;
 
-use App\User;
-use App\Http\Controllers\Controller;
+use Recipr\User;
+use Recipr\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 
@@ -51,7 +51,7 @@ class RegisterController extends Controller
             'first_name' => 'required|string|max:255',
             'last_name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
-            'username' => 'require|string|min:6|unique:users|without_spaces',
+            'username' => 'required|string|min:6|unique:users|without_spaces',
             'password' => 'required|string|min:6|confirmed',
         ]);
     }

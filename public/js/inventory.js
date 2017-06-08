@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 41);
+/******/ 	return __webpack_require__(__webpack_require__.s = 42);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -41343,23 +41343,296 @@ module.exports = function(module) {
 
 
 /***/ }),
-/* 34 */,
-/* 35 */,
-/* 36 */
-/***/ (function(module, exports) {
+/* 34 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-// removed by extract-text-webpack-plugin
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ActionBus; });
+
+var ActionBus = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a();
 
 /***/ }),
-/* 37 */,
-/* 38 */,
-/* 39 */,
-/* 40 */,
-/* 41 */
+/* 35 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__bus_action_bus_js__ = __webpack_require__(34);
+__webpack_require__(9);
+
+Vue.component('pantry-table', __webpack_require__(38));
+
+// Import the EventBus.
+
+
+var homepage = new Vue({
+    el: '#inventory',
+    data: {
+        inventory: [],
+        userID: String,
+        search: '',
+        columns: ['item'],
+        actions: [{ name: 'edit-item', icon: 'fa-pencil-square-o', class: '' }, { name: 'delete-item', icon: 'fa-times', class: '' }]
+    },
+    created: function created() {
+        this.inventory = [{ item: 'carrots' }];
+
+        __WEBPACK_IMPORTED_MODULE_0__bus_action_bus_js__["a" /* ActionBus */].$on('table-action', this.fireAction);
+    },
+    methods: {
+        fireAction: function fireAction(data) {
+            switch (data.action) {
+                case 'delete-item':
+                    if (confirm("Are you sure you want to delete this item?")) {
+                        this.$http.get(inventory_delete_url + data.data.id).then(function (response) {
+                            console.log(response);
+                        });
+                    }
+                    break;
+                case 'edit-item':
+                    //TODO:
+                    break;
+            }
+        }
+    }
+});
+
+/***/ }),
+/* 36 */,
+/* 37 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__bus_action_bus_js__ = __webpack_require__(34);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+// Import the EventBus we just created.
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+	props: ['data', 'columns', 'filterKey', 'actions'],
+	data: function data() {
+		var sortOrders = {};
+		this.columns.forEach(function (key) {
+			sortOrders[key] = 1;
+		});
+		return {
+			sortKey: '',
+			sortOrders: sortOrders
+		};
+	},
+
+	computed: {
+		sortedTable: function sortedTable() {
+			var sortKey = this.sortKey;
+			var filterKey = this.filterKey && this.filterKey.toLowerCase();
+			var order = this.sortOrders[sortKey] || 1;
+			var data = this.data;
+			if (filterKey) {
+				data = data.filter(function (row) {
+					return Object.keys(row).some(function (key) {
+						return String(row[key]).toLowerCase().indexOf(filterKey) > -1;
+					});
+				});
+			}
+			if (sortKey) {
+				data = data.slice().sort(function (a, b) {
+					a = a[sortKey];
+					b = b[sortKey];
+					return (a === b ? 0 : a > b ? 1 : -1) * order;
+				});
+			}
+			return data;
+		}
+	},
+	methods: {
+		sortBy: function sortBy(key) {
+			this.sortKey = key;
+			this.sortOrders[key] = this.sortOrders[key] * -1;
+		},
+		tableHeading: function tableHeading(key) {
+			return this.sortKey == key ? 'active' : '';
+		},
+		fireAction: function fireAction(action) {
+			__WEBPACK_IMPORTED_MODULE_0__bus_action_bus_js__["a" /* ActionBus */].$emit("table-action", action);
+		},
+		getValue: function getValue(row, key) {
+			for (var i = 0; i < this.columns.length; i++) {
+				if (this.columns[i] === key) return row[key];
+			}
+		}
+	}
+});
+
+/***/ }),
+/* 38 */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(9);
-module.exports = __webpack_require__(36);
+var Component = __webpack_require__(39)(
+  /* script */
+  __webpack_require__(37),
+  /* template */
+  __webpack_require__(40),
+  /* scopeId */
+  null,
+  /* cssModules */
+  null
+)
+Component.options.__file = "C:\\Users\\Porsche Tech\\recipe\\resources\\assets\\js\\components\\Table.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] Table.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-6e58d048", Component.options)
+  } else {
+    hotAPI.reload("data-v-6e58d048", Component.options)
+  }
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 39 */
+/***/ (function(module, exports) {
+
+// this module is a runtime utility for cleaner component module output and will
+// be included in the final webpack user bundle
+
+module.exports = function normalizeComponent (
+  rawScriptExports,
+  compiledTemplate,
+  scopeId,
+  cssModules
+) {
+  var esModule
+  var scriptExports = rawScriptExports = rawScriptExports || {}
+
+  // ES6 modules interop
+  var type = typeof rawScriptExports.default
+  if (type === 'object' || type === 'function') {
+    esModule = rawScriptExports
+    scriptExports = rawScriptExports.default
+  }
+
+  // Vue.extend constructor export interop
+  var options = typeof scriptExports === 'function'
+    ? scriptExports.options
+    : scriptExports
+
+  // render functions
+  if (compiledTemplate) {
+    options.render = compiledTemplate.render
+    options.staticRenderFns = compiledTemplate.staticRenderFns
+  }
+
+  // scopedId
+  if (scopeId) {
+    options._scopeId = scopeId
+  }
+
+  // inject cssModules
+  if (cssModules) {
+    var computed = Object.create(options.computed || null)
+    Object.keys(cssModules).forEach(function (key) {
+      var module = cssModules[key]
+      computed[key] = function () { return module }
+    })
+    options.computed = computed
+  }
+
+  return {
+    esModule: esModule,
+    exports: scriptExports,
+    options: options
+  }
+}
+
+
+/***/ }),
+/* 40 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "table-responsive"
+  }, [_c('table', {
+    staticClass: "table table-striped"
+  }, [_c('thead', [_c('tr', [_vm._l((_vm.columns), function(column) {
+    return _c('th', {
+      class: _vm.tableHeading(column),
+      attrs: {
+        "title": column
+      },
+      on: {
+        "click": function($event) {
+          _vm.sortBy(column)
+        }
+      }
+    }, [_vm._v(_vm._s(column))])
+  }), _vm._v(" "), (_vm.actions != null) ? _c('th') : _vm._e()], 2)]), _vm._v(" "), _c('tbody', _vm._l((_vm.sortedTable), function(row) {
+    return _c('tr', [_vm._l((row), function(value, key, index) {
+      return _c('td', [_vm._v(_vm._s(_vm.getValue(row, key)))])
+    }), _vm._v(" "), _c('td', _vm._l((_vm.actions), function(action) {
+      return _c('i', {
+        staticClass: "fa fa-lg",
+        class: action.icon,
+        on: {
+          "click": function($event) {
+            _vm.fireAction({
+              action: action.name,
+              data: row
+            })
+          }
+        }
+      })
+    }))], 2)
+  }))])])
+},staticRenderFns: []}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-6e58d048", module.exports)
+  }
+}
+
+/***/ }),
+/* 41 */,
+/* 42 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(35);
 
 
 /***/ })

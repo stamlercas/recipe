@@ -19,7 +19,7 @@
                     </a>
                   </li>
                   <li>
-                    <a href="./">
+                    <a href="{{ route('inventory') }}">
                       Manage Pantry
                       <br />
                       <i class="fa fa-shopping-bag fa-5x"></i>
@@ -33,9 +33,15 @@
                     </a>
                   </li>
                   <li>
-                    <a href="./">
+                    <a href="#">
+                      {{ Auth::user()->username }}
+                    </a>
+                  </li>
+                  <li>
+                    <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                       Logout
                     </a>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">{{ csrf_field() }}</form>
                   </li>
                   <!--
                   <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Dropdown <b class="caret"></b></a><ul class="dropdown-menu"><li><a href="#">Sub-page 1</a></li>

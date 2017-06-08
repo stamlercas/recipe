@@ -10,11 +10,36 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+/*
 Route::get('/', function () {
     return view('welcome');
 });
+*/
+Route::get('/', function () {
+    if (Auth::check())
+    {
+        return redirect()->route('dashboard');
+    }
+    return view('welcome');
+})->name('home');
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+//Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/dashboard', [
+    'uses' => 'DashboardController@getDashboard',
+    'as' => 'dashboard',
+    'middleware' => 'auth'
+]);
+
+Route::get('/inventory', [
+	'uses' => 'InventoryController@getInventory',
+	'as' => 'inventory',
+]);
+
+Route::get('/inventory/delete/{inventory_id}', [
+    'uses' => 'InventoryController@delete',
+    'as' => 'inventory.delete',
+    'middleware' => 'auth'
+]);
