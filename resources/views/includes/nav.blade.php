@@ -11,6 +11,11 @@
               </div>
               <div class="collapse navbar-collapse">
                 <ul class="nav navbar-nav">
+                <li>
+                    <a href="{{ route('home') }}">
+                      <i class="fa fa-home fa-5x"></i>
+                    </a>
+                  </li>
                   <li>
                     <a href="./">
                       Search Recipes

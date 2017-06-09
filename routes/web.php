@@ -49,3 +49,13 @@ Route::post('/inventory/create', [
     'as' => 'inventory.create',
     'middleware' => 'auth'
 ]);
+
+Route::post('/inventory/edit', [
+    'uses' => 'InventoryController@edit',
+    'as' => 'inventory.edit',
+    'middleware' => 'auth'
+]);
+
+Route::get('/search', function() {
+    return view('search');
+});

@@ -3,16 +3,16 @@
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th v-for="column in columns" @click="sortBy(column)" :class="tableHeading(column)" 
-                    	:title="column">{{ column }}</th>
+                    <th v-for="column in columns" @click="sortBy(column.name)" :class="tableHeading(column.name)" 
+                    	:title="column.alias">{{ column.alias }}</th>
                     <th v-if="actions != null"></th>
                 </tr>
             </thead>
             <tbody>
                 <tr v-for="row in sortedTable">
-                    <td v-for="(value, key, index) in row">{{ getValue(row, key) }}</td>
-                    <td>
-                    	<i class="fa fa-lg" v-for="action in actions" :class="action.icon" @click="fireAction({action: action.name, data: row})"></i>
+                    <td v-for="column in columns">{{ row[column.name] }}</td>
+                    <td v-if="actions != null">
+                    	<i class="fa fa-lg" style="padding-right:5px;" v-for="action in actions" :class="action.icon" @click="fireAction({action: action.name, data: row})"></i>
                     </td>
                 </tr>
           	</tbody>
@@ -34,7 +34,7 @@ export default {
 		data () {
 			var sortOrders = {}
 			this.columns.forEach(function (key) {
-			  sortOrders[key] = 1
+			  sortOrders[key.name] = 1
 			});
 			return {
 			  sortKey: '',
@@ -75,11 +75,14 @@ export default {
 			fireAction: function(action) {
 				ActionBus.$emit("table-action", action);
 			},
-			getValue: function(row, key) {
+			getValue: function(row, index) {
+				/*
+				console.log(key);
 				for (var i = 0; i < this.columns.length; i++)
-					if (this.columns[i] === key)
+					if (this.columns[i].name == key)
 						return row[key];
+						*/
 			}
 		}
 	}
-	</script>
+</script>

@@ -3,6 +3,7 @@
 namespace Recipr\Http\Controllers;
 
 use Recipr\Inventory;
+use Recipr\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -20,7 +21,8 @@ class InventoryController extends Controller
 
     public function getInventory()
     {
-        $inventory = Inventory::where('user_id', Auth::user()->id);
+        $inventory = Inventory::where('user_id', Auth::user()->id)->orderBy('created_at', 'desc')->get();
+
         return view('inventory', ['inventory' => $inventory]);
     }
 
@@ -32,9 +34,10 @@ class InventoryController extends Controller
         ]);
         $inventory = new Inventory();
         $inventory->item = $request['item'];
-        
+        $inventory->user_id = Auth::user()->id;
+
         $message = 'There was an error.';
-        if ($request->user()->inventory()->save($inventory)) //save post in relation to user
+        if ($inventory->save()) //save post in relation to user
         {
             $message = 'Item successfully added!';
             return response()->json(['success' => true, 'item' => $inventory, 'message' => $message], 200);
@@ -42,9 +45,25 @@ class InventoryController extends Controller
         return response()->json(['success' => false, 'message' => $message], 200);
     }
 
+    public function edit(Request $request)
+    {
+        $this->validate($request, [
+            'item' => 'required|max:20'
+        ]);
+        $item = Inventory::find($request['id']);
+        if (Auth::user() != $item->user)    //making sure users don't delete other user's posts
+        {
+            return redirect()->back();
+        }
+        $item->item = $request['item'];
+        $item->update();
+        return response()->json(['item' => $item], 200);
+    }
+
     public function delete($inventory_id)
     {
-        $item = Post::where('id', $inventory_id)->first();
+        $item = Inventory::where('id', $inventory_id)->first();
+
         if (Auth::user() != $item->user)    //making sure users don't delete other user's posts
         {
             return redirect()->json(['success' => false, 'message' => 'You are not the correct user.'], 200);
