@@ -50,10 +50,10 @@ const homepage = new Vue({
     			item: this.addfield,
     			_token: session_token
     		}
-    		console.log(data);
     		this.$http.post(inventory_create_url, data).then((response) => {
+                            console.log(response.body);
 		        			if (response.body.success) {
-		        				inventory.unshift(response.body.item);
+    				            inventory.unshift(response.body.item);
                                 this.addfield = '';
 		        			}
                             this.adding = false;

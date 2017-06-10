@@ -58,4 +58,4 @@ Route::post('/inventory/edit', [
 
 Route::get('/search', function() {
     return view('search');
-});
+})->name('search');

@@ -17,7 +17,7 @@
                     </a>
                   </li>
                   <li>
-                    <a href="./">
+                    <a href="{{ route('search') }}">
                       Search Recipes
                       <br />
                       <i class="fa fa-search fa-5x"></i>
