@@ -56,6 +56,20 @@ Route::post('/inventory/edit', [
     'middleware' => 'auth'
 ]);
 
-Route::get('/search', function() {
-    return view('search');
-})->name('search');
+Route::get('/search', [
+    'uses' => 'RecipeController@search',
+    'as' => 'search',
+    'middleware' => 'auth'
+]);
+
+Route::get('/settings', [
+    'uses' => 'SettingsController@index',
+    'as' => 'settings',
+    'middleware' => 'auth'
+]);
+
+Route::post('/settings/update', [
+    'uses' => 'SettingsController@update',
+    'as' => 'settings.update',
+    'middleware' => 'auth'
+]);

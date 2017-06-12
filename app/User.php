@@ -31,4 +31,9 @@ class User extends Authenticatable
     {
         return $this->hasMany('Recipr\Inventory');
     }
+
+    public function allergies()
+    {
+        return $this->belongsToMany('Recipr\Allergy', 'users_allergies');
+    }
 }

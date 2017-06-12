@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 52);
+/******/ 	return __webpack_require__(__webpack_require__.s = 53);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -770,7 +770,7 @@ module.exports = g;
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(global) {/*!
- * Vue.js v2.3.4
+ * Vue.js v2.3.3
  * (c) 2014-2017 Evan You
  * Released under the MIT License.
  */
@@ -5199,7 +5199,7 @@ Object.defineProperty(Vue$3.prototype, '$ssrContext', {
   }
 });
 
-Vue$3.version = '2.3.4';
+Vue$3.version = '2.3.3';
 
 /*  */
 
@@ -5690,7 +5690,6 @@ function createPatchFunction (backend) {
   function initComponent (vnode, insertedVnodeQueue) {
     if (isDef(vnode.data.pendingInsert)) {
       insertedVnodeQueue.push.apply(insertedVnodeQueue, vnode.data.pendingInsert);
-      vnode.data.pendingInsert = null;
     }
     vnode.elm = vnode.componentInstance.$el;
     if (isPatchable(vnode)) {
@@ -10478,7 +10477,7 @@ __webpack_require__(28);
 
 window.Vue = __webpack_require__(8);
 
-var VueResource = __webpack_require__(33);
+var VueResource = __webpack_require__(34);
 
 Vue.use(VueResource);
 
@@ -41127,7 +41126,7 @@ return jQuery;
   }
 }.call(this));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(7), __webpack_require__(34)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(7), __webpack_require__(35)(module)))
 
 /***/ }),
 /* 32 */
@@ -41321,6 +41320,40 @@ process.umask = function() { return 0; };
 
 /***/ }),
 /* 33 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var Component = __webpack_require__(37)(
+  /* script */
+  __webpack_require__(38),
+  /* template */
+  __webpack_require__(40),
+  /* scopeId */
+  null,
+  /* cssModules */
+  null
+)
+Component.options.__file = "C:\\Users\\Porsche Tech\\recipe\\resources\\assets\\js\\components\\Checkbox.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] Checkbox.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-812aceb6", Component.options)
+  } else {
+    hotAPI.reload("data-v-812aceb6", Component.options)
+  }
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 34 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -42422,7 +42455,7 @@ var xhrClient = function (request) {
 
 var nodeClient = function (request) {
 
-    var client = __webpack_require__(35);
+    var client = __webpack_require__(36);
 
     return new PromiseObj(function (resolve) {
 
@@ -42898,7 +42931,7 @@ if (typeof window !== 'undefined' && window.Vue) {
 
 
 /***/ }),
-/* 34 */
+/* 35 */
 /***/ (function(module, exports) {
 
 module.exports = function(module) {
@@ -42926,13 +42959,13 @@ module.exports = function(module) {
 
 
 /***/ }),
-/* 35 */
+/* 36 */
 /***/ (function(module, exports) {
 
 /* (ignored) */
 
 /***/ }),
-/* 36 */
+/* 37 */
 /***/ (function(module, exports) {
 
 // this module is a runtime utility for cleaner component module output and will
@@ -42989,63 +43022,7 @@ module.exports = function normalizeComponent (
 
 
 /***/ }),
-/* 37 */,
 /* 38 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var Component = __webpack_require__(36)(
-  /* script */
-  __webpack_require__(42),
-  /* template */
-  __webpack_require__(49),
-  /* scopeId */
-  null,
-  /* cssModules */
-  null
-)
-Component.options.__file = "C:\\Users\\Chris\\recipe\\resources\\assets\\js\\components\\Checkbox.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
-if (Component.options.functional) {console.error("[vue-loader] Checkbox.vue: functional components are not supported with templates, they should use render functions.")}
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-812aceb6", Component.options)
-  } else {
-    hotAPI.reload("data-v-812aceb6", Component.options)
-  }
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 39 */,
-/* 40 */
-/***/ (function(module, exports, __webpack_require__) {
-
-__webpack_require__(9);
-
-Vue.component('allergy-checkbox', __webpack_require__(38));
-Vue.component('diet-checkbox', __webpack_require__(38));
-Vue.component('cuisine-checkbox', __webpack_require__(38));
-
-var search = new Vue({
-    el: '#search',
-    data: {
-        allergies: ['Dairy', 'Egg', 'Gluten', 'Peanut', 'Seafood', 'Sesame', 'Soy', 'Sulfite', 'Tree Nut', 'Wheat'],
-        diets: ['Lacto vegetarian', 'Ovo vegetarian', 'Pescetarian', 'Vegan', 'Vegetarian'],
-        cuisines: ['American', 'Italian', 'Asian', 'Mexican', 'Southern & Soul Food', 'French', 'Southwestern', 'Barbecue', 'Indian', 'Chinese', 'Cajun & Creole', 'English', 'Mediterranean', 'Greek', 'Spanish', 'German', 'Thai', 'Moroccan', 'Irish', 'Japanese', 'Cuban', 'Hawaiin', 'Swedish', 'Hungarian', 'Portugese']
-    }
-});
-
-/***/ }),
-/* 41 */,
-/* 42 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -43060,17 +43037,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-	props: ['item']
+	props: ['item', 'checked'],
+	computed: {
+		isChecked: function isChecked() {
+			if (this.checked) return true;
+			return false;
+		}
+	}
 });
 
 /***/ }),
-/* 43 */,
-/* 44 */,
-/* 45 */,
-/* 46 */,
-/* 47 */,
-/* 48 */,
-/* 49 */
+/* 39 */,
+/* 40 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -43080,6 +43058,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "type": "checkbox",
       "name": _vm.item
+    },
+    domProps: {
+      "checked": _vm.isChecked
     }
   }), _vm._v(" " + _vm._s(_vm.item) + "\n  ")])])
 },staticRenderFns: []}
@@ -43092,12 +43073,57 @@ if (false) {
 }
 
 /***/ }),
-/* 50 */,
-/* 51 */,
-/* 52 */
+/* 41 */,
+/* 42 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(40);
+__webpack_require__(9);
+
+Vue.component('allergy-checkbox', __webpack_require__(33));
+Vue.component('diet-checkbox', __webpack_require__(33));
+Vue.component('cuisine-checkbox', __webpack_require__(33));
+Vue.component('course-checkbox', __webpack_require__(33));
+Vue.component('holiday-checkbox', __webpack_require__(33));
+
+var search = new Vue({
+    el: '#search',
+    data: {
+        allergies: [],
+        diets: ['Lacto vegetarian', 'Ovo vegetarian', 'Pescetarian', 'Vegan', 'Vegetarian'],
+        cuisines: ['American', 'Italian', 'Asian', 'Mexican', 'Southern & Soul Food', 'French', 'Southwestern', 'Barbecue', 'Indian', 'Chinese', 'Cajun & Creole', 'English', 'Mediterranean', 'Greek', 'Spanish', 'German', 'Thai', 'Moroccan', 'Irish', 'Japanese', 'Cuban', 'Hawaiin', 'Swedish', 'Hungarian', 'Portugese'],
+        courses: ['Main Dishes', 'Desserts', 'Side Dishes', 'Lunch and Snacks', 'Appetizers', 'Salads', 'Breads', 'Breakfast and Brunch', 'Soups', 'Beverages', 'Condiments and Sauces', 'Cocktails'],
+        holidays: ['Christmas', 'Summer', 'Thanksgiving', 'New Year', 'Super Bowl / Game Day', 'Halloween', 'Hanukkah', '4th of July'],
+        users_allergies: []
+    },
+    created: function created() {
+        this.allergies = allergies;
+        this.users_allergies = users_allergies;
+    },
+    methods: {
+        hasAllergy: function hasAllergy(allergy) {
+            for (var i = 0; i < this.users_allergies.length; i++) {
+                if (allergy.id == this.users_allergies[i].id) return true;
+            }
+            return false;
+        }
+    }
+});
+
+/***/ }),
+/* 43 */,
+/* 44 */,
+/* 45 */,
+/* 46 */,
+/* 47 */,
+/* 48 */,
+/* 49 */,
+/* 50 */,
+/* 51 */,
+/* 52 */,
+/* 53 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(42);
 
 
 /***/ })

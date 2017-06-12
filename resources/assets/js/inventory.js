@@ -28,8 +28,8 @@ const homepage = new Vue({
 			}
     	],
     	actions: [
-    		{ name: 'edit-item', icon: 'fa-pencil-square-o', class: '' },
-    		{ name: 'delete-item', icon: 'fa-times', class: '' }
+    		{ name: 'edit-item', icon: 'fa-pencil-square-o', class: 'edit-icon' },
+    		{ name: 'delete-item', icon: 'fa-times', class: 'delete-icon' }
     	]
     },
     created: function() {
@@ -42,6 +42,15 @@ const homepage = new Vue({
     methods: {
     	addItem: function() {
             this.adding = true;
+
+            //search for duplicate
+            for (var i = 0; i < this.inventory.length; i++)
+                if (this.addfield === this.inventory[i].item) {
+                    alert("You already have " + this.addfield + " in your pantry.");
+                    this.adding = false;
+                    return;
+                }
+
             if (this.addfield === '' || this.addfield === null) {
                 this.adding = false;
                 return;

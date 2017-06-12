@@ -16,8 +16,6 @@
         <link rel='stylesheet' href='{{ asset('css/app.css') }}' />
         
         <link href="{{ asset('img/favicon.ico') }}" type="image/png" rel="icon">
-
-        <script src='{{ asset('js/app.js') }}'></script>
         
         <title>@yield('title')</title>
     </head>

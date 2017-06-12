@@ -1,7 +1,7 @@
 <template>
   <div class="checkbox">
     <label>
-      <input type="checkbox" :name="item"> {{ item }}
+      <input type="checkbox" :name="item" :checked="isChecked"> {{ item }}
     </label>
   </div>
 </template>
@@ -9,7 +9,15 @@
 <script>
 export default {
 	props: [
-    'item'
-	]
+    	'item',
+    	'checked'
+	],
+	computed: {
+		isChecked: function() {
+			if (this.checked)
+				return true;
+			return false;
+		}
+	}
 }
 </script>

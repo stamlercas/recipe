@@ -35,6 +35,10 @@ nav ul li a {
     z-index: -1;
 }
 
+.search-checkbox {
+  padding: 3px;
+}
+
 .vertical-center {
   position: absolute;
   top: 50%;
@@ -46,4 +50,12 @@ nav ul li a {
     display: inline-block;
     vertical-align: middle;
     float: none;
+}
+
+.delete-icon {
+  color: $brand-danger;
+}
+
+.edit-icon {
+  color: $brand-success;
 }

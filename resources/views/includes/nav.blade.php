@@ -1,7 +1,7 @@
           <nav class="navbar navbar-default navbar-fixed-side">
             <div class="container">
               <div class="navbar-header">
-                <button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse">
+                <button class="navbar-toggle" data-target="#collapse" data-toggle="collapse">
                   <span class="sr-only">Toggle navigation</span>
                   <span class="icon-bar"></span>
                   <span class="icon-bar"></span>
@@ -9,7 +9,7 @@
                 </button>
                 <a class="navbar-brand text-center" href="./">Recipr</a>
               </div>
-              <div class="collapse navbar-collapse">
+              <div class="collapse navbar-collapse" id="collapse">
                 <ul class="nav navbar-nav">
                 <li>
                     <a href="{{ route('home') }}">
@@ -31,7 +31,7 @@
                     </a>
                   </li>
                   <li>
-                    <a href="./">
+                    <a href="{{ route('settings') }}">
                       Settings
                       <br />
                       <i class="fa fa-cog fa-5x"></i>
