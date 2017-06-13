@@ -33,7 +33,13 @@
 		  <div class="form-group">
 		    <label for="allergies" class="col-sm-1 control-label">Allergies</label>
 		    <div class="col-sm-10 form-inline">
-		    	<allergy-checkbox class="search-checkbox" v-for="allergy in allergies" :item="allergy.allergy" :checked="hasAllergy(allergy)"></allergy-checkbox>
+		    	<allergy-checkbox class="search-checkbox" v-for="allergy in allergies" :item="allergy.longDescription" :name="allergy.id" :checked="hasAllergy(allergy)"></allergy-checkbox>
+		    </div>
+		  </div>
+		  <div class="form-group">
+		    <label for="allergies" class="col-sm-1 control-label">Diets</label>
+		    <div class="col-sm-10 form-inline">
+		    	<diet-checkbox class="search-checkbox" v-for="diet in diets" :item="diet.longDescription" :name="diet.id" :checked="hasDiet(diet)"></diet-checkbox>
 		    </div>
 		  </div>
 		  <div class="form-group">
@@ -47,6 +53,8 @@
 	<script>
 		var allergies = {!! json_encode($allergies) !!};
 		var users_allergies = {!! json_encode($users_allergies) !!};
+		var diets = {!! json_encode($diets) !!};
+		var users_diets = {!! json_encode($users_diets) !!};
 	</script>
 	<script src="{{ asset('js/settings.js') }}"></script>
 @endsection

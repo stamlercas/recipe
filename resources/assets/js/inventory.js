@@ -2,6 +2,7 @@ require ('./app');
 
 Vue.component('pantry-table', require('./components/Table.vue'));
 Vue.component('edit-modal', require('./components/Modal.vue'));
+Vue.component('search-results-table', require('./components/Table.vue'));
 
 // Import the EventBus.
 import { ActionBus } from './bus/action-bus.js';
@@ -11,15 +12,17 @@ const homepage = new Vue({
     data: {
     	inventory: [
     	],
+        searchResults: [],
     	userID: String,
     	search: '',
-    	addfield: '',
+    	searchfield: '',
+        searching: false,
         adding: false,
         editableItem: {},
         showEditModal: false,
     	columns: [
     		{
-    			name: 'item',
+    			name: 'description',
     			alias: 'Name'
 			},
 			{
@@ -27,10 +30,19 @@ const homepage = new Vue({
 				alias: 'Date Added'
 			}
     	],
-    	actions: [
-    		{ name: 'edit-item', icon: 'fa-pencil-square-o', class: 'edit-icon' },
-    		{ name: 'delete-item', icon: 'fa-times', class: 'delete-icon' }
-    	]
+        actions: [
+            /* { name: 'edit-item', icon: 'fa-pencil-square-o', class: 'edit-icon' }, */
+            { name: 'delete-item', icon: 'fa-times', class: 'delete-icon' }
+        ],
+        resultsColumns: [
+            {
+                name: 'description',
+                alias: 'Name'
+            }
+        ],
+        resultsActions: [
+            { name: 'add-item', icon: 'fa-plus', class: 'add-icon' }  
+        ]
     },
     created: function() {
     	//this.inventory = [{ item: 'carrots' }];
@@ -40,30 +52,26 @@ const homepage = new Vue({
         ActionBus.$on('edit-action', this.editAction);
     },
     methods: {
-    	addItem: function() {
+    	addItem: function(ingredient) {
             this.adding = true;
 
             //search for duplicate
             for (var i = 0; i < this.inventory.length; i++)
-                if (this.addfield === this.inventory[i].item) {
-                    alert("You already have " + this.addfield + " in your pantry.");
+                if (ingredient.id == this.inventory[i].id) {
+                    alert("You already have " + ingredient.description + " in your pantry.");
                     this.adding = false;
                     return;
                 }
 
-            if (this.addfield === '' || this.addfield === null) {
-                this.adding = false;
-                return;
-            }
+
     		var data = {
-    			item: this.addfield,
+    			id: ingredient.id,
     			_token: session_token
     		}
-    		this.$http.post(inventory_create_url, data).then((response) => {
+    		this.$http.post(inventory_add_url, data).then((response) => {
                             console.log(response.body);
 		        			if (response.body.success) {
-    				            inventory.unshift(response.body.item);
-                                this.addfield = '';
+    				            inventory.unshift(response.body.ingredient);
 		        			}
                             this.adding = false;
 		        		});
@@ -106,7 +114,29 @@ const homepage = new Vue({
                     this.editableItem = JSON.parse(JSON.stringify(data.data));  // cloning object to make sure references aren't shared
                     this.showEditModal = true;
 					break;
+                case 'add-item':
+                    this.addItem(data.data);
     		}
-    	}
+    	},
+        searchIngredients: function() {
+            this.searching = true;
+
+            if (this.searchfield === '' || this.searchfield === null) {
+                this.searchResults = [];
+                this.searching = false;
+                return;
+            }
+            var data = {
+                query: this.searchfield,
+                _token: session_token
+            };
+            this.$http.post(inventory_search_url, data).then((response) => {
+                            console.log(response.body);
+                            if (response.body.success) {
+                                this.searchResults = response.body.results;
+                            }
+                            this.searching = false;
+                        });
+        }
     }
 });

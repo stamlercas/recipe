@@ -34,7 +34,7 @@ Route::get('/dashboard', [
 ]);
 
 Route::get('/inventory', [
-	'uses' => 'InventoryController@getInventory',
+	'uses' => 'InventoryController@index',
 	'as' => 'inventory',
 ]);
 
@@ -44,15 +44,21 @@ Route::get('/inventory/delete/{inventory_id}', [
     'middleware' => 'auth'
 ]);
 
-Route::post('/inventory/create', [
-    'uses' => 'InventoryController@create',
-    'as' => 'inventory.create',
+Route::post('/inventory/add', [
+    'uses' => 'InventoryController@add',
+    'as' => 'inventory.add',
     'middleware' => 'auth'
 ]);
 
 Route::post('/inventory/edit', [
     'uses' => 'InventoryController@edit',
     'as' => 'inventory.edit',
+    'middleware' => 'auth'
+]);
+
+Route::post('/inventory/search', [
+    'uses' => 'InventoryController@search',
+    'as' => 'inventory.search',
     'middleware' => 'auth'
 ]);
 

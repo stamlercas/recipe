@@ -16,10 +16,10 @@ class CreateCoursesTable extends Migration
         Schema::create('courses', function (Blueprint $table) {
             $table->string('id');
             $table->timestamps();
-            $table->string('shortDescription');
-            $table->string('longDescription');
-            $table->string('searchValue');
+            $table->string('name');
             $table->string('type');
+            $table->string('description');
+            $table->string('searchValue');
         });
 
         // Insert some stuff
@@ -29,10 +29,10 @@ class CreateCoursesTable extends Migration
             DB::table('courses')->insert(
                 array(
                     'id' => $course->id,
-                    'shortDescription' => $course->shortDescription,
-                    'longDescription' => $course->longDescription,
-                    'searchValue' => $course->searchValue,
-                    'type' => $course->type
+                    'name' => $course->name,
+                    'type' => $course->type,
+                    'description' => $course->description,
+                    'searchValue' => $course->searchValue
                 )
             );
         }

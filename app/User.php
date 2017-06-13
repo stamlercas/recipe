@@ -36,4 +36,14 @@ class User extends Authenticatable
     {
         return $this->belongsToMany('Recipr\Allergy', 'users_allergies');
     }
+
+    public function diets()
+    {
+        return $this->belongsToMany('Recipr\Diet', 'users_diets');
+    }
+
+    public function ingredients()
+    {
+        return $this->belongsToMany('Recipr\Ingredient', 'users_ingredients')->withTimestamps();
+    }
 }

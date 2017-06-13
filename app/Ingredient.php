@@ -6,5 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Ingredient extends Model
 {
-    //
+    public function users() {
+        return $this->belongsToMany('Recipr\User', 'users_ingredients')->withTimestamps();
+    }
 }

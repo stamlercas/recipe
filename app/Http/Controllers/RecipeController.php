@@ -4,6 +4,10 @@ namespace Recipr\Http\Controllers;
 
 use Recipr\Allergy;
 use Recipr\User;
+use Recipr\Diet;
+use Recipr\Cuisine;
+use Recipr\Course;
+use Recipr\Holiday;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -21,7 +25,15 @@ class RecipeController extends Controller
 
     public function search()
     {
-        return view('search', ['allergies' => Allergy::get(), 'users_allergies' => Auth::user()->allergies()->get()]);
+        return view('search', [
+            'allergies' => Allergy::get(), 
+            'users_allergies' => Auth::user()->allergies()->get(),
+            'diets' => Diet::get(),
+            'users_diets' => Auth::user()->diets()->get(),
+            'cuisines' => Cuisine::get(),
+            'courses' => Course::get(),
+            'holidays' => Holiday::get()
+        ]);
     }
 
     public function create(Request $request)

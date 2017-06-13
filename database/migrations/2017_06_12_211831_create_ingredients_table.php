@@ -16,16 +16,15 @@ class CreateIngredientsTable extends Migration
         Schema::create('ingredients', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
-            $table->string('shortDescription');
-            $table->string('longDescription');
             $table->string('searchValue');
-            $table->string('type');
+            $table->string('description');
+            $table->string('term');
         });
 
         // Insert some stuff
         //$allergies = array('Dairy', 'Egg', 'Gluten', 'Peanut', 'Seafood', 'Sesame', 'Soy', 'Sulfite', 'Tree Nut', 'Wheat');
-        $ingredients = json_decode(file_get_contents(storage_path() . "/app/json/" . "ingredients.json"));
-        foreach ($ingredient as $ingredient) {
+        $ingredients = json_decode(file_get_contents(storage_path() . "/app/json/" . "ingredient.json"));
+        foreach ($ingredients as $ingredient) {
             DB::table('ingredients')->insert(
                 array(
                     'searchValue' => $ingredient->searchValue,

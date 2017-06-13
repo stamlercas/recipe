@@ -3,6 +3,7 @@
 namespace Recipr\Http\Controllers;
 
 use Recipr\Inventory;
+use Recipr\Ingredient;
 use Recipr\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -19,30 +20,23 @@ class InventoryController extends Controller
         $this->middleware('auth');
     }
 
-    public function getInventory()
+    public function index()
     {
-        $inventory = Inventory::where('user_id', Auth::user()->id)->orderBy('created_at', 'desc')->get();
+        $inventory = Auth::user()->ingredients()->orderBy('created_at', 'desc')->get();
 
         return view('inventory', ['inventory' => $inventory]);
     }
 
-    public function create(Request $request)
+    public function add(Request $request)
     {
-        //validation
-        $this->validate($request, [
-            'item' => 'required|max:20',
-        ]);
-        $inventory = new Inventory();
-        $inventory->item = $request['item'];
-        $inventory->user_id = Auth::user()->id;
-
-        $message = 'There was an error.';
-        if ($inventory->save()) //save post in relation to user
+        //$ingredient = $request['ingredient'];
+        $ingredient = Ingredient::find($request['id']);
+        $user = Auth::user();
+        if (!$user->ingredients()->find($ingredient->id))
         {
-            $message = 'Item successfully added!';
-            return response()->json(['success' => true, 'item' => $inventory, 'message' => $message], 200);
+            $user->ingredients()->attach($ingredient->id);
         }
-        return response()->json(['success' => false, 'message' => $message], 200);
+        return response()->json(['success' => true, 'ingredient' => $ingredient], 200);
     }
 
     public function edit(Request $request)
@@ -60,17 +54,22 @@ class InventoryController extends Controller
         return response()->json(['item' => $item], 200);
     }
 
-    public function delete($inventory_id)
+    public function delete($ingredient_id)
     {
-        $item = Inventory::where('id', $inventory_id)->first();
+        $ingredient = Ingredient::where('id', $ingredient_id)->first();
 
-        if (Auth::user() != $item->user)    //making sure users don't delete other user's posts
-        {
-            return redirect()->json(['success' => false, 'message' => 'You are not the correct user.'], 200);
-        }
-        $item->delete();
+        Auth::user()->ingredients()->detach($ingredient->id);
         
         return response()->json(['success' => true, 'message' => 'Item successfully deleted!'], 200);
+    }
+
+    public function search(Request $request)
+    {
+        $this->validate($request, [
+            'query' => 'required'
+        ]);
+        $results = Ingredient::where('description', 'like', '%' . $request['query'] . '%')->limit(10)->get();
+        return response()->json(['success' => true, 'results' => $results], 200);
     }
 
 }

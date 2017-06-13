@@ -12,73 +12,36 @@ const search = new Vue({
     	allergies: [
     	],
         diets: [
-            'Lacto vegetarian', 
-            'Ovo vegetarian', 
-            'Pescetarian', 
-            'Vegan', 
-            'Vegetarian'
         ],
         cuisines: [
-            'American', 
-            'Italian', 
-            'Asian', 
-            'Mexican', 
-            'Southern & Soul Food', 
-            'French', 
-            'Southwestern', 
-            'Barbecue', 
-            'Indian', 
-            'Chinese', 
-            'Cajun & Creole', 
-            'English', 
-            'Mediterranean', 
-            'Greek', 
-            'Spanish', 
-            'German', 
-            'Thai', 
-            'Moroccan', 
-            'Irish', 
-            'Japanese', 
-            'Cuban', 
-            'Hawaiin', 
-            'Swedish', 
-            'Hungarian', 
-            'Portugese'
         ],
         courses: [
-            'Main Dishes', 
-            'Desserts', 
-            'Side Dishes', 
-            'Lunch and Snacks', 
-            'Appetizers', 
-            'Salads', 
-            'Breads', 
-            'Breakfast and Brunch', 
-            'Soups', 
-            'Beverages', 
-            'Condiments and Sauces', 
-            'Cocktails'
         ],
         holidays: [
-            'Christmas', 
-            'Summer', 
-            'Thanksgiving', 
-            'New Year', 
-            'Super Bowl / Game Day', 
-            'Halloween', 
-            'Hanukkah', 
-            '4th of July'
         ],
-        users_allergies: []
+        users_allergies: [],
+        users_diets: []
     },
     created: function() {
         this.allergies = allergies;
         this.users_allergies = users_allergies;
+        this.diets = diets;
+        this.users_diets = users_diets;
+        this.cuisines = cuisines;
+        this.courses = courses;
+        this.holidays = holidays;
     },
     methods: {
         hasAllergy: function(allergy) {
             for (var i = 0; i < this.users_allergies.length; i++) {
                 if (allergy.id == this.users_allergies[i].id)
+                    return true;
+            }
+            return false;
+        },
+        hasDiet: function(diet) {
+            for (var i = 0; i < this.users_diets.length; i++) {
+                if (diet.id == this.users_diets[i].id)
                     return true;
             }
             return false;

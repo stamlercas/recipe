@@ -1,7 +1,7 @@
 <template>
 	<div class="table-responsive">
         <table class="table table-striped">
-            <thead>
+            <thead v-if="showHeading != false">
                 <tr>
                     <th v-for="column in columns" @click="sortBy(column.name)" :class="tableHeading(column.name)" 
                     	:title="column.alias">{{ column.alias }}</th>
@@ -12,7 +12,7 @@
                 <tr v-for="row in sortedTable">
                     <td v-for="column in columns">{{ row[column.name] }}</td>
                     <td v-if="actions != null">
-                    	<i class="fa fa-lg" style="padding-right:5px;" v-for="action in actions" :class="action.icon" @click="fireAction({action: action.name, data: row})"></i>
+                    	<i class="action-icon fa fa-lg" style="padding-right:5px;" v-for="action in actions" :class="action.icon" @click="fireAction({action: action.name, data: row})"></i>
                     </td>
                 </tr>
           	</tbody>
@@ -29,7 +29,8 @@ export default {
 			'data',
 			'columns',
 			'filterKey',
-			'actions'
+			'actions',
+			'showHeading'
 		],
 		data () {
 			var sortOrders = {}
