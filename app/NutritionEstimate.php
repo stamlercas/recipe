@@ -4,7 +4,7 @@ namespace Recipr;
 
 use Illuminate\Database\Eloquent\Model;
 
-class IngredientLine extends Model
+class NutritionEstimate extends Model
 {
     public function recipe()
     {

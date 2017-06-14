@@ -11,4 +11,8 @@ class Course extends Model
     public function recipe_searches() {
         return $this->belongsToMany('Recipr\RecipeSearch', 'recipe_searches_courses');
     }
+
+    public function recipes() {
+    	return $this->belongsToMany('Recpr\Recipes', 'recipes_courses');
+    }
 }

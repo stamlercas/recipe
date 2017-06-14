@@ -24,7 +24,7 @@ class CreateRecipesTable extends Migration
             $table->string('yield');
             $table->string('totalTime');
             $table->integer('totalTimeInSeconds');
-            $table->integer('numberOfServings')
+            $table->integer('numberOfServings');
             $table->double('salty', 20, 19);
             $table->double('meaty', 20, 19);
             $table->double('piquant', 20, 19);

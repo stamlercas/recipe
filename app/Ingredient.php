@@ -9,4 +9,9 @@ class Ingredient extends Model
     public function users() {
         return $this->belongsToMany('Recipr\User', 'users_ingredients')->withTimestamps();
     }
+
+    public function recipes()
+    {
+    	return $this->belongsToMany('Recipr\Ingredient', 'recipes_ingredients');
+    }
 }

@@ -14,7 +14,7 @@
 			        <div class="row">
 						<div class="col-md-10 col-md-offset-1">
 							<div class="form-group">
-							    <input type="keywords" name="c d" class="form-control" id="keywords" placeholder="Keywords">
+							    <input type="keywords" name="query" class="form-control" id="keywords" placeholder="Keywords">
 						  	</div>
 						</div>
 					</div>
