@@ -63,8 +63,14 @@ Route::post('/inventory/search', [
 ]);
 
 Route::get('/search', [
+    'uses' => 'RecipeController@index',
+    'as' => 'search.index',
+    'middleware' => 'auth'
+]);
+
+Route::post('/search', [
     'uses' => 'RecipeController@search',
-    'as' => 'search',
+    'as' => 'search.search',
     'middleware' => 'auth'
 ]);
 

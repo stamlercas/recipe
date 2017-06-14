@@ -32,6 +32,11 @@ class User extends Authenticatable
         return $this->hasMany('Recipr\Inventory');
     }
 
+    public function recipe_searches()
+    {
+        return $this->hasMany('Recipr\RecipeSearch');
+    }
+
     public function allergies()
     {
         return $this->belongsToMany('Recipr\Allergy', 'users_allergies');

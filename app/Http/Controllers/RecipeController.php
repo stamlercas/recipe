@@ -8,6 +8,7 @@ use Recipr\Diet;
 use Recipr\Cuisine;
 use Recipr\Course;
 use Recipr\Holiday;
+use Recipr\RecipeSearch;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -23,7 +24,7 @@ class RecipeController extends Controller
         $this->middleware('auth');
     }
 
-    public function search()
+    public function index()
     {
         return view('search', [
             'allergies' => Allergy::get(), 
@@ -36,51 +37,29 @@ class RecipeController extends Controller
         ]);
     }
 
-    public function create(Request $request)
+    public function search(Request $request)
     {
-        //validation
-        $this->validate($request, [
-            'item' => 'required|max:20',
-        ]);
-        $inventory = new Inventory();
-        $inventory->item = $request['item'];
-        $inventory->user_id = Auth::user()->id;
-
-        $message = 'There was an error.';
-        if ($inventory->save()) //save post in relation to user
+        //return response()->json(['data' => $request[str_replace("_", ' ', 'course-Main_Dishes')]]);
+        $recipe_search = new RecipeSearch();
+        $recipe_search->query = ($request['query'] == null) ? '' : $request['query'];
+        if ($request->user()->recipe_searches()->save($recipe_search))    // add all intersects
         {
-            $message = 'Item successfully added!';
-            return response()->json(['success' => true, 'item' => $inventory, 'message' => $message], 200);
+            $tables = array(Allergy::get(), Course::get(), Cuisine::get(), Diet::get(), Holiday::get());
+            foreach($tables as $table) {
+                $this->attach($request, $table, $recipe_search->id);
+            }
         }
-        return response()->json(['success' => false, 'message' => $message], 200);
+
+        return redirect()->route('search.index');
     }
 
-    public function edit(Request $request)
+    protected function attach($request, $table, $id)
     {
-        $this->validate($request, [
-            'item' => 'required|max:20'
-        ]);
-        $item = Inventory::find($request['id']);
-        if (Auth::user() != $item->user)    //making sure users don't delete other user's posts
-        {
-            return redirect()->back();
+        foreach ($table as $value) {
+            if ($request[str_replace(" ", '_', $value->id)]) {  // really needs put into middleware somehow
+                $value->recipe_searches()->attach($id);
+            }
         }
-        $item->item = $request['item'];
-        $item->update();
-        return response()->json(['item' => $item], 200);
-    }
-
-    public function delete($inventory_id)
-    {
-        $item = Inventory::where('id', $inventory_id)->first();
-
-        if (Auth::user() != $item->user)    //making sure users don't delete other user's posts
-        {
-            return redirect()->json(['success' => false, 'message' => 'You are not the correct user.'], 200);
-        }
-        $item->delete();
-        
-        return response()->json(['success' => true, 'message' => 'Item successfully deleted!'], 200);
     }
 
 }

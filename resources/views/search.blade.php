@@ -7,13 +7,14 @@
 @section('content')
     <div id="search">
         <h1>Search</h1>
-        <form>
+        <form method="post" action="{{ route('search.search') }}">
+        	{{ csrf_field() }}
 	        <div class="row">
 	        	<div class="col-md-8 col-md-offset-2">
 			        <div class="row">
 						<div class="col-md-10 col-md-offset-1">
 							<div class="form-group">
-							    <input type="keywords" class="form-control" id="keywords" placeholder="Keywords">
+							    <input type="keywords" name="c d" class="form-control" id="keywords" placeholder="Keywords">
 						  	</div>
 						</div>
 					</div>
@@ -64,7 +65,7 @@
     						</span>
 					  	</h3>
 		        		<div class="form-inline navbar-collapse collapse" id="holiday">
-						    <holiday-checkbox class="search-checkbox" v-for="holiday in holidays" :item="holiday.name" :item="holiday.id"></holiday-checkbox>
+						    <holiday-checkbox class="search-checkbox" v-for="holiday in holidays" :item="holiday.name" :name="holiday.id"></holiday-checkbox>
 					  	</div>
 				  	</div>
 			  	</div>
