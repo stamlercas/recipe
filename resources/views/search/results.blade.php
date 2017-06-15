@@ -18,9 +18,12 @@ Results
 							<a href="#">@{{ result.recipeName }}</a>
 						</h5>
 						<div style="clear:both;"></div>
-						<ul v-for="ingredient in result.ingredients">
-							<li>@{{ ingredient }}</li>
-						</ul>
+						<div class="ingredient-list">
+							<strong>Ingredients:</strong>
+							<ul class="list-unstyled">
+								<ingredient-list-item v-for="ingredient in result.ingredients" :ingredient="ingredient" :users_ingredients="users_ingredients"></ingredient-list-item>
+							</ul>
+						</div>
   						</div>
   						<!--
   						<div class="col-xs-5 col-sm-5 col-md-8">
@@ -35,25 +38,29 @@ Results
 	      			<span>
 	      				<progress-bar v-for="(value, key) in result.flavors" :name="key" :value="value"></progress-bar>
 	      			</span>
-	      			<div v-for="(value, key) in result.attributes">
+	      			<div class="attributes" v-for="(value, key) in result.attributes">
 		      			<strong>@{{ key }}:</strong>
-		      			<ul class="list-group" v-for="v in value">
-		      				<li class="list-group-item">@{{ v }}</li>
+		      			<ul class="list-unstyled">
+		      				<li v-for="v in value">@{{ v }}</li>
 		      			</ul>
 	      			</div>
 	      				</div>
 	      			</div>
 		    	</div>
 	    	</div>
+	    	<!--
 		    <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
 		    <small>Donec id elit non mi porta.</small>
+		    -->
 		  </div>
 	  	</div>
   	</div>
 
   	<script>
   		var search_results = {!! json_encode($results) !!};
-  		console.log(search_results.matches);
+  		var users_ingredients = {!! json_encode($users_ingredients) !!};
+  		var inventory_add_url = "{{ route('inventory.add') }}";
+  		var session_token = "{{ Session::token() }}";
   	</script>
   	<script src="{{ asset('js/results.js') }}"></script>
 @endsection('content')
