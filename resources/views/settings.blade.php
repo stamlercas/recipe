@@ -30,6 +30,11 @@
 		        @endif
 		    </div>
 		  </div>
+		  <div class="row">
+		  	<div class="col-sm-offset-1">
+		  		<h3>Preferences</h3>
+		  	</div>
+		  </div>
 		  <div class="form-group">
 		    <label for="allergies" class="col-sm-1 control-label">Allergies</label>
 		    <div class="col-sm-10 form-inline">

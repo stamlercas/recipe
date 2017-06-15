@@ -7,7 +7,7 @@
 @section('content')
     <div id="search">
         <h1>Search</h1>
-        <form method="post" action="{{ route('search.search') }}">
+        <form method="post" action="{{ route('search.results') }}">
         	{{ csrf_field() }}
 	        <div class="row">
 	        	<div class="col-md-8 col-md-offset-2">
