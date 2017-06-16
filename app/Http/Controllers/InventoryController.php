@@ -29,6 +29,7 @@ class InventoryController extends Controller
 
     public function add(Request $request)
     {
+        //return response()->json(['success' => $request['id']]);
         //$ingredient = $request['ingredient'];
         $ingredient = Ingredient::find($request['id']);
         $user = Auth::user();

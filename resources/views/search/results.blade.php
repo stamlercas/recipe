@@ -12,7 +12,7 @@ Results
 		    <div class="list-group-item-heading">
 		    	<div class="container-fluid">
 		    		<div class="row">
-		    			<div class="col-xs-6 col-sm-6 col-md-8">
+		    			<div class="col-xs-8 col-sm-6 col-md-8">
 	    			<img :src="result.imageUrlsBySize[90]" :alt="result.recipeName" class="img img-responsive list-img" />
 						<h5 class="list-title">
 							<a href="#">@{{ result.recipeName }}</a>

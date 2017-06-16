@@ -43067,7 +43067,7 @@ var homepage = new Vue({
             name: 'description',
             alias: 'Name'
         }, {
-            name: 'created_at',
+            name: 'pivot.created_at',
             alias: 'Date Added'
         }],
         actions: [

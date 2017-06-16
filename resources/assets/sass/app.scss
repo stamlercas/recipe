@@ -37,6 +37,11 @@ nav ul li a {
     text-align:center;
 }
 
+.disabled-action {
+    color: $gray-lighter;
+    cursor: not-allowed;
+}
+
 .home-bg {
     background-color: #0F5276;
     background-size: contain;

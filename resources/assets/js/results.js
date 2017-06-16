@@ -33,7 +33,7 @@ const results = new Vue({
             var data = {
                 id: ingredient.id,
                 _token: session_token
-            }
+            };
             console.log(ingredient);
             this.$http.post(inventory_add_url, data).then((response) => {
                             console.log(response.body);

@@ -43084,20 +43084,25 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 	props: ['ingredient', 'users_ingredients'],
 	methods: {
 		fireAction: function fireAction(action) {
-			__WEBPACK_IMPORTED_MODULE_0__bus_action_bus_js__["a" /* ActionBus */].$emit("list-action", action);
+			if (this.inDB) __WEBPACK_IMPORTED_MODULE_0__bus_action_bus_js__["a" /* ActionBus */].$emit("list-action", action);
 		}
 	},
 	computed: {
 		hasIngredient: function hasIngredient() {
 			for (var i = 0; i < this.users_ingredients.length; i++) {
-				if (this.ingredient === this.users_ingredients[i].description) return this.users_ingredients[i];
+				if (this.ingredient.description === this.users_ingredients[i].description) return this.users_ingredients[i];
 			}return false;
+		},
+		inDB: function inDB() {
+			if (this.ingredient.id == null) return false;
+			return true;
 		}
 	}
 });
@@ -43212,15 +43217,16 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     class: _vm.hasIngredient != false ? 'strong' : ''
   }, [(!_vm.hasIngredient) ? _c('i', {
     staticClass: "action-icon fa fa-plus",
+    class: _vm.inDB ? '' : 'disabled-action',
     on: {
       "click": function($event) {
         _vm.fireAction({
           action: 'add-item',
-          data: _vm.hasIngredient
+          data: _vm.ingredient
         })
       }
     }
-  }, [_vm._v("\n      \t\t\t \n  \t\t\t")]) : _vm._e(), _vm._v("\n  \t\t\t" + _vm._s(_vm.ingredient) + "\n      \t\t"), (_vm.hasIngredient != false) ? _c('span', {
+  }, [_vm._v("\n      \t\t\t \n  \t\t\t")]) : _vm._e(), _vm._v("\n  \t\t\t" + _vm._s(_vm.ingredient.description) + "\n      \t\t"), (_vm.hasIngredient != false) ? _c('span', {
     staticClass: "list-action pull-right bg-danger"
   }, [_vm._v("\n\t      \t\tDon't have this?\n\t      \t\t"), _c('i', {
     staticClass: "fa fa-times"

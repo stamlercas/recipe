@@ -2,10 +2,11 @@
       	<li :class="hasIngredient != false ? 'strong' : ''">
       		<i v-if="!hasIngredient" 
       		class="action-icon fa fa-plus"
-      		@click="fireAction({ action: 'add-item', data: hasIngredient })">
+      		:class="inDB ? '' : 'disabled-action'"
+      		@click="fireAction({ action: 'add-item', data: ingredient })">
       			&nbsp;
   			</i>
-  			{{ ingredient }}
+  			{{ ingredient.description }}
       		<span v-if="hasIngredient != false" class="list-action pull-right bg-danger">
 	      		Don't have this?
 	      		<i class="fa fa-times"></i>
@@ -22,15 +23,21 @@ export default {
 	],
 	methods: {
 		fireAction: function(action) {
-			ActionBus.$emit("list-action", action);
-		},
+			if (this.inDB)
+				ActionBus.$emit("list-action", action);
+		}
 	},
 	computed: {
 		hasIngredient: function() {
 			for (var i = 0; i < this.users_ingredients.length; i++)
-				if (this.ingredient === this.users_ingredients[i].description)
+				if (this.ingredient.description === this.users_ingredients[i].description)
 					return this.users_ingredients[i];
 			return false;
+		},
+		inDB: function() {
+			if (this.ingredient.id == null)
+				return false;
+			return true;
 		}
 	}
 }
