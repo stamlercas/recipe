@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 60);
+/******/ 	return __webpack_require__(__webpack_require__.s = 61);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -43000,25 +43000,54 @@ module.exports = function(module) {
 var ActionBus = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a();
 
 /***/ }),
-/* 39 */,
+/* 39 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony default export */ __webpack_exports__["a"] = ({
+  methods: {
+    addItem: function addItem(ingredient) {
+      var data = {
+        id: ingredient.id,
+        _token: session_token
+      };
+      return this.$http.post(inventory_add_url, data).then(function (response) {
+        return response.body.success;
+      });
+    },
+    deleteItem: function deleteItem(ingredient) {
+      return this.$http.get(inventory_delete_url + ingredient.id).then(function (response) {
+        return response.body.success;
+      });
+    }
+  }
+});
+
+/***/ }),
 /* 40 */,
 /* 41 */,
 /* 42 */,
-/* 43 */
+/* 43 */,
+/* 44 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__bus_action_bus_js__ = __webpack_require__(38);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__mixins_ingredients_js__ = __webpack_require__(39);
 __webpack_require__(9);
 
-Vue.component('progress-bar', __webpack_require__(53));
-Vue.component('ingredient-list-item', __webpack_require__(51));
+Vue.component('progress-bar', __webpack_require__(54));
+Vue.component('ingredient-list-item', __webpack_require__(52));
+
+
+
 
 
 
 var results = new Vue({
     el: '#results',
+    mixins: [__WEBPACK_IMPORTED_MODULE_1__mixins_ingredients_js__["a" /* default */], __WEBPACK_IMPORTED_MODULE_1__mixins_ingredients_js__["a" /* default */]],
     data: {
         results: [],
         users_ingredients: []
@@ -43033,42 +43062,43 @@ var results = new Vue({
         timeInMinutes: function timeInMinutes(seconds) {
             return seconds / 60;
         },
-        fireAction: function fireAction(action) {
-            switch (action.action) {
-                case 'add-item':
-                    this.addItem(action.data);
-                    break;
-            }
-        },
-        addItem: function addItem(ingredient) {
+        fireAction: function fireAction(data) {
             var _this = this;
 
-            var data = {
-                id: ingredient.id,
-                _token: session_token
-            };
-            console.log(ingredient);
-            this.$http.post(inventory_add_url, data).then(function (response) {
-                console.log(response.body);
-                if (response.body.success) {
-                    _this.users_ingredients.unshift(response.body.ingredient);
-                }
-            });
+            switch (data.action) {
+                case 'add-item':
+                    this.addItem(data.data).then(function (value) {
+                        if (value) _this.users_ingredients.unshift(data.data);
+                    });
+                    break;
+                case 'delete-item':
+                    this.deleteItem(data.data).then(function (value) {
+                        console.log(_this.users_ingredients.indexOf(data.data));
+                        var index = _this.users_ingredients.indexOf(data.data);
+                        for (var i = 0; i < _this.users_ingredients.length; i++) {
+                            if (data.data.id == _this.users_ingredients[i].id) {
+                                console.log(i);
+                                _this.users_ingredients.splice(i, 1);
+                            }
+                        }
+                    });
+            }
         }
 
     }
 });
 
 /***/ }),
-/* 44 */,
 /* 45 */,
 /* 46 */,
-/* 47 */
+/* 47 */,
+/* 48 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__bus_action_bus_js__ = __webpack_require__(38);
+//
 //
 //
 //
@@ -43097,7 +43127,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 	computed: {
 		hasIngredient: function hasIngredient() {
 			for (var i = 0; i < this.users_ingredients.length; i++) {
-				if (this.ingredient.description === this.users_ingredients[i].description) return this.users_ingredients[i];
+				if (this.ingredient.description === this.users_ingredients[i].description) return true;
 			}return false;
 		},
 		inDB: function inDB() {
@@ -43108,8 +43138,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 48 */,
-/* 49 */
+/* 49 */,
+/* 50 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -43139,15 +43169,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 50 */,
-/* 51 */
+/* 51 */,
+/* 52 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var Component = __webpack_require__(33)(
   /* script */
-  __webpack_require__(47),
+  __webpack_require__(48),
   /* template */
-  __webpack_require__(54),
+  __webpack_require__(55),
   /* scopeId */
   null,
   /* cssModules */
@@ -43174,15 +43204,15 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 52 */,
-/* 53 */
+/* 53 */,
+/* 54 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var Component = __webpack_require__(33)(
   /* script */
-  __webpack_require__(49),
+  __webpack_require__(50),
   /* template */
-  __webpack_require__(55),
+  __webpack_require__(56),
   /* scopeId */
   null,
   /* cssModules */
@@ -43209,7 +43239,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 54 */
+/* 55 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -43227,8 +43257,18 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       }
     }
   }, [_vm._v("\n      \t\t\t \n  \t\t\t")]) : _vm._e(), _vm._v("\n  \t\t\t" + _vm._s(_vm.ingredient.description) + "\n      \t\t"), (_vm.hasIngredient != false) ? _c('span', {
-    staticClass: "list-action pull-right bg-danger"
-  }, [_vm._v("\n\t      \t\tDon't have this?\n\t      \t\t"), _c('i', {
+    staticClass: "list-action pull-right bg-danger",
+    on: {
+      "click": function($event) {
+        _vm.fireAction({
+          action: 'delete-item',
+          data: _vm.ingredient
+        })
+      }
+    }
+  }, [_c('span', {
+    staticClass: "hidden-xs"
+  }, [_vm._v("Don't have this?")]), _vm._v(" "), _c('i', {
     staticClass: "fa fa-times"
   })]) : _vm._e()])
 },staticRenderFns: []}
@@ -43241,7 +43281,7 @@ if (false) {
 }
 
 /***/ }),
-/* 55 */
+/* 56 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -43271,14 +43311,14 @@ if (false) {
 }
 
 /***/ }),
-/* 56 */,
 /* 57 */,
 /* 58 */,
 /* 59 */,
-/* 60 */
+/* 60 */,
+/* 61 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(43);
+module.exports = __webpack_require__(44);
 
 
 /***/ })

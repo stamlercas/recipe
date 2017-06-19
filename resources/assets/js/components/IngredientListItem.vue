@@ -7,8 +7,9 @@
       			&nbsp;
   			</i>
   			{{ ingredient.description }}
-      		<span v-if="hasIngredient != false" class="list-action pull-right bg-danger">
-	      		Don't have this?
+      		<span v-if="hasIngredient != false" class="list-action pull-right bg-danger"
+      		@click="fireAction({ action: 'delete-item', data: ingredient })">
+	      		<span class="hidden-xs">Don't have this?</span>
 	      		<i class="fa fa-times"></i>
       		</span>
   		</li>
@@ -31,7 +32,7 @@ export default {
 		hasIngredient: function() {
 			for (var i = 0; i < this.users_ingredients.length; i++)
 				if (this.ingredient.description === this.users_ingredients[i].description)
-					return this.users_ingredients[i];
+					return true;
 			return false;
 		},
 		inDB: function() {

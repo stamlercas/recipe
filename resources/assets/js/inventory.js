@@ -7,8 +7,12 @@ Vue.component('search-results-table', require('./components/Table.vue'));
 // Import the EventBus.
 import { ActionBus } from './bus/action-bus.js';
 
+import addItem from './mixins/ingredients.js';
+import deleteItem from './mixins/ingredients.js';
+
 const homepage = new Vue({
     el: '#inventory',
+    mixins: [addItem, deleteItem],
     data: {
     	inventory: [
     	],
@@ -52,30 +56,6 @@ const homepage = new Vue({
         ActionBus.$on('edit-action', this.editAction);
     },
     methods: {
-    	addItem: function(ingredient) {
-            this.adding = true;
-
-            //search for duplicate
-            for (var i = 0; i < this.inventory.length; i++)
-                if (ingredient.id == this.inventory[i].id) {
-                    alert("You already have " + ingredient.description + " in your pantry.");
-                    this.adding = false;
-                    return;
-                }
-
-
-    		var data = {
-    			id: ingredient.id,
-    			_token: session_token
-    		}
-    		this.$http.post(inventory_add_url, data).then((response) => {
-                            console.log(response.body);
-		        			if (response.body.success) {
-    				            inventory.unshift(response.body.ingredient);
-		        			}
-                            this.adding = false;
-		        		});
-    	},
         editAction: function(data) {
             switch(data) {
                 case 'edit':
@@ -104,10 +84,10 @@ const homepage = new Vue({
     		switch(data.action) {
     			case 'delete-item':
     				if (confirm("Are you sure you want to delete this item?")) {
-    					this.$http.get(inventory_delete_url + data.data.id).then((response) => {
-		        			console.log(response);
-                            inventory.splice(inventory.indexOf(data.data), 1);
-		        		});
+    					this.deleteItem(data.data).then((value) => {
+                            if (value)
+                                this.inventory.splice(inventory.indexOf(data.data), 1);
+                        });
 	        		}
     				break;
 				case 'edit-item':
@@ -115,7 +95,20 @@ const homepage = new Vue({
                     this.showEditModal = true;
 					break;
                 case 'add-item':
-                    this.addItem(data.data);
+                    this.adding = true;
+
+                    //search for duplicate
+                    for (var i = 0; i < this.inventory.length; i++)
+                        if (data.data.id == this.inventory[i].id) {
+                            alert("You already have " + data.data.description + " in your pantry.");
+                            this.adding = false;
+                            return;
+                        }
+                this.addItem(data.data).then( function(value) {
+                    if (value)
+                        this.inventory.unshift(data.data);
+                });
+                this.adding = false;
     		}
     	},
         searchIngredients: function() {

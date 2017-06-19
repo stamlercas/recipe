@@ -87,6 +87,12 @@ class RecipeController extends Controller
             'users_ingredients' => Auth::user()->ingredients()->get()]);
     }
 
+    public function get($recipe_id)
+    {
+        $recipe = new Recipe();
+        $json = 
+    }
+
     protected function append($request, $table, $parameter)
     {
         $str = '';

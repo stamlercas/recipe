@@ -5,8 +5,12 @@ Vue.component('ingredient-list-item', require('./components/IngredientListItem.v
 
 import { ActionBus } from './bus/action-bus.js';
 
+import addItem from './mixins/ingredients.js';
+import deleteItem from './mixins/ingredients.js';
+
 const results = new Vue({
     el: '#results',
+    mixins: [addItem, deleteItem],
     data: {
     	results: [
         ],
@@ -22,26 +26,24 @@ const results = new Vue({
         timeInMinutes: function(seconds) {
             return seconds / 60;
         },
-        fireAction: function(action) {
-            switch(action.action) {
+        fireAction: function(data) {
+            switch(data.action) {
                 case 'add-item':
-                    this.addItem(action.data);
+                    this.addItem(data.data).then((value) => {
+                        if (value)
+                            this.users_ingredients.unshift(data.data);
+                    });
                     break;
-            }
-        },
-        addItem: function(ingredient) {
-            var data = {
-                id: ingredient.id,
-                _token: session_token
-            };
-            console.log(ingredient);
-            this.$http.post(inventory_add_url, data).then((response) => {
-                            console.log(response.body);
-                            if (response.body.success) {
-                                this.users_ingredients.unshift(response.body.ingredient);
+                case 'delete-item':
+                    this.deleteItem(data.data).then((value) => {
+                        for (var i = 0; i < this.users_ingredients.length; i++)
+                            if (data.data.id == this.users_ingredients[i].id) {
+                                console.log(i);
+                                this.users_ingredients.splice(i, 1);
                             }
-                        });
-        },
+                    });
+            }
+        }
 
     }
 });

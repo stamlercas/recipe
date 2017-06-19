@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 59);
+/******/ 	return __webpack_require__(__webpack_require__.s = 60);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -43000,16 +43000,40 @@ module.exports = function(module) {
 var ActionBus = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a();
 
 /***/ }),
-/* 39 */,
+/* 39 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony default export */ __webpack_exports__["a"] = ({
+  methods: {
+    addItem: function addItem(ingredient) {
+      var data = {
+        id: ingredient.id,
+        _token: session_token
+      };
+      return this.$http.post(inventory_add_url, data).then(function (response) {
+        return response.body.success;
+      });
+    },
+    deleteItem: function deleteItem(ingredient) {
+      return this.$http.get(inventory_delete_url + ingredient.id).then(function (response) {
+        return response.body.success;
+      });
+    }
+  }
+});
+
+/***/ }),
 /* 40 */,
-/* 41 */
+/* 41 */,
+/* 42 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var Component = __webpack_require__(33)(
   /* script */
-  __webpack_require__(50),
+  __webpack_require__(51),
   /* template */
-  __webpack_require__(56),
+  __webpack_require__(57),
   /* scopeId */
   null,
   /* cssModules */
@@ -43036,23 +43060,28 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 42 */
+/* 43 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__bus_action_bus_js__ = __webpack_require__(38);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__mixins_ingredients_js__ = __webpack_require__(39);
 __webpack_require__(9);
 
-Vue.component('pantry-table', __webpack_require__(41));
-Vue.component('edit-modal', __webpack_require__(52));
-Vue.component('search-results-table', __webpack_require__(41));
+Vue.component('pantry-table', __webpack_require__(42));
+Vue.component('edit-modal', __webpack_require__(53));
+Vue.component('search-results-table', __webpack_require__(42));
 
 // Import the EventBus.
 
 
+
+
+
 var homepage = new Vue({
     el: '#inventory',
+    mixins: [__WEBPACK_IMPORTED_MODULE_1__mixins_ingredients_js__["a" /* default */], __WEBPACK_IMPORTED_MODULE_1__mixins_ingredients_js__["a" /* default */]],
     data: {
         inventory: [],
         searchResults: [],
@@ -43067,7 +43096,7 @@ var homepage = new Vue({
             name: 'description',
             alias: 'Name'
         }, {
-            name: 'pivot.created_at',
+            name: 'created_at',
             alias: 'Date Added'
         }],
         actions: [
@@ -43087,32 +43116,8 @@ var homepage = new Vue({
         __WEBPACK_IMPORTED_MODULE_0__bus_action_bus_js__["a" /* ActionBus */].$on('edit-action', this.editAction);
     },
     methods: {
-        addItem: function addItem(ingredient) {
-            var _this = this;
-
-            this.adding = true;
-
-            //search for duplicate
-            for (var i = 0; i < this.inventory.length; i++) {
-                if (ingredient.id == this.inventory[i].id) {
-                    alert("You already have " + ingredient.description + " in your pantry.");
-                    this.adding = false;
-                    return;
-                }
-            }var data = {
-                id: ingredient.id,
-                _token: session_token
-            };
-            this.$http.post(inventory_add_url, data).then(function (response) {
-                console.log(response.body);
-                if (response.body.success) {
-                    inventory.unshift(response.body.ingredient);
-                }
-                _this.adding = false;
-            });
-        },
         editAction: function editAction(data) {
-            var _this2 = this;
+            var _this = this;
 
             switch (data) {
                 case 'edit':
@@ -43127,7 +43132,7 @@ var homepage = new Vue({
                             console.log(inventory[i]);
                             if (inventory[i].id == response.body.item.id) inventory[i].item = response.body.item.item;
                         }
-                        _this2.showEditModal = false;
+                        _this.showEditModal = false;
                     });
                     break;
                 case 'close':
@@ -43136,12 +43141,13 @@ var homepage = new Vue({
             }
         },
         fireAction: function fireAction(data) {
+            var _this2 = this;
+
             switch (data.action) {
                 case 'delete-item':
                     if (confirm("Are you sure you want to delete this item?")) {
-                        this.$http.get(inventory_delete_url + data.data.id).then(function (response) {
-                            console.log(response);
-                            inventory.splice(inventory.indexOf(data.data), 1);
+                        this.deleteItem(data.data).then(function (value) {
+                            if (value) _this2.inventory.splice(inventory.indexOf(data.data), 1);
                         });
                     }
                     break;
@@ -43150,7 +43156,19 @@ var homepage = new Vue({
                     this.showEditModal = true;
                     break;
                 case 'add-item':
-                    this.addItem(data.data);
+                    this.adding = true;
+
+                    //search for duplicate
+                    for (var i = 0; i < this.inventory.length; i++) {
+                        if (data.data.id == this.inventory[i].id) {
+                            alert("You already have " + data.data.description + " in your pantry.");
+                            this.adding = false;
+                            return;
+                        }
+                    }this.addItem(data.data).then(function (value) {
+                        if (value) this.inventory.unshift(data.data);
+                    });
+                    this.adding = false;
             }
         },
         searchIngredients: function searchIngredients() {
@@ -43179,12 +43197,12 @@ var homepage = new Vue({
 });
 
 /***/ }),
-/* 43 */,
 /* 44 */,
 /* 45 */,
 /* 46 */,
 /* 47 */,
-/* 48 */
+/* 48 */,
+/* 49 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -43235,8 +43253,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 49 */,
-/* 50 */
+/* 50 */,
+/* 51 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -43327,15 +43345,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 51 */,
-/* 52 */
+/* 52 */,
+/* 53 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var Component = __webpack_require__(33)(
   /* script */
-  __webpack_require__(48),
+  __webpack_require__(49),
   /* template */
-  __webpack_require__(57),
+  __webpack_require__(58),
   /* scopeId */
   null,
   /* cssModules */
@@ -43362,10 +43380,10 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 53 */,
 /* 54 */,
 /* 55 */,
-/* 56 */
+/* 56 */,
+/* 57 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -43416,7 +43434,7 @@ if (false) {
 }
 
 /***/ }),
-/* 57 */
+/* 58 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -43454,11 +43472,11 @@ if (false) {
 }
 
 /***/ }),
-/* 58 */,
-/* 59 */
+/* 59 */,
+/* 60 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(42);
+module.exports = __webpack_require__(43);
 
 
 /***/ })

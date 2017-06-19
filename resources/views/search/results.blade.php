@@ -12,7 +12,7 @@ Results
 		    <div class="list-group-item-heading">
 		    	<div class="container-fluid">
 		    		<div class="row">
-		    			<div class="col-xs-8 col-sm-6 col-md-8">
+		    			<div class="col-sm-6 col-md-8">
 	    			<img :src="result.imageUrlsBySize[90]" :alt="result.recipeName" class="img img-responsive list-img" />
 						<h5 class="list-title">
 							<a href="#">@{{ result.recipeName }}</a>
@@ -32,7 +32,7 @@ Results
 					</a>
   						</div>
 						-->
-						<div class="col-xs-4 col-sm-4 col-md-2">
+						<div class="col-sm-4 col-md-2">
 	      			<small>Time: @{{ timeInMinutes(result.totalTimeInSeconds) }} min</small>
 	      			<br />
 	      			<span>
@@ -60,6 +60,7 @@ Results
   		var search_results = {!! json_encode($results) !!};
   		var users_ingredients = {!! json_encode($users_ingredients) !!};
   		var inventory_add_url = "{{ route('inventory.add') }}";
+  		var inventory_delete_url = "{{ route('inventory.delete', ['inventory_id' => ''])  }}" + "/";
   		var session_token = "{{ Session::token() }}";
   	</script>
   	<script src="{{ asset('js/results.js') }}"></script>
