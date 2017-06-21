@@ -25,18 +25,18 @@ class CreateRecipesTable extends Migration
             $table->string('totalTime');
             $table->integer('totalTimeInSeconds');
             $table->integer('numberOfServings');
-            $table->double('salty', 20, 19);
-            $table->double('meaty', 20, 19);
-            $table->double('piquant', 20, 19);
-            $table->double('bitter', 20, 19);
-            $table->double('sour', 20, 19);
-            $table->double('sweet', 20, 19);
+            $table->double('salty', 20, 19)->nullable();
+            $table->double('meaty', 20, 19)->nullable();
+            $table->double('piquant', 20, 19)->nullable();
+            $table->double('bitter', 20, 19)->nullable();
+            $table->double('sour', 20, 19)->nullable();
+            $table->double('sweet', 20, 19)->nullable();
             $table->string('sourceRecipeUrl');
             $table->string('sourceSiteUrl');
             $table->string('sourceDisplayName');
-            $table->string('hostedLargeUrl');
-            $table->string('hostedMediumUrl');
-            $table->string('hostedSmallUrl');
+            $table->string('hostedLargeUrl')->nullable();
+            $table->string('hostedMediumUrl')->nullable();
+            $table->string('hostedSmallUrl')->nullable();
         });
     }
 

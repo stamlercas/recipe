@@ -9,7 +9,10 @@ use Recipr\Cuisine;
 use Recipr\Course;
 use Recipr\Holiday;
 use Recipr\RecipeSearch;
+use Recipr\Recipe;
 use Recipr\Ingredient;
+use Recipr\IngredientLine;
+use Recipr\NutritionEstimate;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -89,8 +92,96 @@ class RecipeController extends Controller
 
     public function get($recipe_id)
     {
-        $recipe = new Recipe();
-        $json = 
+        $recipe = json_decode(file_get_contents(storage_path() . "/app/json/" . "recipe.json"));
+
+        $r = null;
+        if (!Recipe::find($recipe->id)) {   // insert it
+            $r = new Recipe();
+
+            // attributions
+            $r->html = $recipe->attribution->html;
+            $r->url = $recipe->attribution->url;
+            $r->text = $recipe->attribution->text;
+            $r->logo = $recipe->attribution->logo;
+
+            // flavors
+            $r->salty = $recipe->flavors->Salty;
+            $r->meaty = $recipe->flavors->Meaty;
+            $r->piquant = $recipe->flavors->Piquant;
+            $r->bitter = $recipe->flavors->Bitter;
+            $r->sour = $recipe->flavors->Sour;
+            $r->sweet = $recipe->flavors->Sweet;
+
+            // images are nullable fields
+            if (isset($recipe->images[0]->hostedLargeUrl))
+                $r->hostedLargeUrl = $recipe->images[0]->hostedLargeUrl;
+            if (isset($recipe->images[0]->hostedMediumUrl))
+                $r->hostedMediumUrl = $recipe->images[0]->hostedMediumUrl;
+            if (isset($recipe->images[0]->hostedSmallUrl))
+                $r->hostedSmallUrl = $recipe->images[0]->hostedSmallUrl;
+
+            $r->name = $recipe->name;
+            $r->yield = $recipe->yield;
+            $r->totalTime = $recipe->totalTime;
+            $r->totalTimeInSeconds = $recipe->totalTimeInSeconds;
+            $r->numberOfServings = $recipe->numberOfServings;
+
+            // source
+            $r->sourceRecipeUrl = $recipe->source->sourceRecipeUrl;
+            $r->sourceSiteUrl = $recipe->source->sourceSiteUrl;
+            $r->sourceDisplayName = $recipe->source->sourceDisplayName;
+
+            $r->id = $recipe->id;
+
+            $r->save();
+
+            // ingredient lines
+            foreach($recipe->ingredientLines as $ingredientLine) {
+                $i = new IngredientLine();
+                $i->line = $ingredientLine;
+                $r->ingredient_lines()->save($i);
+            }
+
+            // nutrition estimates
+            foreach($recipe->nutritionEstimates as $nutritionEstimate) {
+                $n = new NutritionEstimate();
+                $n->attribute = $nutritionEstimate->attribute;
+                $n->description = $nutritionEstimate->description;
+                $n->value = $nutritionEstimate->value;
+                $n->unit_name = $nutritionEstimate->unit->name;
+                $n->unit_abbreviation = $nutritionEstimate->unit->abbreviation;
+                $n->unit_plural = $nutritionEstimate->unit->plural;
+                $n->unit_plural_abbreviation = $nutritionEstimate->unit->pluralAbbreviation;
+
+                $r->nutrition_estimates()->save($n);
+            }
+
+            //attributes
+            if (isset($recipe->attributes->holiday)) {
+                foreach($recipe->attributes->holiday as $holiday) {
+                    $h = Holiday::where('name', $holiday)->first();
+                    $r->holidays()->attach($h);
+                }
+            }
+
+            if (isset($recipe->attributes->course)) {
+                foreach($recipe->attributes->course as $course) {
+                    $c = Course::where('name', $course)->first();
+                    $r->courses()->attach($c);
+                }
+            }
+
+            if (isset($recipe->attributes->cuisine)) {
+                foreach($recipe->attributes->cuisine as $cuisine) {
+                    $c = Cuisine::where('name', 'like', '%' . $cuisine . '%')->first();
+                    $r->cuisines()->attach($c);
+                }
+            } else {
+                $r = Recipe::find($recipe->id);
+            }
+        }
+
+        return response()->json($this->toJson($r));
     }
 
     protected function append($request, $table, $parameter)
@@ -111,6 +202,71 @@ class RecipeController extends Controller
                 $value->recipe_searches()->attach($id);
             }
         }
+    }
+
+    protected function toJson($recipe) {
+        $r = json_decode(file_get_contents(storage_path() . '/app/json/recipe_template.json'));
+        $r->attribution->html = $recipe->html;
+        $r->attribution->url = $recipe->url;
+        $r->attribution->text = $recipe->text;
+        $r->attribution->logo = $recipe->logo;
+
+        $ingredient_lines = $r->ingredient_lines()->get();
+        for($i = 0; $i < count($ingredient_lines); $i++) {
+            $r->ingredientLines[$i] = $ingredient_lines[$i]->line;
+        }
+
+        $r->flavors->Salty = $recipe->salty;
+        $r->flavors->Meaty = $recipe->meaty;
+        $r->flavors->Piquant = $recipe->piquant;
+        $r->flavors->Bitter = $recipe->bitter;
+        $r->flavors->Sour = $recipe->sour;
+        $r->flavors->Sweet = $recipe->sweet;
+
+        $nutrition_estimate = $r->nutritionEstimates[0];
+        $r->nutritionEstimates = array();   // get template and clear array to fill with data from db
+        foreach($recipe->nutrition_estimates()->get() as $estimate) {
+            $nutrition_estimate->attribute = $estimate->attribute;
+            $nutrition_estimate->description = $estimate->description;
+            $nutrition_estimate->value = $estimate->value;
+            $nutrition_estimate->unit->name = $estimate->unit_name;
+            $nutrition_estimate->unit->abbreviation = $estimate->unit_abbreviation;
+            $nutrition_estmiate->unit->plural = $estimate->unit_plural;
+            $nutrition_estimate->unit->pluralAbbreviation = $estimate->unit_plural_abbreviaiton;
+
+            array_push($r->nutritionEstimates, $nutrition_estimate);
+        }
+
+        $r->images->hostedLargeUrl = $recipe->hostedLargeUrl;
+        $r->images->hostedMediumUrl = $recipe->hostedMediumUrl;
+        $r->images->hostedSmallUrl = $recipe->hostedSmallUrl;
+
+        $r->name = $recipe->name;
+        $r->yield = $recipe->yield;
+        $r->totalTime = $recipe->totalTime;
+
+        foreach($recipe->holidays()->get() as $holiday) {
+            array_push($r->attributes->holiday, $holiday->name);
+        }
+
+        foreach($recipe->courses()->get() as $course) {
+            array_push($r->attributes->course, $course->name);
+        }
+
+        foreach($recipe->cusines()->get() as $cuisine) {
+            array_push($r->attributes->cuisine, $cuisine->name);
+        }
+
+        $r->totalTimeInSeconds = $recipe->totalTimeInSeconds;
+        $r->numberOfServings = $recipe->numberOfServings;
+
+        $r->source->sourceRecipeUrl = $recipe->sourceRecipeUrl;
+        $r->source->sourceSiteUrl = $recipe->sourceSiteUrl;
+        $r->source->sourceDisplayName = $recipe->sourceDisplayName;
+
+        $r->id = $recipe->id;
+
+        return $r;
     }
 
 }
