@@ -94,7 +94,7 @@ class RecipeController extends Controller
     {
         $recipe = json_decode(file_get_contents(storage_path() . "/app/json/" . "recipe.json"));
 
-        $r = null;
+        $r = Recipe::find($recipe->id);
         if (!Recipe::find($recipe->id)) {   // insert it
             $r = new Recipe();
 
@@ -176,12 +176,10 @@ class RecipeController extends Controller
                     $c = Cuisine::where('name', 'like', '%' . $cuisine . '%')->first();
                     $r->cuisines()->attach($c);
                 }
-            } else {
-                $r = Recipe::find($recipe->id);
             }
         }
 
-        return response()->json($this->toJson($r));
+        return view('recipe', ['recipe' => $this->toJson($r)]);
     }
 
     protected function append($request, $table, $parameter)
@@ -205,13 +203,19 @@ class RecipeController extends Controller
     }
 
     protected function toJson($recipe) {
-        $r = json_decode(file_get_contents(storage_path() . '/app/json/recipe_template.json'));
+        $r = new \stdClass();//json_decode(file_get_contents(storage_path() . '/app/json/recipe_template.json'));
+        $r->attribution = new \stdClass();
+        $r->flavors = new \stdClass();
+        $r->images = new \stdClass();
+        $r->attributes = new \stdClass();
+        $r->source = new \stdClass();
+
         $r->attribution->html = $recipe->html;
         $r->attribution->url = $recipe->url;
         $r->attribution->text = $recipe->text;
         $r->attribution->logo = $recipe->logo;
 
-        $ingredient_lines = $r->ingredient_lines()->get();
+        $ingredient_lines = $recipe->ingredient_lines()->get();
         for($i = 0; $i < count($ingredient_lines); $i++) {
             $r->ingredientLines[$i] = $ingredient_lines[$i]->line;
         }
@@ -223,7 +227,8 @@ class RecipeController extends Controller
         $r->flavors->Sour = $recipe->sour;
         $r->flavors->Sweet = $recipe->sweet;
 
-        $nutrition_estimate = $r->nutritionEstimates[0];
+        $nutrition_estimate = new \stdClass();
+        $nutrition_estimate->unit = new \stdClass();
         $r->nutritionEstimates = array();   // get template and clear array to fill with data from db
         foreach($recipe->nutrition_estimates()->get() as $estimate) {
             $nutrition_estimate->attribute = $estimate->attribute;
@@ -231,7 +236,7 @@ class RecipeController extends Controller
             $nutrition_estimate->value = $estimate->value;
             $nutrition_estimate->unit->name = $estimate->unit_name;
             $nutrition_estimate->unit->abbreviation = $estimate->unit_abbreviation;
-            $nutrition_estmiate->unit->plural = $estimate->unit_plural;
+            $nutrition_estimate->unit->plural = $estimate->unit_plural;
             $nutrition_estimate->unit->pluralAbbreviation = $estimate->unit_plural_abbreviaiton;
 
             array_push($r->nutritionEstimates, $nutrition_estimate);
@@ -245,16 +250,25 @@ class RecipeController extends Controller
         $r->yield = $recipe->yield;
         $r->totalTime = $recipe->totalTime;
 
-        foreach($recipe->holidays()->get() as $holiday) {
-            array_push($r->attributes->holiday, $holiday->name);
+        if (count($recipe->holidays()->get()) > 0) {
+            $r->attributes->holiday = array();
+            foreach($recipe->holidays()->get() as $holiday) {
+                array_push($r->attributes->holiday, $holiday->name);
+            }
         }
 
-        foreach($recipe->courses()->get() as $course) {
-            array_push($r->attributes->course, $course->name);
+        if (count($recipe->courses()->get()) > 0) {
+            $r->attributes->course = array();
+            foreach($recipe->courses()->get() as $course) {
+                array_push($r->attributes->course, $course->name);
+            }
         }
 
-        foreach($recipe->cusines()->get() as $cuisine) {
-            array_push($r->attributes->cuisine, $cuisine->name);
+        if (count($recipe->cuisines()->get()) > 0) {
+            $r->attributes->cuisine = array();
+            foreach($recipe->cuisines()->get() as $cuisine) {
+                array_push($r->attributes->cuisine, $cuisine->name);
+            }
         }
 
         $r->totalTimeInSeconds = $recipe->totalTimeInSeconds;

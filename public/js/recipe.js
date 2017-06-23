@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 64);
+/******/ 	return __webpack_require__(__webpack_require__.s = 62);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -42931,204 +42931,32 @@ module.exports = function(module) {
 /* (ignored) */
 
 /***/ }),
-/* 36 */
-/***/ (function(module, exports) {
-
-// this module is a runtime utility for cleaner component module output and will
-// be included in the final webpack user bundle
-
-module.exports = function normalizeComponent (
-  rawScriptExports,
-  compiledTemplate,
-  scopeId,
-  cssModules
-) {
-  var esModule
-  var scriptExports = rawScriptExports = rawScriptExports || {}
-
-  // ES6 modules interop
-  var type = typeof rawScriptExports.default
-  if (type === 'object' || type === 'function') {
-    esModule = rawScriptExports
-    scriptExports = rawScriptExports.default
-  }
-
-  // Vue.extend constructor export interop
-  var options = typeof scriptExports === 'function'
-    ? scriptExports.options
-    : scriptExports
-
-  // render functions
-  if (compiledTemplate) {
-    options.render = compiledTemplate.render
-    options.staticRenderFns = compiledTemplate.staticRenderFns
-  }
-
-  // scopedId
-  if (scopeId) {
-    options._scopeId = scopeId
-  }
-
-  // inject cssModules
-  if (cssModules) {
-    var computed = Object.create(options.computed || null)
-    Object.keys(cssModules).forEach(function (key) {
-      var module = cssModules[key]
-      computed[key] = function () { return module }
-    })
-    options.computed = computed
-  }
-
-  return {
-    esModule: esModule,
-    exports: scriptExports,
-    options: options
-  }
-}
-
-
-/***/ }),
-/* 37 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var Component = __webpack_require__(36)(
-  /* script */
-  __webpack_require__(40),
-  /* template */
-  __webpack_require__(41),
-  /* scopeId */
-  null,
-  /* cssModules */
-  null
-)
-Component.options.__file = "C:\\Users\\Porsche Tech\\recipe\\resources\\assets\\js\\components\\Checkbox.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
-if (Component.options.functional) {console.error("[vue-loader] Checkbox.vue: functional components are not supported with templates, they should use render functions.")}
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-812aceb6", Component.options)
-  } else {
-    hotAPI.reload("data-v-812aceb6", Component.options)
-  }
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
+/* 36 */,
+/* 37 */,
 /* 38 */,
 /* 39 */,
-/* 40 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
-//
-//
-//
-//
-//
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-	props: ['item', 'checked', 'name'],
-	computed: {
-		isChecked: function isChecked() {
-			if (this.checked) return true;
-			return false;
-		},
-		id: function id() {
-			return this.name == null ? this.item : this.name;
-		}
-	}
-});
-
-/***/ }),
-/* 41 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "checkbox"
-  }, [_c('label', [_c('input', {
-    attrs: {
-      "type": "checkbox",
-      "name": _vm.id
-    },
-    domProps: {
-      "checked": _vm.isChecked
-    }
-  }), _vm._v(" " + _vm._s(_vm.item) + "\n  ")])])
-},staticRenderFns: []}
-module.exports.render._withStripped = true
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-812aceb6", module.exports)
-  }
-}
-
-/***/ }),
+/* 40 */,
+/* 41 */,
 /* 42 */,
 /* 43 */,
-/* 44 */,
-/* 45 */,
-/* 46 */
+/* 44 */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(9);
 
-Vue.component('allergy-checkbox', __webpack_require__(37));
-Vue.component('diet-checkbox', __webpack_require__(37));
-Vue.component('cuisine-checkbox', __webpack_require__(37));
-Vue.component('course-checkbox', __webpack_require__(37));
-Vue.component('holiday-checkbox', __webpack_require__(37));
-
-var search = new Vue({
-    el: '#search',
+var recipe_app = new Vue({
+    el: '#recipe',
     data: {
-        allergies: [],
-        diets: [],
-        cuisines: [],
-        courses: [],
-        holidays: [],
-        users_allergies: [],
-        users_diets: []
+        recipe: {}
     },
     created: function created() {
-        this.allergies = allergies;
-        this.users_allergies = users_allergies;
-        this.diets = diets;
-        this.users_diets = users_diets;
-        this.cuisines = cuisines;
-        this.courses = courses;
-        this.holidays = holidays;
-    },
-    methods: {
-        hasAllergy: function hasAllergy(allergy) {
-            for (var i = 0; i < this.users_allergies.length; i++) {
-                if (allergy.id == this.users_allergies[i].id) return true;
-            }
-            return false;
-        },
-        hasDiet: function hasDiet(diet) {
-            for (var i = 0; i < this.users_diets.length; i++) {
-                if (diet.id == this.users_diets[i].id) return true;
-            }
-            return false;
-        }
+        this.recipe = recipe;
     }
 });
 
 /***/ }),
+/* 45 */,
+/* 46 */,
 /* 47 */,
 /* 48 */,
 /* 49 */,
@@ -43144,12 +42972,10 @@ var search = new Vue({
 /* 59 */,
 /* 60 */,
 /* 61 */,
-/* 62 */,
-/* 63 */,
-/* 64 */
+/* 62 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(46);
+module.exports = __webpack_require__(44);
 
 
 /***/ })

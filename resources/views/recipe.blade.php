@@ -1,15 +1,45 @@
 @extends('layouts.master')
 
 @section('title')
-{{ recipe.name }}
+@{{ recipe.name }}
 @endsection
 
 @section('content')
 
+<div id="recipe">
+	<div class="row">
+		<div class="col-md-4" style=";margin-top:22px;">
+			<img :src="recipe.images.hostedLargeUrl" class="img img-respsonsive" :alt="recipe.name + ' image'" />
+		</div>
+		<div class="col-md-6">
+			<h1 style="margin-bottom:0;">@{{ recipe.name }}</h1>
+			<div>
+				Provided by 
+				<a :href="recipe.sourceSiteUrl" target="_blank">
+					@{{ recipe.source.sourceDisplayName }}
+				</a>
+			</div>
+		</div>
+	</div>
+	<h2>Ingredients</h2>
+	<div class="row" style="margin-bottom:10px;">
+		<div class="col-sm-4" style="padding:5px;" v-for="ingredient in recipe.ingredientLines">@{{ ingredient }}</div>
+	</div>
+	<div class="row">
+		<div class="col-md-3">
+			<a role="button" class="btn btn-primary btn-block" :href="recipe.source.sourceRecipeUrl" target="_blank">
+				View Source
+			</a>
+		</div>
+		<div class="col-md-3">
+			<button class="btn btn-primary btn-block" value="Submit">Make Grocery List</button>
+		</div>
+	</div>
+</div>
+
 <script>
-	var recipe = {{ json_encode($recipe) }};
+	var recipe = {!! json_encode($recipe) !!};
 </script>
-
-
+<script src="{{ asset('js/recipe.js') }}"></script>
 
 @endsection
