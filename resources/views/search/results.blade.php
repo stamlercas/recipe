@@ -6,12 +6,10 @@ Results
 
 @section('content')
 	<div id="results">
-	<div class="row">
-		<div class="col-md-6"><h1>Search Results</h1></div>
-		<div class="col-md-6">
+		<h1>
+			Search Results
 			<button class="btn-default btn pull-right" type="submit" @click="results = sort(results, 'numberOfIngredients')">Update</button>
-		</div>
-	</div>
+		</h1>
 		<div class="list-group">
 		  <div v-for="result in results" class="list-group-item">
 		    <div class="list-group-item-heading">

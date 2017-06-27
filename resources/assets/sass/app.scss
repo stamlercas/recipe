@@ -37,6 +37,10 @@ nav ul li a {
     text-align:center;
 }
 
+.btn {
+  margin-bottom:10px;
+}
+
 .disabled-action {
     color: $gray-lighter;
     cursor: not-allowed;
@@ -87,12 +91,11 @@ nav ul li a {
   .navbar-fixed-side .navbar-nav > li > a {
       border-bottom: $brand-primary-darker;
   }
+}
 
-
-  .navbar-fixed-side .navbar-collapse {
+.navbar-fixed-side .navbar-collapse {
       border-top: $brand-primary-darker;
   }
-}
 
 .search-checkbox {
   padding: 3px;
