@@ -36,3 +36,15 @@ $input-color-placeholder: lighten($text-color, 30%);
 
 // Panels
 $panel-default-heading-bg: #fff;
+
+
+// EDITS
+
+$brand-primary: #FFBE0B;
+$brand-primary-darker: lighten($brand-primary, 13.5%);
+$brand-priamry-dark: lighten($brand-primary, 20%);
+$brand-priamry-light: lighten($brand-primary, 46.7%);
+$brand-priamry-lighter: lighten($brand-primary, 93.5%);
+
+
+$navbar-default-bg: $brand-primary;

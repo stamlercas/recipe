@@ -1,6 +1,6 @@
 <template>
       	<li :class="hasIngredient != false ? 'strong' : ''">
-      		<i v-if="!hasIngredient" 
+      		<i v-if="!hasIngredient && showWhenHave != false" 
       		class="action-icon fa fa-plus"
       		:class="inDB ? '' : 'disabled-action'"
       		@click="fireAction({ action: 'add-item', data: ingredient })">
@@ -20,7 +20,8 @@ import { ActionBus } from '../bus/action-bus.js';
 export default {
 	props: [
     	'ingredient',
-    	'users_ingredients'
+    	'users_ingredients',
+    	'showWhenHave'
 	],
 	methods: {
 		fireAction: function(action) {

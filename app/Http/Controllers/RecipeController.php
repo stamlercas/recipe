@@ -15,6 +15,7 @@ use Recipr\IngredientLine;
 use Recipr\NutritionEstimate;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class RecipeController extends Controller
 {
@@ -73,6 +74,7 @@ class RecipeController extends Controller
         //return response()->json(['data' => var_dump($results)]);
         foreach($results->matches as $result) {
             $temp = array();
+            $id = $result->id;
             foreach($result->ingredients as $ingredient) {
                 $obj = Ingredient::where('description', $ingredient)->first();
                 if ($obj == null) {
@@ -83,6 +85,11 @@ class RecipeController extends Controller
                     $obj->id = null;
                 }
                 array_push($temp, $obj);
+
+                // as well as adding the whole ingredient object to the result, we should add the ingredient to the interesect table with the recipe
+                if (count(DB::table('recipes_ingredients')->where('recipe_id', $id)->where('ingredient_id', $obj->id)->get()) == 0
+                        && ($obj->id != null))
+                        $obj->recipes()->attach($id);
             }
             $result->ingredients = $temp;
         }
@@ -179,7 +186,9 @@ class RecipeController extends Controller
             }
         }
 
-        return view('recipe', ['recipe' => $this->toJson($r)]);
+        return view('recipe', ['recipe' => $this->toJson($r), 
+                                'users_ingredients' => Auth::user()->ingredients()->get()
+                            ]);
     }
 
     protected function append($request, $table, $parameter)
@@ -279,6 +288,8 @@ class RecipeController extends Controller
         $r->source->sourceDisplayName = $recipe->sourceDisplayName;
 
         $r->id = $recipe->id;
+
+        $r->ingredients = $recipe->ingredients()->get();
 
         return $r;
     }

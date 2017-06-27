@@ -10477,7 +10477,7 @@ __webpack_require__(28);
 
 window.Vue = __webpack_require__(8);
 
-var VueResource = __webpack_require__(33);
+var VueResource = __webpack_require__(34);
 
 Vue.use(VueResource);
 
@@ -41126,7 +41126,7 @@ return jQuery;
   }
 }.call(this));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(7), __webpack_require__(34)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(7), __webpack_require__(35)(module)))
 
 /***/ }),
 /* 32 */
@@ -41320,6 +41320,63 @@ process.umask = function() { return 0; };
 
 /***/ }),
 /* 33 */
+/***/ (function(module, exports) {
+
+// this module is a runtime utility for cleaner component module output and will
+// be included in the final webpack user bundle
+
+module.exports = function normalizeComponent (
+  rawScriptExports,
+  compiledTemplate,
+  scopeId,
+  cssModules
+) {
+  var esModule
+  var scriptExports = rawScriptExports = rawScriptExports || {}
+
+  // ES6 modules interop
+  var type = typeof rawScriptExports.default
+  if (type === 'object' || type === 'function') {
+    esModule = rawScriptExports
+    scriptExports = rawScriptExports.default
+  }
+
+  // Vue.extend constructor export interop
+  var options = typeof scriptExports === 'function'
+    ? scriptExports.options
+    : scriptExports
+
+  // render functions
+  if (compiledTemplate) {
+    options.render = compiledTemplate.render
+    options.staticRenderFns = compiledTemplate.staticRenderFns
+  }
+
+  // scopedId
+  if (scopeId) {
+    options._scopeId = scopeId
+  }
+
+  // inject cssModules
+  if (cssModules) {
+    var computed = Object.create(options.computed || null)
+    Object.keys(cssModules).forEach(function (key) {
+      var module = cssModules[key]
+      computed[key] = function () { return module }
+    })
+    options.computed = computed
+  }
+
+  return {
+    esModule: esModule,
+    exports: scriptExports,
+    options: options
+  }
+}
+
+
+/***/ }),
+/* 34 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -42421,7 +42478,7 @@ var xhrClient = function (request) {
 
 var nodeClient = function (request) {
 
-    var client = __webpack_require__(35);
+    var client = __webpack_require__(36);
 
     return new PromiseObj(function (resolve) {
 
@@ -42897,7 +42954,7 @@ if (typeof window !== 'undefined' && window.Vue) {
 
 
 /***/ }),
-/* 34 */
+/* 35 */
 /***/ (function(module, exports) {
 
 module.exports = function(module) {
@@ -42925,71 +42982,13 @@ module.exports = function(module) {
 
 
 /***/ }),
-/* 35 */
+/* 36 */
 /***/ (function(module, exports) {
 
 /* (ignored) */
 
 /***/ }),
-/* 36 */
-/***/ (function(module, exports) {
-
-// this module is a runtime utility for cleaner component module output and will
-// be included in the final webpack user bundle
-
-module.exports = function normalizeComponent (
-  rawScriptExports,
-  compiledTemplate,
-  scopeId,
-  cssModules
-) {
-  var esModule
-  var scriptExports = rawScriptExports = rawScriptExports || {}
-
-  // ES6 modules interop
-  var type = typeof rawScriptExports.default
-  if (type === 'object' || type === 'function') {
-    esModule = rawScriptExports
-    scriptExports = rawScriptExports.default
-  }
-
-  // Vue.extend constructor export interop
-  var options = typeof scriptExports === 'function'
-    ? scriptExports.options
-    : scriptExports
-
-  // render functions
-  if (compiledTemplate) {
-    options.render = compiledTemplate.render
-    options.staticRenderFns = compiledTemplate.staticRenderFns
-  }
-
-  // scopedId
-  if (scopeId) {
-    options._scopeId = scopeId
-  }
-
-  // inject cssModules
-  if (cssModules) {
-    var computed = Object.create(options.computed || null)
-    Object.keys(cssModules).forEach(function (key) {
-      var module = cssModules[key]
-      computed[key] = function () { return module }
-    })
-    options.computed = computed
-  }
-
-  return {
-    esModule: esModule,
-    exports: scriptExports,
-    options: options
-  }
-}
-
-
-/***/ }),
-/* 37 */,
-/* 38 */
+/* 37 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -43000,6 +42999,7 @@ module.exports = function normalizeComponent (
 var ActionBus = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a();
 
 /***/ }),
+/* 38 */,
 /* 39 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -43025,78 +43025,12 @@ var ActionBus = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a();
 
 /***/ }),
 /* 40 */,
-/* 41 */,
-/* 42 */,
-/* 43 */,
-/* 44 */,
-/* 45 */
+/* 41 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__bus_action_bus_js__ = __webpack_require__(38);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__mixins_ingredients_js__ = __webpack_require__(39);
-__webpack_require__(9);
-
-Vue.component('progress-bar', __webpack_require__(55));
-Vue.component('ingredient-list-item', __webpack_require__(53));
-
-
-
-
-
-
-var results = new Vue({
-    el: '#results',
-    mixins: [__WEBPACK_IMPORTED_MODULE_1__mixins_ingredients_js__["a" /* default */], __WEBPACK_IMPORTED_MODULE_1__mixins_ingredients_js__["a" /* default */]],
-    data: {
-        results: [],
-        users_ingredients: []
-    },
-    created: function created() {
-        this.results = search_results.matches;
-        this.users_ingredients = users_ingredients;
-
-        __WEBPACK_IMPORTED_MODULE_0__bus_action_bus_js__["a" /* ActionBus */].$on('list-action', this.fireAction);
-    },
-    methods: {
-        timeInMinutes: function timeInMinutes(seconds) {
-            return seconds / 60;
-        },
-        fireAction: function fireAction(data) {
-            var _this = this;
-
-            switch (data.action) {
-                case 'add-item':
-                    this.addItem(data.data).then(function (value) {
-                        if (value) _this.users_ingredients.unshift(data.data);
-                    });
-                    break;
-                case 'delete-item':
-                    this.deleteItem(data.data).then(function (value) {
-                        for (var i = 0; i < _this.users_ingredients.length; i++) {
-                            if (data.data.id == _this.users_ingredients[i].id) {
-                                console.log(i);
-                                _this.users_ingredients.splice(i, 1);
-                            }
-                        }
-                    });
-            }
-        }
-
-    }
-});
-
-/***/ }),
-/* 46 */,
-/* 47 */,
-/* 48 */,
-/* 49 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__bus_action_bus_js__ = __webpack_require__(38);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__bus_action_bus_js__ = __webpack_require__(37);
 //
 //
 //
@@ -43117,7 +43051,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-	props: ['ingredient', 'users_ingredients'],
+	props: ['ingredient', 'users_ingredients', 'showWhenHave'],
 	methods: {
 		fireAction: function fireAction(action) {
 			if (this.inDB) __WEBPACK_IMPORTED_MODULE_0__bus_action_bus_js__["a" /* ActionBus */].$emit("list-action", action);
@@ -43137,46 +43071,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 50 */,
-/* 51 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-	props: ['name', 'value'],
-	computed: {
-		progressBarClass: function progressBarClass() {
-			if (this.percentage > 80) return 'progress-bar-danger';else if (this.percentage > 60) return 'progress-bar-warning';else return 'progress-bar-success';
-		},
-		percentage: function percentage() {
-			return this.value * 100;
-		}
-	}
-});
-
-/***/ }),
-/* 52 */,
-/* 53 */
+/* 42 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var Component = __webpack_require__(36)(
+var Component = __webpack_require__(33)(
   /* script */
-  __webpack_require__(49),
+  __webpack_require__(41),
   /* template */
-  __webpack_require__(56),
+  __webpack_require__(43),
   /* scopeId */
   null,
   /* cssModules */
@@ -43203,48 +43105,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 54 */,
-/* 55 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var Component = __webpack_require__(36)(
-  /* script */
-  __webpack_require__(51),
-  /* template */
-  __webpack_require__(57),
-  /* scopeId */
-  null,
-  /* cssModules */
-  null
-)
-Component.options.__file = "C:\\Users\\Porsche Tech\\recipe\\resources\\assets\\js\\components\\ProgressBar.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
-if (Component.options.functional) {console.error("[vue-loader] ProgressBar.vue: functional components are not supported with templates, they should use render functions.")}
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-5f1af634", Component.options)
-  } else {
-    hotAPI.reload("data-v-5f1af634", Component.options)
-  }
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 56 */
+/* 43 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('li', {
     class: _vm.hasIngredient != false ? 'strong' : ''
-  }, [(!_vm.hasIngredient) ? _c('i', {
+  }, [(!_vm.hasIngredient && _vm.showWhenHave != false) ? _c('i', {
     staticClass: "action-icon fa fa-plus",
     class: _vm.inDB ? '' : 'disabled-action',
     on: {
@@ -43278,6 +43145,160 @@ if (false) {
      require("vue-hot-reload-api").rerender("data-v-0d2446a4", module.exports)
   }
 }
+
+/***/ }),
+/* 44 */,
+/* 45 */,
+/* 46 */,
+/* 47 */,
+/* 48 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__bus_action_bus_js__ = __webpack_require__(37);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__mixins_ingredients_js__ = __webpack_require__(39);
+__webpack_require__(9);
+
+Vue.component('progress-bar', __webpack_require__(56));
+Vue.component('ingredient-list-item', __webpack_require__(42));
+
+
+
+
+
+
+var results = new Vue({
+    el: '#results',
+    mixins: [__WEBPACK_IMPORTED_MODULE_1__mixins_ingredients_js__["a" /* default */], __WEBPACK_IMPORTED_MODULE_1__mixins_ingredients_js__["a" /* default */]],
+    data: {
+        results: [],
+        users_ingredients: []
+    },
+    created: function created() {
+        this.results = search_results.matches;
+        this.users_ingredients = users_ingredients;
+
+        for (var i = 0; i < this.results.length; i++) {
+            this.numberOfIngredients(this.results[i]);
+        }
+
+        this.results = this.sort(this.results, 'numberOfIngredients');
+        __WEBPACK_IMPORTED_MODULE_0__bus_action_bus_js__["a" /* ActionBus */].$on('list-action', this.fireAction);
+    },
+    methods: {
+        timeInMinutes: function timeInMinutes(seconds) {
+            return seconds / 60;
+        },
+        fireAction: function fireAction(data) {
+            var _this = this;
+
+            switch (data.action) {
+                case 'add-item':
+                    this.addItem(data.data).then(function (value) {
+                        if (value) _this.users_ingredients.unshift(data.data);
+                    });
+                    break;
+                case 'delete-item':
+                    this.deleteItem(data.data).then(function (value) {
+                        for (var i = 0; i < _this.users_ingredients.length; i++) {
+                            if (data.data.id == _this.users_ingredients[i].id) {
+                                console.log(i);
+                                _this.users_ingredients.splice(i, 1);
+                            }
+                        }
+                    });
+            }
+        },
+        numberOfIngredients: function numberOfIngredients(result) {
+            result.numberOfIngredients = 0;
+            for (var i = 0; i < result.ingredients.length; i++) {
+                for (var j = 0; j < this.users_ingredients.length; j++) {
+                    if (result.ingredients[i].id == this.users_ingredients[j].id) result.numberOfIngredients++;
+                }
+            }return result.numberOfIngredients;
+        },
+        sort: function sort(list, sortKey) {
+            list = list.slice().sort(function (a, b) {
+                a = a[sortKey];
+                b = b[sortKey];
+                return (a === b ? 0 : a > b ? 1 : -1) * -1;
+            });
+            return list;
+        }
+
+    }
+});
+
+/***/ }),
+/* 49 */,
+/* 50 */,
+/* 51 */,
+/* 52 */,
+/* 53 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+	props: ['name', 'value'],
+	computed: {
+		progressBarClass: function progressBarClass() {
+			if (this.percentage > 80) return 'progress-bar-danger';else if (this.percentage > 60) return 'progress-bar-warning';else return 'progress-bar-success';
+		},
+		percentage: function percentage() {
+			return this.value * 100;
+		}
+	}
+});
+
+/***/ }),
+/* 54 */,
+/* 55 */,
+/* 56 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var Component = __webpack_require__(33)(
+  /* script */
+  __webpack_require__(53),
+  /* template */
+  __webpack_require__(57),
+  /* scopeId */
+  null,
+  /* cssModules */
+  null
+)
+Component.options.__file = "C:\\Users\\Porsche Tech\\recipe\\resources\\assets\\js\\components\\ProgressBar.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] ProgressBar.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-5f1af634", Component.options)
+  } else {
+    hotAPI.reload("data-v-5f1af634", Component.options)
+  }
+})()}
+
+module.exports = Component.exports
+
 
 /***/ }),
 /* 57 */
@@ -43318,7 +43339,7 @@ if (false) {
 /* 63 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(45);
+module.exports = __webpack_require__(48);
 
 
 /***/ })

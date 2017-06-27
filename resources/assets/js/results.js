@@ -20,6 +20,12 @@ const results = new Vue({
         this.results = search_results.matches;
         this.users_ingredients = users_ingredients;
 
+        for (var i = 0; i < this.results.length; i++)
+        {
+            this.numberOfIngredients(this.results[i]);
+        }
+
+        this.results = this.sort(this.results, 'numberOfIngredients');
         ActionBus.$on('list-action', this.fireAction);
     },
     methods: {
@@ -43,6 +49,22 @@ const results = new Vue({
                             }
                     });
             }
+        },
+        numberOfIngredients: function(result) {
+            result.numberOfIngredients = 0;
+            for (var i = 0; i < result.ingredients.length; i++)
+                for (var j = 0; j < this.users_ingredients.length; j++)
+                    if (result.ingredients[i].id == this.users_ingredients[j].id)
+                        result.numberOfIngredients++;
+            return result.numberOfIngredients;
+        },
+        sort: function(list, sortKey) {
+            list = list.slice().sort(function (a, b) {
+                  a = a[sortKey];
+                  b = b[sortKey];
+                  return (a === b ? 0 : a > b ? 1 : -1) * -1
+                });
+            return list;
         }
 
     }

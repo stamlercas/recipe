@@ -23,6 +23,11 @@ class Recipe extends Model
         return $this->belongsToMany('Recipr\Holiday', 'recipes_holidays');
     }
 
+    public function ingredients()
+    {
+        return $this->belongsToMany('Recipr\Ingredient', 'recipes_ingredients');
+    }
+
     public function nutrition_estimates()
     {
     	return $this->hasMany('Recipr\NutritionEstimate');

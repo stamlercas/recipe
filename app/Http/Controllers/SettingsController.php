@@ -53,7 +53,7 @@ class SettingsController extends Controller
                 $allergy->users()->detach($user->id);
             }
         }
-
+        /*
         // updating allergies
         $allergies = Allergy::get();
         foreach ($allergies as $allergy) {
@@ -65,7 +65,7 @@ class SettingsController extends Controller
                 $allergy->users()->detach($user->id);
             }
         }
-
+        */
         // updating allergies
         $diets = Diet::get();
         foreach ($diets as $diet) {

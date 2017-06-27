@@ -50,6 +50,10 @@ nav ul li a {
     z-index: -1;
 }
 
+.landing-page-bg {
+    background-image: linear-gradient( 135deg, #FCCF31 0%, #F55555 100%);
+}
+
 .ingredient-list ul li {
     list-style-type:none;
 }
@@ -63,6 +67,31 @@ nav ul li a {
     margin-right:7px;
     margin-bottom:5px;
     float:left;
+}
+
+.navbar-default {
+  border-color: $brand-primary;
+}
+
+.navbar-default .navbar-brand,
+.navbar-default .navbar-nav > li > a {
+  color:#333;
+}
+
+.navbar-default .navbar-nav > li > a:hover {
+  color:#FFF;
+}
+
+@media (min-width: 768px) {
+  .navbar-fixed-side .navbar-collapse,
+  .navbar-fixed-side .navbar-nav > li > a {
+      border-bottom: $brand-primary-darker;
+  }
+
+
+  .navbar-fixed-side .navbar-collapse {
+      border-top: $brand-primary-darker;
+  }
 }
 
 .search-checkbox {

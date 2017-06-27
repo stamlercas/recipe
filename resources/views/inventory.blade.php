@@ -22,7 +22,7 @@
 		  	</div>
 	  		<div class="col-md-4">
 	  			<h3 class="visible-sm visible-xs">Inventory</h3>
-	  			<pantry-table :data="inventory" :columns="columns" :filter-key="search" :actions="actions"></pantry-table>
+	  			<pantry-table :data="inventory" :columns="columns" :filter-key="searchfield" :actions="actions"></pantry-table>
 	  		</div>
   		</div>
   		<edit-modal v-if="showEditModal" @close="showEditModal = false">

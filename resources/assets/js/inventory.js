@@ -3,7 +3,6 @@ require ('./app');
 Vue.component('pantry-table', require('./components/Table.vue'));
 Vue.component('edit-modal', require('./components/Modal.vue'));
 Vue.component('search-results-table', require('./components/Table.vue'));
-
 // Import the EventBus.
 import { ActionBus } from './bus/action-bus.js';
 
