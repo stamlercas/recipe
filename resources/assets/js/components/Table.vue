@@ -9,7 +9,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="row in sortedTable">
+                <tr v-for="(row, index) in sortedTable" v-if="inbound(index)">
                     <td v-for="column in columns">{{ row[column.name] }}</td>
                     <td v-if="actions != null">
                     	<i class="action-icon fa fa-lg" style="padding-right:5px;" v-for="action in actions" :class="action.icon" @click="fireAction({action: action.name, data: row})"></i>
@@ -17,6 +17,7 @@
                 </tr>
           	</tbody>
       	</table>
+      	<paginate v-if="paginate" :page-count="pages" :container-class="'pagination'" :click-handler="paginateCallBack"></paginate>
     </div>
 </template>
 
@@ -24,13 +25,17 @@
 
 import { ActionBus } from '../bus/action-bus.js';
 
+import Paginate from 'vuejs-paginate';
+Vue.component('paginate', Paginate);
+
 export default {
 		props: [
 			'data',
 			'columns',
 			'filterKey',
 			'actions',
-			'showHeading'
+			'showHeading',
+			'paginate',	// if true show pages
 		],
 		data () {
 			var sortOrders = {}
@@ -39,7 +44,9 @@ export default {
 			});
 			return {
 			  sortKey: '',
-			  sortOrders: sortOrders
+			  sortOrders: sortOrders,
+			  pageLength: 10,
+			  page: 1
 			};
 		},
 		computed: {
@@ -63,6 +70,9 @@ export default {
 			    });
 			  }
 			  return data;
+			},
+			pages: function() {
+				return this.sortedTable.length / this.pageLength;
 			}
 		},
 		methods: {
@@ -83,6 +93,19 @@ export default {
 					if (this.columns[i].name == key)
 						return row[key];
 						*/
+			},
+			paginateCallBack: function(page) {
+				if (this.paginate)
+					this.page = page;
+			},
+			inbound: function(index) {
+				if (!this.paginate)
+					return true;
+				// find bounds of page and check index
+				else if ( index >= (this.page - 1) * this.pageLength 
+					&& index <= ((this.page) * this.pageLength) - 1 )
+					return true;
+				return false;
 			}
 		}
 	}

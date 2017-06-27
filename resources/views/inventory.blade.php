@@ -18,11 +18,22 @@
 		    		</button>
 	    		</span>
 			  </div>
-			  <search-results-table :data="searchResults" :columns="resultsColumns" :actions="resultsActions" :show-heading="false"></search-results-table>
+			  <search-results-table 
+			  		:data="searchResults" 
+			  		:columns="resultsColumns" 
+			  		:actions="resultsActions" 
+			  		:show-heading="false">
+	  			</search-results-table>
 		  	</div>
 	  		<div class="col-md-4">
 	  			<h3 class="visible-sm visible-xs">Inventory</h3>
-	  			<pantry-table :data="inventory" :columns="columns" :filter-key="searchfield" :actions="actions"></pantry-table>
+	  			<pantry-table 
+	  				:data="inventory" 
+  					:columns="columns" 
+  					:filter-key="searchfield" 
+  					:actions="actions"
+  					:paginate="true">
+	  			</pantry-table>
 	  		</div>
   		</div>
   		<edit-modal v-if="showEditModal" @close="showEditModal = false">
