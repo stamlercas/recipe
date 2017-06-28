@@ -37,7 +37,12 @@
 			</a>
 		</div>
 		<div class="col-md-3">
-			<button class="btn btn-primary btn-block" value="Submit">Make Grocery List</button>
+			<form action="{{ route('grocery_list.create') }}" method="post">
+			{{ csrf_field() }}
+			<input hidden name="id" value="{{ $recipe->id }}" />
+			<input hidden name="name" value="{{ $recipe->name }}" />
+			<button class="btn btn-primary btn-block" value="Submit" @click="makeGroceryList()">Make Grocery List</button>
+			</form>
 		</div>
 		<div class="col-md-3">
 			<button class="btn btn-success btn-block" value="Submit">I Made It!</button>

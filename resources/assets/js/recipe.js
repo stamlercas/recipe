@@ -11,5 +11,15 @@ const recipe_app = new Vue({
     created: function() {
         this.recipe = recipe;
         this.users_ingredients = users_ingredients;
+    },
+    methods: {
+    	makeGroceryList: function() {
+    		var data = {
+                id: this.recipe.id,
+                name: this.recipe.name,
+                _token: session_token
+            }
+            this.$http.post(grocery_list_create_url, data);
+    	}
     }
 });

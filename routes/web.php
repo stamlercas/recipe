@@ -33,6 +33,21 @@ Route::get('/dashboard', [
     'middleware' => 'auth'
 ]);
 
+Route::get('/grocery-lists', [
+    'uses' => 'GroceryListController@index',
+    'as' => 'grocery_lists'
+]);
+
+Route::post('/grocery-list/create', [
+    'uses' => 'GroceryListController@create',
+    'as' => 'grocery_list.create'
+]);
+
+Route::get('/grocery-list/{username}/{grocery_list_slug}', [
+    'uses' => 'GroceryListController@get',
+    'as' => 'grocery_list.get'
+]);
+
 Route::get('/inventory', [
 	'uses' => 'InventoryController@index',
 	'as' => 'inventory',

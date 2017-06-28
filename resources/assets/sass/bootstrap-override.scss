@@ -1,3 +1,29 @@
 .btn {
 	border-radius: 0;
 }
+
+.navbar-default .navbar-toggle {
+  border-color:transparent;
+}
+
+.navbar-default .navbar-toggle:hover,
+.navbar-default .navbar-toggle:focus {
+	background-color: $brand-primary-darker;
+}
+
+.navbar-default {
+  border-color: $brand-primary;
+}
+
+.navbar-default .navbar-brand,
+.navbar-default .navbar-nav > li > a {
+  color:#333;
+}
+
+.navbar-default .navbar-nav > li > a:hover {
+  color:#FFF;
+}
+
+.navbar-default .navbar-toggle .icon-bar {
+    background-color: #333;
+}

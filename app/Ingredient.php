@@ -14,4 +14,8 @@ class Ingredient extends Model
     {
     	return $this->belongsToMany('Recipr\Recipe', 'recipes_ingredients');
     }
+
+    public function grocery_lists() {
+    	return $this->belongsToMany('Recipr\GroceryList', 'grocery_lists_ingredients');
+    }
 }

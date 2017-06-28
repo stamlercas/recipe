@@ -73,30 +73,6 @@ nav ul li a {
     float:left;
 }
 
-.navbar-default {
-  border-color: $brand-primary;
-}
-
-.navbar-default .navbar-brand,
-.navbar-default .navbar-nav > li > a {
-  color:#333;
-}
-
-.navbar-default .navbar-nav > li > a:hover {
-  color:#FFF;
-}
-
-@media (min-width: 768px) {
-  .navbar-fixed-side .navbar-collapse,
-  .navbar-fixed-side .navbar-nav > li > a {
-      border-bottom: $brand-primary-darker;
-  }
-}
-
-.navbar-fixed-side .navbar-collapse {
-      border-top: $brand-primary-darker;
-  }
-
 .search-checkbox {
   padding: 3px;
 }
@@ -125,3 +101,17 @@ nav ul li a {
 .edit-icon {
   color: $brand-success;
 }
+
+/*************************
+NAVBAR FIXED SIDE OVERRIDE
+*************************/
+@media (min-width: 768px) {
+  .navbar-fixed-side .navbar-collapse,
+  .navbar-fixed-side .navbar-nav > li > a {
+      border-bottom: $brand-primary-darker;
+  }
+}
+
+.navbar-fixed-side .navbar-collapse {
+      border-top: $brand-primary-darker;
+  }

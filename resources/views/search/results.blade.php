@@ -16,7 +16,9 @@ Results
 		    	<div class="container-fluid">
 		    		<div class="row">
 		    			<div class="col-sm-6 col-md-8">
+		    			<a :href="'{{ route('recipe.get', ['inventory_id' => ''])  }}/' + result.id">
 	    			<img :src="result.imageUrlsBySize[90]" :alt="result.recipeName" class="img img-responsive list-img" />
+	    				</a>
 						<h5 class="list-title">
 							<a :href="'{{ route('recipe.get', ['inventory_id' => ''])  }}/' + result.id">@{{ result.recipeName }}</a>
 						</h5>

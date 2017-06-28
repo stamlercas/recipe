@@ -187,7 +187,9 @@ class RecipeController extends Controller
         }
 
         return view('recipe', ['recipe' => $this->toJson($r), 
-                                'users_ingredients' => Auth::user()->ingredients()->get()
+                                'users_ingredients' => Auth::user()->ingredients()->get(),
+                                'grocery_list_id' => Auth::user()->grocery_lists()
+                                ->where('status', 'open')
                             ]);
     }
 
