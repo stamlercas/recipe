@@ -23,8 +23,7 @@ class GroceryListController extends Controller
 
     public function index()
     {
-        $grocery_lists = Auth::user()->grocery_lists()->where('status', 'open');
-
+        $grocery_lists = Auth::user()->grocery_lists()->where('status', 'open')->get();
         return view('grocery_list.index', ['grocery_lists' => $grocery_lists]);
     }
 
@@ -80,8 +79,14 @@ class GroceryListController extends Controller
     }
 
     public function get($username, $grocery_list_slug) {
-        $grocery_list = Auth::user()->grocery_list->where('slug', $grocery_list_slug)->first();
-        return route('grocery_list.get', ['grocery_list' => $grocery_list]);
+        $grocery_list = Auth::user()->grocery_lists()->where('slug', $grocery_list_slug)->first();
+        $ingredients = $grocery_list->ingredients()->get();
+        $user_ingredients = Auth::user()->ingredients()->get();
+        return view('grocery_list.list', [
+                'grocery_list' => $grocery_list,
+                'ingredients' => $ingredients,
+                'user_ingredients' => $user_ingredients
+            ]);
     }
 
     public function delete($ingredient_id)

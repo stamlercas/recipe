@@ -21,7 +21,6 @@ const homepage = new Vue({
     	searchfield: '',
         searching: false,
         adding: false,
-        editableItem: {},
         showEditModal: false,
     	columns: [
     		{
@@ -55,30 +54,6 @@ const homepage = new Vue({
         ActionBus.$on('edit-action', this.editAction);
     },
     methods: {
-        editAction: function(data) {
-            switch(data) {
-                case 'edit':
-                    if (this.editableItem.item === '')
-                        return;
-                    var data = {
-                        id: this.editableItem.id,
-                        item: this.editableItem.item,
-                        _token: session_token
-                    }
-                    this.$http.post(inventory_edit_url, data).then((response) => {
-                                    for (var i = 0; i < inventory.length; i++) {
-                                        console.log(inventory[i]);
-                                        if (inventory[i].id == response.body.item.id)
-                                            inventory[i].item = response.body.item.item;
-                                    }
-                                    this.showEditModal = false;
-                                });
-                    break;
-                case 'close':
-                    this.showEditModal = false;
-                    break;
-            }
-        },
     	fireAction: function(data) {
     		switch(data.action) {
     			case 'delete-item':
@@ -89,10 +64,6 @@ const homepage = new Vue({
                         });
 	        		}
     				break;
-				case 'edit-item':
-                    this.editableItem = JSON.parse(JSON.stringify(data.data));  // cloning object to make sure references aren't shared
-                    this.showEditModal = true;
-					break;
                 case 'add-item':
                     this.adding = true;
 

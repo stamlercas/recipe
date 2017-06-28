@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 67);
+/******/ 	return __webpack_require__(__webpack_require__.s = 64);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -43129,39 +43129,30 @@ if (false) {
 /* 46 */,
 /* 47 */,
 /* 48 */,
-/* 49 */,
-/* 50 */,
-/* 51 */,
-/* 52 */
+/* 49 */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(9);
 
 Vue.component('ingredient-list-item', __webpack_require__(41));
 
-var recipe_app = new Vue({
-    el: '#recipe',
+var grocery_lists_app = new Vue({
+    el: '#grocery-list-app',
     data: {
-        recipe: {},
+        grocery_list: {},
+        ingredients: [],
         users_ingredients: []
     },
     created: function created() {
-        this.recipe = recipe;
-        this.users_ingredients = users_ingredients;
-    },
-    methods: {
-        makeGroceryList: function makeGroceryList() {
-            var data = {
-                id: this.recipe.id,
-                name: this.recipe.name,
-                _token: session_token
-            };
-            this.$http.post(grocery_list_create_url, data);
-        }
+        this.grocery_list = grocery_list;
+        this.ingredients = ingredients;
     }
 });
 
 /***/ }),
+/* 50 */,
+/* 51 */,
+/* 52 */,
 /* 53 */,
 /* 54 */,
 /* 55 */,
@@ -43173,13 +43164,10 @@ var recipe_app = new Vue({
 /* 61 */,
 /* 62 */,
 /* 63 */,
-/* 64 */,
-/* 65 */,
-/* 66 */,
-/* 67 */
+/* 64 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(52);
+module.exports = __webpack_require__(49);
 
 
 /***/ })

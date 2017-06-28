@@ -37,12 +37,17 @@
 			</a>
 		</div>
 		<div class="col-md-3">
-			<form action="{{ route('grocery_list.create') }}" method="post">
-			{{ csrf_field() }}
-			<input hidden name="id" value="{{ $recipe->id }}" />
-			<input hidden name="name" value="{{ $recipe->name }}" />
-			<button class="btn btn-primary btn-block" value="Submit" @click="makeGroceryList()">Make Grocery List</button>
-			</form>
+			@if ($grocery_list == null)
+				<form action="{{ route('grocery_list.create') }}" method="post">
+				{{ csrf_field() }}
+				<input hidden name="id" value="{{ $recipe->id }}" />
+				<input hidden name="name" value="{{ $recipe->name }}" />
+				<button class="btn btn-primary btn-block" value="Submit" @click="makeGroceryList()">Make Grocery List</button>
+				</form>
+			@else
+				<a class="btn btn-primary btn-block" href="{{ route('grocery_list.get', 
+					['username' => Auth::user()->username, 'grocery_list_slug' => $grocery_list->slug]) }}" role="button">View Grocery List</a>
+			@endif
 		</div>
 		<div class="col-md-3">
 			<button class="btn btn-success btn-block" value="Submit">I Made It!</button>

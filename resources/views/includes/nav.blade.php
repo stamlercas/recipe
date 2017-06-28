@@ -27,7 +27,14 @@
                     <a href="{{ route('inventory') }}">
                       Manage Pantry
                       <br />
-                      <i class="fa fa-shopping-bag fa-5x"></i>
+                      <i class="fa fa-shopping-basket fa-5x"></i>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="{{ route('grocery_lists') }}">
+                      Grocery Lists
+                      <br />
+                      <i class="fa fa-shopping-cart fa-5x"></i>
                     </a>
                   </li>
                   <li>
@@ -38,13 +45,8 @@
                     </a>
                   </li>
                   <li>
-                    <a href="#">
-                      {{ Auth::user()->username }}
-                    </a>
-                  </li>
-                  <li>
                     <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                      Logout
+                      Logout <i class="fa fa-sign-out fa-lg" aria-hidden="true"></i>
                     </a>
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">{{ csrf_field() }}</form>
                   </li>

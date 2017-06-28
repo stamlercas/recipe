@@ -5,5 +5,8 @@
   "/js/search.js": "/js/search.js",
   "/js/settings.js": "/js/settings.js",
   "/js/results.js": "/js/results.js",
-  "/js/recipe.js": "/js/recipe.js"
+  "/js/recipe.js": "/js/recipe.js",
+  "/js/grocery_lists.js": "/js/grocery_lists.js",
+  "/js/grocer_list.js": "/js/grocer_list.js",
+  "/js/grocery_list.js": "/js/grocery_list.js"
 }

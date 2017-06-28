@@ -36,26 +36,6 @@
 	  			</pantry-table>
 	  		</div>
   		</div>
-  		<edit-modal v-if="showEditModal" @close="showEditModal = false">
-		    <!--
-		      you can use custom content here to overwrite
-		      default content
-	    	-->
-	    	<h3 slot="header">Edit</h3>
-	    	<div slot="body">
-	    		<div class="input-group">
-				    <input type="text" class="form-control" v-model="editableItem.item" v-on:keyup.13="editAction('edit')" />
-			  	</div>
-	    	</div>
-	    	<div slot="footer">
-	    		<button class="btn btn-primary" @click="editAction('edit')">
-                	Save
-              	</button>
-              	<button class="btn btn-outline" @click="editAction('close')">
-                	Close
-              	</button>
-	    	</div>
-	  	</edit-modal>
     </div>
 
 
