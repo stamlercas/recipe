@@ -770,7 +770,7 @@ module.exports = g;
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(global) {/*!
- * Vue.js v2.3.3
+ * Vue.js v2.3.4
  * (c) 2014-2017 Evan You
  * Released under the MIT License.
  */
@@ -5199,7 +5199,7 @@ Object.defineProperty(Vue$3.prototype, '$ssrContext', {
   }
 });
 
-Vue$3.version = '2.3.3';
+Vue$3.version = '2.3.4';
 
 /*  */
 
@@ -5690,6 +5690,7 @@ function createPatchFunction (backend) {
   function initComponent (vnode, insertedVnodeQueue) {
     if (isDef(vnode.data.pendingInsert)) {
       insertedVnodeQueue.push.apply(insertedVnodeQueue, vnode.data.pendingInsert);
+      vnode.data.pendingInsert = null;
     }
     vnode.elm = vnode.componentInstance.$el;
     if (isPatchable(vnode)) {
@@ -43040,7 +43041,7 @@ var Component = __webpack_require__(33)(
   /* cssModules */
   null
 )
-Component.options.__file = "C:\\Users\\Porsche Tech\\recipe\\resources\\assets\\js\\components\\Table.vue"
+Component.options.__file = "C:\\Users\\Chris\\Documents\\recipe\\resources\\assets\\js\\components\\Table.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] Table.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -43268,7 +43269,6 @@ var homepage = new Vue({
         searchfield: '',
         searching: false,
         adding: false,
-        editableItem: {},
         showEditModal: false,
         columns: [{
             name: 'description',
@@ -43294,44 +43294,16 @@ var homepage = new Vue({
         __WEBPACK_IMPORTED_MODULE_0__bus_action_bus_js__["a" /* ActionBus */].$on('edit-action', this.editAction);
     },
     methods: {
-        editAction: function editAction(data) {
-            var _this = this;
-
-            switch (data) {
-                case 'edit':
-                    if (this.editableItem.item === '') return;
-                    var data = {
-                        id: this.editableItem.id,
-                        item: this.editableItem.item,
-                        _token: session_token
-                    };
-                    this.$http.post(inventory_edit_url, data).then(function (response) {
-                        for (var i = 0; i < inventory.length; i++) {
-                            console.log(inventory[i]);
-                            if (inventory[i].id == response.body.item.id) inventory[i].item = response.body.item.item;
-                        }
-                        _this.showEditModal = false;
-                    });
-                    break;
-                case 'close':
-                    this.showEditModal = false;
-                    break;
-            }
-        },
         fireAction: function fireAction(data) {
-            var _this2 = this;
+            var _this = this;
 
             switch (data.action) {
                 case 'delete-item':
                     if (confirm("Are you sure you want to delete this item?")) {
                         this.deleteItem(data.data).then(function (value) {
-                            if (value) _this2.inventory.splice(inventory.indexOf(data.data), 1);
+                            if (value) _this.inventory.splice(inventory.indexOf(data.data), 1);
                         });
                     }
-                    break;
-                case 'edit-item':
-                    this.editableItem = JSON.parse(JSON.stringify(data.data)); // cloning object to make sure references aren't shared
-                    this.showEditModal = true;
                     break;
                 case 'add-item':
                     this.adding = true;
@@ -43350,7 +43322,7 @@ var homepage = new Vue({
             }
         },
         searchIngredients: function searchIngredients() {
-            var _this3 = this;
+            var _this2 = this;
 
             this.searching = true;
 
@@ -43366,9 +43338,9 @@ var homepage = new Vue({
             this.$http.post(inventory_search_url, data).then(function (response) {
                 console.log(response.body);
                 if (response.body.success) {
-                    _this3.searchResults = response.body.results;
+                    _this2.searchResults = response.body.results;
                 }
-                _this3.searching = false;
+                _this2.searching = false;
             });
         }
     }
@@ -43445,7 +43417,7 @@ var Component = __webpack_require__(33)(
   /* cssModules */
   null
 )
-Component.options.__file = "C:\\Users\\Porsche Tech\\recipe\\resources\\assets\\js\\components\\Modal.vue"
+Component.options.__file = "C:\\Users\\Chris\\Documents\\recipe\\resources\\assets\\js\\components\\Modal.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] Modal.vue: functional components are not supported with templates, they should use render functions.")}
 
