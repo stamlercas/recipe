@@ -8,10 +8,11 @@ Vue.component('search-results-table', require('./components/Table.vue'));
 import { ActionBus } from './bus/action-bus.js';
 
 import searchIngredients from './mixins/ingredients.js';
+import addIngredient from './mixins/grocery_list.js';
 
 const grocery_lists_app = new Vue({
     el: '#grocery-list-app',
-    mixins: [searchIngredients],
+    mixins: [searchIngredients, addIngredient],
     data: {
     	grocery_list: {},
     	ingredients: [],
@@ -60,7 +61,13 @@ const grocery_lists_app = new Vue({
         fireAction: function(data) {
             switch(data.action) {
                 case 'add-item':
-                    // TODO: ADD ITEM TO GROCERY LIST
+                    if (this.addIngredient(this.grocery_list, data.data).then((value) => {
+                        if (value) {
+                            this.ingredients.push(data.data);
+                            this.closeModal();
+                        }
+                    }));
+                    break;
             }
         }
     }

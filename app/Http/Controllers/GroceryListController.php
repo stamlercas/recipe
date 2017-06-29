@@ -81,7 +81,7 @@ class GroceryListController extends Controller
     }
 
     public function get($username, $grocery_list_slug) {
-        $grocery_list = Auth::user()->grocery_lists()->where('slug', $grocery_list_slug)->first();
+        $grocery_list = $this->getGroceryList($grocery_list_slug);
         $ingredients = $grocery_list->ingredients()->get();
         $users_ingredients = Auth::user()->ingredients()->get();
         return view('grocery_list.list', [
@@ -89,6 +89,22 @@ class GroceryListController extends Controller
                 'ingredients' => $ingredients,
                 'users_ingredients' => $users_ingredients
             ]);
+    }
+
+    //uses the 'id' index of request to find the ingredient and add to a list if not already there
+    public function addIngredient($username, $grocery_list_slug, Request $request) {
+        $this->validate($request, [
+            'ingredient_id' => 'required'
+        ]);
+        $ingredient = Ingredient::find($request['ingredient_id']);
+        $grocery_list = $this->getGroceryList($grocery_list_slug);
+        if (!$grocery_list->ingredients()->find($ingredient->id))
+        {
+            $grocery_list->ingredients()->attach($ingredient->id);
+            return response()->json(['success' => true, 'ingredient' => $ingredient], 200);
+        } else {
+            return response()->json(['success' => false, 'ingredient' => null], 200);
+        }
     }
 
     public function delete($ingredient_id)
@@ -107,6 +123,10 @@ class GroceryListController extends Controller
         ]);
         $results = Ingredient::where('description', 'like', '%' . $request['query'] . '%')->limit(10)->get();
         return response()->json(['success' => true, 'results' => $results], 200);
+    }
+
+    protected function getGroceryList($slug) {
+        return Auth::user()->grocery_lists()->where('slug', $slug)->first();
     }
 
 }

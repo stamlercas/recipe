@@ -9,6 +9,9 @@
 		<div class="row">
 			<div class="col-md-offset-3 col-md-6">
 				<h1 class="text-center">@{{ grocery_list.name }}</h1>
+				<div class="pull-right">You have @{{ ingredients.length }} item<span v-if="ingredients.length != 1">s</span> in your grocery list.
+				</div>
+				<div style="clear:both;"></div>
 				<ul class="list-unstyled">
 					<ingredient-list-item v-for="ingredient in ingredients" :ingredient="ingredient" :users_ingredients="users_ingredients"></ingredient-list-item>
 				</ul>
@@ -19,8 +22,9 @@
 					<button class="btn-primary btn" type="submit" @click="showModal = true"><i class="fa fa-plus"></i> Add Item</button>
 				</div>
 				<br />
-				<div v-if="grocery_list.recipe_id != null" class="text-center">
-					<a class="btn btn-primary btn-block" href="{{ route('recipe.get', ['recipe_id' => $grocery_list->recipe_id ]) }}" role="button">View Recipe</a>
+				<div class="text-center">
+					<a v-if="grocery_list.recipe_id != null" class="btn btn-primary btn-block" href="{{ route('recipe.get', ['recipe_id' => $grocery_list->recipe_id ]) }}" role="button">View Recipe</a>
+					<button class="btn btn-danger btn-block" type="submit">Close List</button>
 				</div>
 			</div>
 		</div>
@@ -53,6 +57,7 @@
 		var users_ingredients = {!! json_encode($users_ingredients) !!};
 
 		var inventory_search_url = "{{ route('inventory.search') }}";
+		var grocery_list_add_url = "{{ route('grocery_list.add', ['username' => Auth::user()->username, 'grocery_list_slug' => $grocery_list->slug]) }}";
 		var session_token = "{{ Session::token() }}";
 	</script>
 	<script src="{{ asset('js/grocery_list.js') }}"></script>

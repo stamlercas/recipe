@@ -34,6 +34,8 @@ Grocery Lists
 	</div>
 	<script>
 		var grocery_lists = {!! json_encode($grocery_lists) !!};
+
+		var grocery_list_url = "{{ route('grocery_list.get', ['username' => Auth::user()->username, 'grocery_list_slug' => '']) }}" + "/";
 	</script>
 	<script src="{{ asset('js/grocery_lists.js') }}"></script>
 @endsection
