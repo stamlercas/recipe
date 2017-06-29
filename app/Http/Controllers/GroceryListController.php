@@ -51,11 +51,13 @@ class GroceryListController extends Controller
 
         if (Auth::user()->grocery_lists()->save($grocery_list)) {
             // if recipe_id is set, then add the ingredients you need
-            $ingredientsToAdd = Recipe::find($grocery_list->recipe_id)->ingredients()
-                ->whereNotIn('recipes_ingredients.id', Auth::user()->ingredients()->select('ingredient_id')->get())->get();
-            $grocery_list->ingredients()->attach($ingredientsToAdd);
+            if ($grocery_list->recipe_id != null) {
+                $ingredientsToAdd = Recipe::find($grocery_list->recipe_id)->ingredients()
+                    ->whereNotIn('recipes_ingredients.id', Auth::user()->ingredients()->select('ingredient_id')->get())->get();
+                $grocery_list->ingredients()->attach($ingredientsToAdd);
+            }
 
-            return redirect()->route('recipe.get', ['recipe_id' => $grocery_list->recipe_id]);
+            // return redirect()->route('recipe.get', ['recipe_id' => $grocery_list->recipe_id]);
             return redirect()->route('grocery_list.get', [
                 'username' => Auth::user()->username,
                 'slug' => $grocery_list->slug
@@ -81,11 +83,11 @@ class GroceryListController extends Controller
     public function get($username, $grocery_list_slug) {
         $grocery_list = Auth::user()->grocery_lists()->where('slug', $grocery_list_slug)->first();
         $ingredients = $grocery_list->ingredients()->get();
-        $user_ingredients = Auth::user()->ingredients()->get();
+        $users_ingredients = Auth::user()->ingredients()->get();
         return view('grocery_list.list', [
                 'grocery_list' => $grocery_list,
                 'ingredients' => $ingredients,
-                'user_ingredients' => $user_ingredients
+                'users_ingredients' => $users_ingredients
             ]);
     }
 

@@ -11,7 +11,11 @@ const grocery_lists_app = new Vue({
     		{
     			name: 'name',
     			alias: 'Name'
-			}
+			},
+            {
+                name: 'created_at',
+                alias: 'Date Created'
+            }
     	],
     	name: '',
     	creating: false,

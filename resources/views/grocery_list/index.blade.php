@@ -15,13 +15,12 @@ Grocery Lists
 						:name="'name'"
 						:action="'Create'" 
 						:icon="'fa-plus'"
-						:callback-function="createGroceryList" 
-						:field="name" 
+						:callback-function="createGroceryList"
 						:doing-work="creating">
 					</input-button>
 					@if ($errors->has('name'))
                         <span class="help-block">
-                            <strong>{{ $errors->first('name') }}</strong>
+                            <strong class="text-danger">{{ $errors->first('name') }}</strong>
                         </span>
                     @endif
 				</form>

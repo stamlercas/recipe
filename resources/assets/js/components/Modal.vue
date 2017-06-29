@@ -35,11 +35,6 @@ import { ActionBus } from '../bus/action-bus.js';
 export default {
 	//template: require('../templates/Modal.html'),
 	props: [
-	],
-	methods: {
-		edit: function(action) {
-			ActionBus.$emit("edit-action", action);
-		}
-	}
+	]
 }
 </script>
