@@ -53,6 +53,11 @@ Route::post('/grocery-list/{username}/{grocery_list_slug}/add', [
     'as' => 'grocery_list.add'
 ]);
 
+Route::post('/grocery-list/{username}/{grocery_list_slug}/close', [
+    'uses' => 'GroceryListController@close',
+    'as' => 'grocery_list.close'
+]);
+
 Route::get('/inventory', [
 	'uses' => 'InventoryController@index',
 	'as' => 'inventory',

@@ -42999,8 +42999,7 @@ module.exports = function(module) {
 /* (ignored) */
 
 /***/ }),
-/* 38 */,
-/* 39 */
+/* 38 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -43037,6 +43036,7 @@ module.exports = function(module) {
 });
 
 /***/ }),
+/* 39 */,
 /* 40 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -43640,7 +43640,7 @@ if (false) {
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__bus_action_bus_js__ = __webpack_require__(10);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__mixins_ingredients_js__ = __webpack_require__(39);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__mixins_ingredients_js__ = __webpack_require__(38);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__mixins_grocery_list_js__ = __webpack_require__(50);
 __webpack_require__(11);
 
@@ -43648,6 +43648,7 @@ Vue.component('ingredient-list-item', __webpack_require__(43));
 Vue.component('modal', __webpack_require__(52));
 Vue.component('input-button', __webpack_require__(51));
 Vue.component('search-results-table', __webpack_require__(40));
+
 
 
 
@@ -43668,7 +43669,7 @@ var grocery_lists_app = new Vue({
             name: 'description',
             alias: 'Name'
         }],
-        resultsActions: [{ name: 'add-item', icon: 'fa-plus', class: 'add-icon' }]
+        resultsActions: [{ name: 'add-item-grocery-list', icon: 'fa-plus', class: 'add-icon' }]
     },
     created: function created() {
         this.grocery_list = grocery_list;
@@ -43676,6 +43677,7 @@ var grocery_lists_app = new Vue({
         this.users_ingredients = users_ingredients;
 
         __WEBPACK_IMPORTED_MODULE_0__bus_action_bus_js__["a" /* ActionBus */].$on('table-action', this.fireAction);
+        __WEBPACK_IMPORTED_MODULE_0__bus_action_bus_js__["a" /* ActionBus */].$on('list-action', this.fireAction);
     },
     methods: {
         closeModal: function closeModal() {
@@ -43696,11 +43698,17 @@ var grocery_lists_app = new Vue({
                 _this.searching = false;
             });
         },
+        close: function close() {
+            if (this.confirmCloseGroceryList()) {
+                $('#close-grocery-list').submit();
+            }
+        },
         fireAction: function fireAction(data) {
             var _this2 = this;
 
             switch (data.action) {
-                case 'add-item':
+                // adds ingredient to this grocery list
+                case 'add-item-grocery-list':
                     if (this.addIngredient(this.grocery_list, data.data).then(function (value) {
                         if (value) {
                             _this2.ingredients.push(data.data);
@@ -43708,6 +43716,22 @@ var grocery_lists_app = new Vue({
                         }
                     })) ;
                     break;
+                // adds ingredient to pantry
+                case 'add-item':
+                    this.addItem(data.data).then(function (value) {
+                        if (value) _this2.users_ingredients.unshift(data.data);
+                    });
+                    break;
+                // deletes ingredient from pantry
+                case 'delete-item':
+                    this.deleteItem(data.data).then(function (value) {
+                        for (var i = 0; i < _this2.users_ingredients.length; i++) {
+                            if (data.data.id == _this2.users_ingredients[i].id) {
+                                console.log(i);
+                                _this2.users_ingredients.splice(i, 1);
+                            }
+                        }
+                    });
             }
         }
     }

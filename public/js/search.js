@@ -42989,7 +42989,8 @@ module.exports = function(module) {
 /* (ignored) */
 
 /***/ }),
-/* 38 */
+/* 38 */,
+/* 39 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var Component = __webpack_require__(9)(
@@ -43023,7 +43024,6 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 39 */,
 /* 40 */,
 /* 41 */,
 /* 42 */,
@@ -43101,11 +43101,11 @@ if (false) {
 
 __webpack_require__(11);
 
-Vue.component('allergy-checkbox', __webpack_require__(38));
-Vue.component('diet-checkbox', __webpack_require__(38));
-Vue.component('cuisine-checkbox', __webpack_require__(38));
-Vue.component('course-checkbox', __webpack_require__(38));
-Vue.component('holiday-checkbox', __webpack_require__(38));
+Vue.component('allergy-checkbox', __webpack_require__(39));
+Vue.component('diet-checkbox', __webpack_require__(39));
+Vue.component('cuisine-checkbox', __webpack_require__(39));
+Vue.component('course-checkbox', __webpack_require__(39));
+Vue.component('holiday-checkbox', __webpack_require__(39));
 
 var search = new Vue({
     el: '#search',

@@ -21,7 +21,7 @@ class CreateRecipesTable extends Migration
             $table->string('text');
             $table->string('logo');
             $table->string("name");
-            $table->string('yield');
+            $table->string('yield')->nullable();
             $table->string('totalTime');
             $table->integer('totalTimeInSeconds');
             $table->integer('numberOfServings');

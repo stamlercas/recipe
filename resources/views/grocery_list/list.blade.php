@@ -24,7 +24,10 @@
 				<br />
 				<div class="text-center">
 					<a v-if="grocery_list.recipe_id != null" class="btn btn-primary btn-block" href="{{ route('recipe.get', ['recipe_id' => $grocery_list->recipe_id ]) }}" role="button">View Recipe</a>
-					<button class="btn btn-danger btn-block" type="submit">Close List</button>
+					<button class="btn btn-danger btn-block" type="submit" @click="close()">Close List</button>
+					<form id="close-grocery-list" method="post" action="{{ route('grocery_list.close', ['username' => Auth::user()->username, 'grocery_list_slug' => $grocery_list->slug]) }}">
+						{{ csrf_field() }}
+					</form>
 				</div>
 			</div>
 		</div>
@@ -58,6 +61,9 @@
 
 		var inventory_search_url = "{{ route('inventory.search') }}";
 		var grocery_list_add_url = "{{ route('grocery_list.add', ['username' => Auth::user()->username, 'grocery_list_slug' => $grocery_list->slug]) }}";
+		var inventory_add_url = "{{ route('inventory.add') }}";
+		var inventory_delete_url = "{{ route('inventory.delete', ['inventory_id' => '']) }}" + "/";
+
 		var session_token = "{{ Session::token() }}";
 	</script>
 	<script src="{{ asset('js/grocery_list.js') }}"></script>

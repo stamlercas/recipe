@@ -7,6 +7,7 @@ Vue.component('search-results-table', require('./components/Table.vue'));
 
 import { ActionBus } from './bus/action-bus.js';
 
+import addItem from './mixins/ingredients.js';
 import searchIngredients from './mixins/ingredients.js';
 import addIngredient from './mixins/grocery_list.js';
 
@@ -27,7 +28,7 @@ const grocery_lists_app = new Vue({
             }
         ],
         resultsActions: [
-            { name: 'add-item', icon: 'fa-plus', class: 'add-icon' }  
+            { name: 'add-item-grocery-list', icon: 'fa-plus', class: 'add-icon' }  
         ]
     },
     created: function() {
@@ -36,6 +37,7 @@ const grocery_lists_app = new Vue({
         this.users_ingredients = users_ingredients;
 
         ActionBus.$on('table-action', this.fireAction);
+        ActionBus.$on('list-action', this.fireAction);
     },
     methods: {
         closeModal: function() {
@@ -58,9 +60,15 @@ const grocery_lists_app = new Vue({
                 this.searching = false;
             });
         },
+        close: function() {
+            if (this.confirmCloseGroceryList()) {
+                $('#close-grocery-list').submit();
+            }
+        },
         fireAction: function(data) {
             switch(data.action) {
-                case 'add-item':
+                // adds ingredient to this grocery list
+                case 'add-item-grocery-list':
                     if (this.addIngredient(this.grocery_list, data.data).then((value) => {
                         if (value) {
                             this.ingredients.push(data.data);
@@ -68,6 +76,22 @@ const grocery_lists_app = new Vue({
                         }
                     }));
                     break;
+                // adds ingredient to pantry
+                case 'add-item':
+                    this.addItem(data.data).then((value) => {
+                        if (value)
+                            this.users_ingredients.unshift(data.data);
+                    });
+                    break;
+                // deletes ingredient from pantry
+                case 'delete-item':
+                    this.deleteItem(data.data).then((value) => {
+                        for (var i = 0; i < this.users_ingredients.length; i++)
+                            if (data.data.id == this.users_ingredients[i].id) {
+                                console.log(i);
+                                this.users_ingredients.splice(i, 1);
+                            }
+                    });
             }
         }
     }

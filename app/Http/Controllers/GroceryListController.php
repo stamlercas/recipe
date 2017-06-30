@@ -65,6 +65,15 @@ class GroceryListController extends Controller
         }
     }
 
+    public function close($username, $grocery_list_slug, Request $request) {
+        $grocery_list = Auth::user()->grocery_lists()->where('slug', $grocery_list_slug)->first();
+        if ($grocery_list != null) {
+            $grocery_list->status = 'closed';
+            $grocery_list->update();
+            return ($grocery_list->recipe_id == null) ? redirect()->route('grocery_lists') : redirect()->route('recipe.get', ['recipe_id' => $grocery_list->recipe_id]);
+        }
+    }
+
     public function edit(Request $request)
     {
         $this->validate($request, [
