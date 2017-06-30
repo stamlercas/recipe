@@ -197,6 +197,11 @@ class RecipeController extends Controller
                             ]);
     }
 
+    public function made($recipe_id)
+    {
+        
+    }
+
     protected function append($request, $table, $parameter)
     {
         $str = '';

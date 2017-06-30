@@ -8,7 +8,7 @@ Results
 	<div id="results">
 		<h1>
 			Search Results
-			<button class="btn-default btn pull-right" type="submit" @click="results = sort(results, 'numberOfIngredients')">Update</button>
+			<button class="btn-default btn pull-right" type="submit" @click="results = sort(results, 'percentageOfIngredients')">Update</button>
 		</h1>
 		<div class="list-group">
 		  <div v-for="result in results" class="list-group-item">
@@ -38,7 +38,7 @@ Results
   						</div>
 						-->
 						<div class="col-sm-4 col-md-2">
-					<div>You have @{{ numberOfIngredients(result) }} ingredients</div>
+					<div>You have @{{ (percentageOfIngredients(result)  * 100).toFixed(0) }}% ingredients</div>
 	      			<small>Time: @{{ timeInMinutes(result.totalTimeInSeconds) }} min</small>
 	      			<br />
 	      			<span>

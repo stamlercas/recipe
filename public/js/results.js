@@ -43072,9 +43072,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 	},
 	created: function created() {
 		if (this.showWhenHave == false) if (this.hasIngredient) this.show = false;
-		console.log("showWhenHave: " + this.showWhenHave);
-		console.log("hasIngredient: " + this.hasIngredient);
-		console.log(this.show);
 	},
 	methods: {
 		fireAction: function fireAction(action) {
@@ -43217,9 +43214,10 @@ var results = new Vue({
 
         for (var i = 0; i < this.results.length; i++) {
             this.numberOfIngredients(this.results[i]);
+            this.percentageOfIngredients(this.results[i]);
         }
 
-        this.results = this.sort(this.results, 'numberOfIngredients');
+        this.results = this.sort(this.results, 'percentageOfIngredients');
         __WEBPACK_IMPORTED_MODULE_0__bus_action_bus_js__["a" /* ActionBus */].$on('list-action', this.fireAction);
     },
     methods: {
@@ -43253,6 +43251,10 @@ var results = new Vue({
                     if (result.ingredients[i].id == this.users_ingredients[j].id) result.numberOfIngredients++;
                 }
             }return result.numberOfIngredients;
+        },
+        percentageOfIngredients: function percentageOfIngredients(result) {
+            result.percentageOfIngredients = this.numberOfIngredients(result) / result.ingredients.length;
+            return result.percentageOfIngredients;
         },
         sort: function sort(list, sortKey) {
             list = list.slice().sort(function (a, b) {

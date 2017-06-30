@@ -43105,9 +43105,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 	},
 	created: function created() {
 		if (this.showWhenHave == false) if (this.hasIngredient) this.show = false;
-		console.log("showWhenHave: " + this.showWhenHave);
-		console.log("hasIngredient: " + this.hasIngredient);
-		console.log(this.show);
 	},
 	methods: {
 		fireAction: function fireAction(action) {

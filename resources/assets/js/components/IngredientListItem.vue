@@ -32,9 +32,6 @@ export default {
 		if (this.showWhenHave == false)
 			if (this.hasIngredient)
 				this.show = false;
-		console.log("showWhenHave: " + this.showWhenHave);
-		console.log("hasIngredient: " + this.hasIngredient);
-		console.log(this.show);
 	},
 	methods: {
 		fireAction: function(action) {

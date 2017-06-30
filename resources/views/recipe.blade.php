@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('title')
-@{{ recipe.name }}
+{{ $recipe->name }}
 @endsection
 
 @section('content')

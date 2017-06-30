@@ -37,4 +37,8 @@ class Recipe extends Model
     {
     	return $this->hasMany('Recipr\IngredientLine');
     }
+
+    public function users_made() {
+        return $this->belongsToMany('Recipr\User', 'recipes_made')->withTimestamps();
+    }
 }

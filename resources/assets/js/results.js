@@ -23,9 +23,10 @@ const results = new Vue({
         for (var i = 0; i < this.results.length; i++)
         {
             this.numberOfIngredients(this.results[i]);
+            this.percentageOfIngredients(this.results[i]);
         }
 
-        this.results = this.sort(this.results, 'numberOfIngredients');
+        this.results = this.sort(this.results, 'percentageOfIngredients');
         ActionBus.$on('list-action', this.fireAction);
     },
     methods: {
@@ -57,6 +58,11 @@ const results = new Vue({
                     if (result.ingredients[i].id == this.users_ingredients[j].id)
                         result.numberOfIngredients++;
             return result.numberOfIngredients;
+        },
+        percentageOfIngredients: function(result) {
+            result.percentageOfIngredients = (this.numberOfIngredients(result) / 
+                                            result.ingredients.length);
+            return result.percentageOfIngredients;
         },
         sort: function(list, sortKey) {
             list = list.slice().sort(function (a, b) {

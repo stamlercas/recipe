@@ -55,4 +55,8 @@ class User extends Authenticatable
     public function grocery_lists() {
         return $this->hasMany('Recipr\GroceryList');
     }
+
+    public function recipes_made() {
+        return $this->belongsToMany('Recipr\Recipe', 'recipes_made')->withTimestamps();
+    }
 }
