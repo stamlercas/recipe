@@ -26,9 +26,19 @@
 		<div class="col-sm-4" style="padding:5px;" v-for="ingredient in recipe.ingredientLines">@{{ ingredient }}</div>
 	</div>
 	<div v-if="recipe.ingredients.length > 0">
-		<h4>You still need:</h4>
-		<ul class="list-unstyled" v-for="ingredient in recipe.ingredients">
-			<ingredient-list-item :ingredient="ingredient" :users_ingredients="users_ingredients" :show-when-have="false"></ingredient-list-item>
+		<h4>You still need:
+			<span class="pull-right" data-target="#ingredient-list" data-toggle="collapse">
+				<i class="fa fa-caret-square-o-down" aria-hidden="true"></i>
+			</span>
+		</h4>
+		<hr />
+		<div class="row" id="ingredient-list">
+			<div class="col-md-4">
+				<ul class="list-unstyled" v-for="ingredient in recipe.ingredients">
+					<ingredient-list-item :ingredient="ingredient" :users_ingredients="users_ingredients" :show-when-have="false"></ingredient-list-item>
+				</ul>
+			</div>
+		</div>
 	</div>
 	<div class="row">
 		<div class="col-md-3">
@@ -58,6 +68,11 @@
 <script>
 	var recipe = {!! json_encode($recipe) !!};
 	var users_ingredients = {!! json_encode($users_ingredients) !!};
+
+	var inventory_add_url = "{{ route('inventory.add') }}";
+	var inventory_delete_url = "{{ route('inventory.delete', ['inventory_id' => '']) }}" + "/";
+
+	var session_token = "{{ Session::token() }}";
 </script>
 <script src="{{ asset('js/recipe.js') }}"></script>
 

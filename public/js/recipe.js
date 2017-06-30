@@ -42999,7 +42999,43 @@ module.exports = function(module) {
 /* (ignored) */
 
 /***/ }),
-/* 38 */,
+/* 38 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony default export */ __webpack_exports__["a"] = ({
+    methods: {
+        addItem: function addItem(ingredient) {
+            var data = {
+                id: ingredient.id,
+                _token: session_token
+            };
+            return this.$http.post(inventory_add_url, data).then(function (response) {
+                return response.body.success;
+            });
+        },
+        deleteItem: function deleteItem(ingredient) {
+            return this.$http.get(inventory_delete_url + ingredient.id).then(function (response) {
+                return response.body.success;
+            });
+        },
+        searchIngredients: function searchIngredients(query) {
+            //TODO: MAKE WORK
+            if (query === '' || query === null) {
+                return false;
+            }
+            var data = {
+                query: query,
+                _token: session_token
+            };
+            return this.$http.post(inventory_search_url, data).then(function (response) {
+                return response.body;
+            });
+        }
+    }
+});
+
+/***/ }),
 /* 39 */,
 /* 40 */,
 /* 41 */
@@ -43029,6 +43065,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 	props: ['ingredient', 'users_ingredients', 'showWhenHave'],
+	data: function data() {
+		return {
+			show: true
+		};
+	},
+	created: function created() {
+		if (this.showWhenHave == false) if (this.hasIngredient) this.show = false;
+		console.log("showWhenHave: " + this.showWhenHave);
+		console.log("hasIngredient: " + this.hasIngredient);
+		console.log(this.show);
+	},
 	methods: {
 		fireAction: function fireAction(action) {
 			if (this.inDB) __WEBPACK_IMPORTED_MODULE_0__bus_action_bus_js__["a" /* ActionBus */].$emit("list-action", action);
@@ -43087,9 +43134,9 @@ module.exports = Component.exports
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('li', {
+  return (_vm.show) ? _c('li', {
     class: _vm.hasIngredient != false ? 'strong' : ''
-  }, [(!_vm.hasIngredient && _vm.showWhenHave != false) ? _c('i', {
+  }, [(!_vm.hasIngredient) ? _c('i', {
     staticClass: "action-icon fa fa-plus",
     class: _vm.inDB ? '' : 'disabled-action',
     on: {
@@ -43114,7 +43161,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "hidden-xs"
   }, [_vm._v("Don't have this?")]), _vm._v(" "), _c('i', {
     staticClass: "fa fa-times"
-  })]) : _vm._e()])
+  })]) : _vm._e()]) : _vm._e()
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
@@ -43140,14 +43187,23 @@ if (false) {
 /* 57 */,
 /* 58 */,
 /* 59 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__bus_action_bus_js__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__mixins_ingredients_js__ = __webpack_require__(38);
 __webpack_require__(11);
 
 Vue.component('ingredient-list-item', __webpack_require__(43));
 
+
+
+
+
 var recipe_app = new Vue({
     el: '#recipe',
+    mixins: [__WEBPACK_IMPORTED_MODULE_1__mixins_ingredients_js__["a" /* default */]],
     data: {
         recipe: {},
         users_ingredients: []
@@ -43155,6 +43211,8 @@ var recipe_app = new Vue({
     created: function created() {
         this.recipe = recipe;
         this.users_ingredients = users_ingredients;
+
+        __WEBPACK_IMPORTED_MODULE_0__bus_action_bus_js__["a" /* ActionBus */].$on('list-action', this.fireAction);
     },
     methods: {
         makeGroceryList: function makeGroceryList() {
@@ -43164,6 +43222,29 @@ var recipe_app = new Vue({
                 _token: session_token
             };
             this.$http.post(grocery_list_create_url, data);
+        },
+        fireAction: function fireAction(data) {
+            var _this = this;
+
+            switch (data.action) {
+                // adds ingredient to pantry
+                case 'add-item':
+                    this.addItem(data.data).then(function (value) {
+                        if (value) _this.users_ingredients.unshift(data.data);
+                    });
+                    break;
+                // deletes ingredient from pantry
+                case 'delete-item':
+                    this.deleteItem(data.data).then(function (value) {
+                        for (var i = 0; i < _this.users_ingredients.length; i++) {
+                            if (data.data.id == _this.users_ingredients[i].id) {
+                                console.log(i);
+                                _this.users_ingredients.splice(i, 1);
+                            }
+                        }
+                    });
+                    break;
+            }
         }
     }
 });

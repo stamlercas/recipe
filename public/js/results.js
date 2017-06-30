@@ -43065,6 +43065,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 	props: ['ingredient', 'users_ingredients', 'showWhenHave'],
+	data: function data() {
+		return {
+			show: true
+		};
+	},
+	created: function created() {
+		if (this.showWhenHave == false) if (this.hasIngredient) this.show = false;
+		console.log("showWhenHave: " + this.showWhenHave);
+		console.log("hasIngredient: " + this.hasIngredient);
+		console.log(this.show);
+	},
 	methods: {
 		fireAction: function fireAction(action) {
 			if (this.inDB) __WEBPACK_IMPORTED_MODULE_0__bus_action_bus_js__["a" /* ActionBus */].$emit("list-action", action);
@@ -43123,9 +43134,9 @@ module.exports = Component.exports
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('li', {
+  return (_vm.show) ? _c('li', {
     class: _vm.hasIngredient != false ? 'strong' : ''
-  }, [(!_vm.hasIngredient && _vm.showWhenHave != false) ? _c('i', {
+  }, [(!_vm.hasIngredient) ? _c('i', {
     staticClass: "action-icon fa fa-plus",
     class: _vm.inDB ? '' : 'disabled-action',
     on: {
@@ -43150,7 +43161,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "hidden-xs"
   }, [_vm._v("Don't have this?")]), _vm._v(" "), _c('i', {
     staticClass: "fa fa-times"
-  })]) : _vm._e()])
+  })]) : _vm._e()]) : _vm._e()
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {

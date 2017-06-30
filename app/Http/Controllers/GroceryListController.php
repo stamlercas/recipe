@@ -29,6 +29,7 @@ class GroceryListController extends Controller
 
     public function create(Request $request)
     {
+
         $grocery_list = new GroceryList();
 
         $this->validate($request, [
@@ -52,8 +53,23 @@ class GroceryListController extends Controller
         if (Auth::user()->grocery_lists()->save($grocery_list)) {
             // if recipe_id is set, then add the ingredients you need
             if ($grocery_list->recipe_id != null) {
-                $ingredientsToAdd = Recipe::find($grocery_list->recipe_id)->ingredients()
-                    ->whereNotIn('recipes_ingredients.id', Auth::user()->ingredients()->select('ingredient_id')->get())->get();
+                $ingredients = Recipe::find($grocery_list->recipe_id)->ingredients()->get();
+                $users_ingredients = Auth::user()->ingredients()->get();
+                $ingredientsToAdd = array();
+
+                foreach($ingredients as $ingredient) {
+                    $found = false;
+                    foreach($users_ingredients as $ingredient_in_pantry) {
+                        if ($ingredient->id == $ingredient_in_pantry->id) {
+                            $found = true;
+                            break;
+                        }
+                    }
+                    if (!$found) {
+                        array_push($ingredientsToAdd, $ingredient->id);
+                    }
+                }
+
                 $grocery_list->ingredients()->attach($ingredientsToAdd);
             }
 

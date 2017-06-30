@@ -1,6 +1,6 @@
 <template>
-      	<li :class="hasIngredient != false ? 'strong' : ''">
-      		<i v-if="!hasIngredient && showWhenHave != false" 
+      	<li :class="hasIngredient != false ? 'strong' : ''" v-if="show">
+      		<i v-if="!hasIngredient" 
       		class="action-icon fa fa-plus"
       		:class="inDB ? '' : 'disabled-action'"
       		@click="fireAction({ action: 'add-item', data: ingredient })">
@@ -23,6 +23,19 @@ export default {
     	'users_ingredients',
     	'showWhenHave'
 	],
+	data: function(){
+		return {
+			show: true
+		};
+	},
+	created: function() {
+		if (this.showWhenHave == false)
+			if (this.hasIngredient)
+				this.show = false;
+		console.log("showWhenHave: " + this.showWhenHave);
+		console.log("hasIngredient: " + this.hasIngredient);
+		console.log(this.show);
+	},
 	methods: {
 		fireAction: function(action) {
 			if (this.inDB)
