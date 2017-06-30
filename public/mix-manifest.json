@@ -8,5 +8,6 @@
   "/js/recipe.js": "/js/recipe.js",
   "/js/grocery_lists.js": "/js/grocery_lists.js",
   "/js/grocer_list.js": "/js/grocer_list.js",
-  "/js/grocery_list.js": "/js/grocery_list.js"
+  "/js/grocery_list.js": "/js/grocery_list.js",
+  "/js/recipe_made.js": "/js/recipe_made.js"
 }

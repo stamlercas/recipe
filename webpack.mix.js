@@ -19,4 +19,5 @@ mix.js('resources/assets/js/app.js', 'public/js')
 	.js('resources/assets/js/recipe.js', 'public/js')
 	.js('resources/assets/js/grocery_lists.js', 'public/js')
 	.js('resources/assets/js/grocery_list.js', 'public/js')
+	.js('resources/assets/js/recipe_made.js', 'public/js')
    .sass('resources/assets/sass/app.scss', 'public/css');

@@ -23,7 +23,7 @@ class GroceryListController extends Controller
 
     public function index()
     {
-        $grocery_lists = Auth::user()->grocery_lists()->where('status', 'open')->get();
+        $grocery_lists = Auth::user()->grocery_lists()->where('status', 'open')->orderBy('created_at', 'desc')->get();
         return view('grocery_list.index', ['grocery_lists' => $grocery_lists]);
     }
 
@@ -86,7 +86,12 @@ class GroceryListController extends Controller
         if ($grocery_list != null) {
             $grocery_list->status = 'closed';
             $grocery_list->update();
-            return ($grocery_list->recipe_id == null) ? redirect()->route('grocery_lists') : redirect()->route('recipe.get', ['recipe_id' => $grocery_list->recipe_id]);
+
+            if ($request->ajax()) {
+                return response()->json(['success' => true]);
+            } else {
+                return ($grocery_list->recipe_id == null) ? redirect()->route('grocery_lists') : redirect()->route('recipe.get', ['recipe_id' => $grocery_list->recipe_id]);
+            }
         }
     }
 
@@ -130,24 +135,6 @@ class GroceryListController extends Controller
         } else {
             return response()->json(['success' => false, 'ingredient' => null], 200);
         }
-    }
-
-    public function delete($ingredient_id)
-    {
-        $ingredient = Ingredient::where('id', $ingredient_id)->first();
-
-        Auth::user()->ingredients()->detach($ingredient->id);
-        
-        return response()->json(['success' => true, 'message' => 'Item successfully deleted!'], 200);
-    }
-
-    public function search(Request $request)
-    {
-        $this->validate($request, [
-            'query' => 'required'
-        ]);
-        $results = Ingredient::where('description', 'like', '%' . $request['query'] . '%')->limit(10)->get();
-        return response()->json(['success' => true, 'results' => $results], 200);
     }
 
     protected function getGroceryList($slug) {

@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 69);
+/******/ 	return __webpack_require__(__webpack_require__.s = 70);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -43001,12 +43001,15 @@ module.exports = function(module) {
 /***/ }),
 /* 38 */,
 /* 39 */,
-/* 40 */
+/* 40 */,
+/* 41 */,
+/* 42 */,
+/* 43 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var Component = __webpack_require__(9)(
   /* script */
-  __webpack_require__(42),
+  __webpack_require__(44),
   /* template */
   __webpack_require__(45),
   /* scopeId */
@@ -43035,8 +43038,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 41 */,
-/* 42 */
+/* 44 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -43147,8 +43149,6 @@ Vue.component('paginate', __WEBPACK_IMPORTED_MODULE_1_vuejs_paginate___default.a
 });
 
 /***/ }),
-/* 43 */,
-/* 44 */,
 /* 45 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -43261,6 +43261,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
         confirmCloseGroceryList: function confirmCloseGroceryList() {
             return confirm("Are you sure you want to close this list.  " + "Once you close, you will not have access to it anymore.");
+        },
+        closeGroceryList: function closeGroceryList(slug) {
+            var data = {
+                _token: session_token
+            };
+            return this.$http.post(grocery_list_url + slug + "/close", data).then(function (response) {
+                return response.body.success;
+            });
         }
     }
 });
@@ -43374,7 +43382,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__mixins_grocery_list_js__ = __webpack_require__(50);
 __webpack_require__(11);
 
-Vue.component('grocery-list-table', __webpack_require__(40));
+Vue.component('grocery-list-table', __webpack_require__(43));
 Vue.component('input-button', __webpack_require__(51));
 
 
@@ -43405,14 +43413,19 @@ var grocery_lists_app = new Vue({
     methods: {
         createGroceryList: function createGroceryList(name) {
             this.creating = true;
+            $('create-grocery-list-form').submit();
         },
         fireAction: function fireAction(data) {
+            var _this = this;
+
             switch (data.action) {
                 case 'view-item':
                     window.location = grocery_list_url + data.data.slug;
                     break;
                 case 'delete-item':
-                    if (this.confirmCloseGroceryList()) ; //TODO: delete list
+                    if (this.confirmCloseGroceryList()) this.closeGroceryList(data.data.slug).then(function (value) {
+                        _this.grocery_lists.splice(grocery_lists.indexOf(data.data), 1);
+                    });
             }
         }
     }
@@ -43430,7 +43443,8 @@ var grocery_lists_app = new Vue({
 /* 66 */,
 /* 67 */,
 /* 68 */,
-/* 69 */
+/* 69 */,
+/* 70 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__(57);

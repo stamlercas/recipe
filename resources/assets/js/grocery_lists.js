@@ -37,6 +37,7 @@ const grocery_lists_app = new Vue({
     methods: {
     	createGroceryList: function(name) {
     		this.creating = true;
+            $('create-grocery-list-form').submit();
     	},
         fireAction: function(data) {
             switch (data.action) {
@@ -45,7 +46,9 @@ const grocery_lists_app = new Vue({
                     break;
                 case 'delete-item':
                     if (this.confirmCloseGroceryList())
-                        ;   //TODO: delete list
+                        this.closeGroceryList(data.data.slug).then((value) => {
+                            this.grocery_lists.splice(grocery_lists.indexOf(data.data), 1);
+                        });
             }
         }
     }

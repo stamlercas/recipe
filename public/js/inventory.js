@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 70);
+/******/ 	return __webpack_require__(__webpack_require__.s = 71);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -43037,12 +43037,15 @@ module.exports = function(module) {
 
 /***/ }),
 /* 39 */,
-/* 40 */
+/* 40 */,
+/* 41 */,
+/* 42 */,
+/* 43 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var Component = __webpack_require__(9)(
   /* script */
-  __webpack_require__(42),
+  __webpack_require__(44),
   /* template */
   __webpack_require__(45),
   /* scopeId */
@@ -43071,8 +43074,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 41 */,
-/* 42 */
+/* 44 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -43183,8 +43185,6 @@ Vue.component('paginate', __WEBPACK_IMPORTED_MODULE_1_vuejs_paginate___default.a
 });
 
 /***/ }),
-/* 43 */,
-/* 44 */,
 /* 45 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -43383,9 +43383,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__mixins_ingredients_js__ = __webpack_require__(38);
 __webpack_require__(11);
 
-Vue.component('pantry-table', __webpack_require__(40));
+Vue.component('pantry-table', __webpack_require__(43));
 Vue.component('edit-modal', __webpack_require__(52));
-Vue.component('search-results-table', __webpack_require__(40));
+Vue.component('search-results-table', __webpack_require__(43));
 // Import the EventBus.
 
 
@@ -43492,7 +43492,8 @@ var homepage = new Vue({
 /* 67 */,
 /* 68 */,
 /* 69 */,
-/* 70 */
+/* 70 */,
+/* 71 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__(58);

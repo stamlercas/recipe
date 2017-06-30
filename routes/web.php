@@ -93,6 +93,11 @@ Route::get('/recipe/{recipe_id}', [
     'middleware' => 'auth'
 ]);
 
+Route::post('/recipe/made', [
+    'uses' => 'RecipeController@made',
+    'as' => 'recipe.made'
+]);
+
 Route::get('/search', [
     'uses' => 'RecipeController@index',
     'as' => 'search.index',

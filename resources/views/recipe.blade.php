@@ -60,7 +60,11 @@
 			@endif
 		</div>
 		<div class="col-md-3">
-			<button class="btn btn-success btn-block" value="Submit">I Made It!</button>
+			<form action="{{ route('recipe.made') }}" method="post">
+				{{ csrf_field() }}
+				<input hidden name="id" value="{{ $recipe->id }}" />
+				<button class="btn btn-success btn-block" value="Submit">I Made It!</button>
+			</form>
 		</div>
 	</div>
 </div>

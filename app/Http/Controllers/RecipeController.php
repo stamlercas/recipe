@@ -197,9 +197,15 @@ class RecipeController extends Controller
                             ]);
     }
 
-    public function made($recipe_id)
+    public function made(Request $request)
     {
-        
+        $this->validate($request, [
+            'id' => 'required'
+        ]);
+
+        Auth::user()->recipes_made()->attach($request['id']);
+
+        return view('recipe.made', ['ingredients', Recipe::find($request['id'])->ingredients()->get()]);
     }
 
     protected function append($request, $table, $parameter)
