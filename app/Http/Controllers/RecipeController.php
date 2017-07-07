@@ -205,7 +205,9 @@ class RecipeController extends Controller
 
         Auth::user()->recipes_made()->attach($request['id']);
 
-        return view('recipe.made', ['ingredients', Recipe::find($request['id'])->ingredients()->get()]);
+        return view('recipe.made', ['ingredients' => Recipe::find($request['id'])->ingredients()->get(),
+                                   'users_ingredients' => Auth::user()->ingredients()->get()
+                                   ]);
     }
 
     protected function append($request, $table, $parameter)
