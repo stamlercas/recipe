@@ -78,7 +78,7 @@ class RecipeController extends Controller
             foreach($result->ingredients as $ingredient) {
                 $obj = Ingredient::where('description', $ingredient)->first();
                 if ($obj == null) {
-                    $obj = Ingredient::find(1);     // find an Ingredient object first, then manipulate it.
+                    $obj = new \stdClass();     // instantiate a blank object to create an ingredient object to use in the view
                     $obj->searchValue = $ingredient;
                     $obj->description = $ingredient;
                     $obj->term = $ingredient;
