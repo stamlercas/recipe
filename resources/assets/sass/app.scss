@@ -133,6 +133,7 @@ NAVBAR FIXED SIDE OVERRIDE
       border-top: $brand-primary-darker;
   }
 
+.table-responsive::-webkit-scrollbar,
 .modal-container::-webkit-scrollbar {
   width:6px;
   background-color: #fff;
@@ -143,6 +144,7 @@ NAVBAR FIXED SIDE OVERRIDE
   background-color: $brand-primary;
 }
 
+.table-responsive::-webkit-scrollbar-thumb,
 .modal-container::-webkit-scrollbar-thumb,
 .navbar-fixed-side::-webkit-scrollbar-thumb {
   border-radius: 6px;
@@ -150,6 +152,7 @@ NAVBAR FIXED SIDE OVERRIDE
   background-color: #333;
 }
 
+.table-responsive::-webkit-scrollbar-track,
 .modal-container::-webkit-scrollbar-track,
 .navbar-fixed-side::-webkit-scrollbar-track {
   border-radius: 10px;
