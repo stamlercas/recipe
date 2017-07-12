@@ -1,12 +1,41 @@
           <nav class="navbar navbar-default navbar-fixed-side">
             <div class="container">
-              <div class="navbar-header">
-                <button class="navbar-toggle" data-target="#collapse" data-toggle="collapse">
-                  <span class="sr-only">Toggle navigation</span>
-                  <span class="icon-bar"></span>
-                  <span class="icon-bar"></span>
-                  <span class="icon-bar"></span>
-                </button>
+              <div class="navbar-header visible-xs">
+                <!-- mobile bar -->
+                <div class="row mobile-navbar text-center">
+                  <div class="col-xs-2 navbar-btn">
+                    <a href="{{ route('home') }}">
+                      <i class="fa fa-home fa-lg"></i>
+                    </a>
+                  </div>
+                  <div class="col-xs-2 navbar-btn">
+                    <a href="{{ route('search.index') }}">
+                      <i class="fa fa-search fa-lg"></i>
+                    </a>
+                  </div>
+                  <div class="col-xs-2 navbar-btn">
+                    <a href="{{ route('inventory') }}">
+                      <i class="fa fa-shopping-basket fa-lg"></i>
+                    </a>
+                  </div>
+                  <div class="col-xs-2 navbar-btn">
+                    <a href="{{ route('grocery_lists') }}">
+                      <i class="fa fa-shopping-cart fa-lg"></i>
+                    </a>
+                  </div>
+                  <div class="col-xs-2 navbar-btn">
+                    <a href="{{ route('settings') }}">
+                      <i class="fa fa-cog fa-lg"></i>
+                    </a>
+                  </div>
+                  <div class="col-xs-2 navbar-btn">
+                    <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                      <i class="fa fa-sign-out fa-lg"></i>
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <div class="navbar-header hidden-xs">
                 <a class="navbar-brand text-center" href="./">Recipr</a>
               </div>
               <div class="collapse navbar-collapse" id="collapse">
