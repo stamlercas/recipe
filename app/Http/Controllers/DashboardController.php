@@ -3,6 +3,10 @@
 namespace Recipr\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Recipr\Recipe;
+
+use Recipr\Http\Controllers\RecipeController;
 
 class DashboardController extends Controller
 {
@@ -23,6 +27,28 @@ class DashboardController extends Controller
      */
     public function getDashboard()
     {
-        return view('dashboard');
+        $recipe_ids = DB::select(DB::raw("SELECT recipe_id
+            FROM 
+                (SELECT recipe_id, COUNT(recipe_id) AS `num` 
+                    FROM recipes_made 
+                    GROUP BY recipe_id 
+                    UNION ALL 
+                    SELECT recipe_id, COUNT(recipe_id) AS `num` 
+                    FROM recipes_saved 
+                    GROUP BY recipe_id) AS T 
+                GROUP BY recipe_id 
+                ORDER BY SUM(num)
+                LIMIT 6"));
+
+        $trending = array();
+        $rc = new RecipeController();
+        foreach($recipe_ids as $result) {
+            array_push($trending, 
+                app('Recipr\Http\Controllers\RecipeController')->toJson(Recipe::find($result->recipe_id)));
+        }
+
+        return view('dashboard', [
+            'trending' => $trending
+        ]);
     }
 }

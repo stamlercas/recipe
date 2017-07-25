@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 77);
+/******/ 	return __webpack_require__(__webpack_require__.s = 73);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -10521,17 +10521,7 @@ module.exports = Vue$3;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(7)))
 
 /***/ }),
-/* 10 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(9);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ActionBus; });
-
-var ActionBus = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a();
-
-/***/ }),
+/* 10 */,
 /* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -43000,174 +42990,11 @@ module.exports = function(module) {
 /* (ignored) */
 
 /***/ }),
-/* 38 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony default export */ __webpack_exports__["a"] = ({
-    methods: {
-        addItem: function addItem(ingredient) {
-            var data = {
-                id: ingredient.id,
-                _token: session_token
-            };
-            return this.$http.post(inventory_add_url, data).then(function (response) {
-                return response.body.success;
-            });
-        },
-        deleteItem: function deleteItem(ingredient) {
-            return this.$http.get(inventory_delete_url + ingredient.id).then(function (response) {
-                return response.body.success;
-            });
-        },
-        searchIngredients: function searchIngredients(query) {
-            //TODO: MAKE WORK
-            if (query === '' || query === null) {
-                return false;
-            }
-            var data = {
-                query: query,
-                _token: session_token
-            };
-            return this.$http.post(inventory_search_url, data).then(function (response) {
-                return response.body;
-            });
-        }
-    }
-});
-
-/***/ }),
+/* 38 */,
 /* 39 */,
-/* 40 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__bus_action_bus_js__ = __webpack_require__(10);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-	props: ['ingredient', 'users_ingredients', 'showWhenHave'],
-	data: function data() {
-		return {
-			show: true
-		};
-	},
-	created: function created() {
-		if (this.showWhenHave == false) if (this.hasIngredient) this.show = false;
-	},
-	methods: {
-		fireAction: function fireAction(action) {
-			if (this.inDB) __WEBPACK_IMPORTED_MODULE_0__bus_action_bus_js__["a" /* ActionBus */].$emit("list-action", action);
-		}
-	},
-	computed: {
-		hasIngredient: function hasIngredient() {
-			for (var i = 0; i < this.users_ingredients.length; i++) {
-				if (this.ingredient.description === this.users_ingredients[i].description) return true;
-			}return false;
-		},
-		inDB: function inDB() {
-			if (this.ingredient.id == null) return false;
-			return true;
-		}
-	}
-});
-
-/***/ }),
-/* 41 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var Component = __webpack_require__(8)(
-  /* script */
-  __webpack_require__(40),
-  /* template */
-  __webpack_require__(42),
-  /* scopeId */
-  null,
-  /* cssModules */
-  null
-)
-Component.options.__file = "C:\\Users\\Porsche Tech\\Documents\\recipe\\resources\\assets\\js\\components\\IngredientListItem.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
-if (Component.options.functional) {console.error("[vue-loader] IngredientListItem.vue: functional components are not supported with templates, they should use render functions.")}
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-0d2446a4", Component.options)
-  } else {
-    hotAPI.reload("data-v-0d2446a4", Component.options)
-  }
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 42 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return (_vm.show) ? _c('li', {
-    class: _vm.hasIngredient != false ? 'strong' : ''
-  }, [(!_vm.hasIngredient) ? _c('i', {
-    staticClass: "action-icon fa fa-plus",
-    class: _vm.inDB ? '' : 'disabled-action',
-    on: {
-      "click": function($event) {
-        _vm.fireAction({
-          action: 'add-item',
-          data: _vm.ingredient
-        })
-      }
-    }
-  }, [_vm._v("\n      \t\t\t \n  \t\t\t")]) : _vm._e(), _vm._v("\n  \t\t\t" + _vm._s(_vm.ingredient.description) + "\n      \t\t"), (_vm.hasIngredient != false) ? _c('span', {
-    staticClass: "list-action pull-right bg-danger",
-    on: {
-      "click": function($event) {
-        _vm.fireAction({
-          action: 'delete-item',
-          data: _vm.ingredient
-        })
-      }
-    }
-  }, [_c('span', {
-    staticClass: "hidden-xs"
-  }, [_vm._v("Don't have this?")]), _vm._v(" "), _c('i', {
-    staticClass: "fa fa-times"
-  })]) : _vm._e()]) : _vm._e()
-},staticRenderFns: []}
-module.exports.render._withStripped = true
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-0d2446a4", module.exports)
-  }
-}
-
-/***/ }),
+/* 40 */,
+/* 41 */,
+/* 42 */,
 /* 43 */,
 /* 44 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -43271,75 +43098,28 @@ if (false) {
 /* 56 */,
 /* 57 */,
 /* 58 */,
-/* 59 */,
-/* 60 */,
-/* 61 */,
-/* 62 */,
-/* 63 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/* 59 */
+/***/ (function(module, exports, __webpack_require__) {
 
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__bus_action_bus_js__ = __webpack_require__(10);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__mixins_ingredients_js__ = __webpack_require__(38);
 __webpack_require__(11);
 
-Vue.component('ingredient-list-item', __webpack_require__(41));
 Vue.component('save-icon', __webpack_require__(46));
 
-
-
-
-
-var recipe_app = new Vue({
-    el: '#recipe',
-    mixins: [__WEBPACK_IMPORTED_MODULE_1__mixins_ingredients_js__["a" /* default */]],
+var homepage = new Vue({
+    el: '#dashboard',
     data: {
-        recipe: {},
-        users_ingredients: []
+        trending: []
     },
     created: function created() {
-        this.recipe = recipe;
-        this.users_ingredients = users_ingredients;
-
-        __WEBPACK_IMPORTED_MODULE_0__bus_action_bus_js__["a" /* ActionBus */].$on('list-action', this.fireAction);
-    },
-    methods: {
-        makeGroceryList: function makeGroceryList() {
-            var data = {
-                id: this.recipe.id,
-                name: this.recipe.name,
-                _token: session_token
-            };
-            this.$http.post(grocery_list_create_url, data);
-        },
-        fireAction: function fireAction(data) {
-            var _this = this;
-
-            switch (data.action) {
-                // adds ingredient to pantry
-                case 'add-item':
-                    this.addItem(data.data).then(function (value) {
-                        if (value) _this.users_ingredients.unshift(data.data);
-                    });
-                    break;
-                // deletes ingredient from pantry
-                case 'delete-item':
-                    this.deleteItem(data.data).then(function (value) {
-                        for (var i = 0; i < _this.users_ingredients.length; i++) {
-                            if (data.data.id == _this.users_ingredients[i].id) {
-                                console.log(i);
-                                _this.users_ingredients.splice(i, 1);
-                            }
-                        }
-                    });
-                    break;
-            }
-        }
+        this.trending = trending;
     }
 });
 
 /***/ }),
+/* 60 */,
+/* 61 */,
+/* 62 */,
+/* 63 */,
 /* 64 */,
 /* 65 */,
 /* 66 */,
@@ -43349,14 +43129,10 @@ var recipe_app = new Vue({
 /* 70 */,
 /* 71 */,
 /* 72 */,
-/* 73 */,
-/* 74 */,
-/* 75 */,
-/* 76 */,
-/* 77 */
+/* 73 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(63);
+module.exports = __webpack_require__(59);
 
 
 /***/ })

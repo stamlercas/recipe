@@ -99,7 +99,17 @@ class RecipeController extends Controller
             'users_ingredients' => Auth::user()->ingredients()->get()]);
     }
 
-    public function get($recipe_id)
+    public function get($recipe_id) {
+        $recipe = $this->getRecipe($recipe_id);
+        return view('recipe', ['recipe' => $recipe, 
+                                'users_ingredients' => Auth::user()->ingredients()->get(),
+                                'grocery_list' => Auth::user()->grocery_lists()
+                                    ->where('status', 'open')
+                                    ->where('recipe_id', $recipe->id)->first()
+                            ]);
+    }
+
+    public function getRecipe($recipe_id)
     {
         //$recipe = json_decode(file_get_contents(storage_path() . "/app/json/" . "recipe.json"));
 
@@ -195,12 +205,7 @@ class RecipeController extends Controller
             }
         }
 
-        return view('recipe', ['recipe' => $this->toJson($r), 
-                                'users_ingredients' => Auth::user()->ingredients()->get(),
-                                'grocery_list' => Auth::user()->grocery_lists()
-                                    ->where('status', 'open')
-                                    ->where('recipe_id', $r->id)->first()
-                            ]);
+        return $this->toJson($r);
     }
 
     public function made(Request $request)
@@ -220,6 +225,8 @@ class RecipeController extends Controller
         $this->validate($request, [
             'id' => 'required'
         ]);
+
+        $recipe = $this->getRecipe($request['id']);
 
         if (Auth::user()->recipes_saved()->find($request['id'])) {
             Auth::user()->recipes_saved()->detach($request['id']);
@@ -250,7 +257,7 @@ class RecipeController extends Controller
         }
     }
 
-    protected function toJson($recipe) {
+    public function toJson($recipe) {
         $r = new \stdClass();//json_decode(file_get_contents(storage_path() . '/app/json/recipe_template.json'));
         $r->attribution = new \stdClass();
         $r->flavors = new \stdClass();
@@ -329,6 +336,8 @@ class RecipeController extends Controller
         $r->id = $recipe->id;
 
         $r->ingredients = $recipe->ingredients()->get();
+
+        $r->saved = (Auth::user()->recipes_saved()->find($r->id)) ? true : false;
 
         return $r;
     }

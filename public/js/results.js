@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 77);
+/******/ 	return __webpack_require__(__webpack_require__.s = 79);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -766,6 +766,63 @@ module.exports = g;
 
 /***/ }),
 /* 8 */
+/***/ (function(module, exports) {
+
+// this module is a runtime utility for cleaner component module output and will
+// be included in the final webpack user bundle
+
+module.exports = function normalizeComponent (
+  rawScriptExports,
+  compiledTemplate,
+  scopeId,
+  cssModules
+) {
+  var esModule
+  var scriptExports = rawScriptExports = rawScriptExports || {}
+
+  // ES6 modules interop
+  var type = typeof rawScriptExports.default
+  if (type === 'object' || type === 'function') {
+    esModule = rawScriptExports
+    scriptExports = rawScriptExports.default
+  }
+
+  // Vue.extend constructor export interop
+  var options = typeof scriptExports === 'function'
+    ? scriptExports.options
+    : scriptExports
+
+  // render functions
+  if (compiledTemplate) {
+    options.render = compiledTemplate.render
+    options.staticRenderFns = compiledTemplate.staticRenderFns
+  }
+
+  // scopedId
+  if (scopeId) {
+    options._scopeId = scopeId
+  }
+
+  // inject cssModules
+  if (cssModules) {
+    var computed = Object.create(options.computed || null)
+    Object.keys(cssModules).forEach(function (key) {
+      var module = cssModules[key]
+      computed[key] = function () { return module }
+    })
+    options.computed = computed
+  }
+
+  return {
+    esModule: esModule,
+    exports: scriptExports,
+    options: options
+  }
+}
+
+
+/***/ }),
+/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10464,68 +10521,11 @@ module.exports = Vue$3;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(7)))
 
 /***/ }),
-/* 9 */
-/***/ (function(module, exports) {
-
-// this module is a runtime utility for cleaner component module output and will
-// be included in the final webpack user bundle
-
-module.exports = function normalizeComponent (
-  rawScriptExports,
-  compiledTemplate,
-  scopeId,
-  cssModules
-) {
-  var esModule
-  var scriptExports = rawScriptExports = rawScriptExports || {}
-
-  // ES6 modules interop
-  var type = typeof rawScriptExports.default
-  if (type === 'object' || type === 'function') {
-    esModule = rawScriptExports
-    scriptExports = rawScriptExports.default
-  }
-
-  // Vue.extend constructor export interop
-  var options = typeof scriptExports === 'function'
-    ? scriptExports.options
-    : scriptExports
-
-  // render functions
-  if (compiledTemplate) {
-    options.render = compiledTemplate.render
-    options.staticRenderFns = compiledTemplate.staticRenderFns
-  }
-
-  // scopedId
-  if (scopeId) {
-    options._scopeId = scopeId
-  }
-
-  // inject cssModules
-  if (cssModules) {
-    var computed = Object.create(options.computed || null)
-    Object.keys(cssModules).forEach(function (key) {
-      var module = cssModules[key]
-      computed[key] = function () { return module }
-    })
-    options.computed = computed
-  }
-
-  return {
-    esModule: esModule,
-    exports: scriptExports,
-    options: options
-  }
-}
-
-
-/***/ }),
 /* 10 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(9);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ActionBus; });
 
@@ -10544,7 +10544,7 @@ var ActionBus = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a();
 
 __webpack_require__(30);
 
-window.Vue = __webpack_require__(8);
+window.Vue = __webpack_require__(9);
 
 var VueResource = __webpack_require__(35);
 
@@ -43095,7 +43095,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* 41 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var Component = __webpack_require__(9)(
+var Component = __webpack_require__(8)(
   /* script */
   __webpack_require__(40),
   /* template */
@@ -43169,10 +43169,97 @@ if (false) {
 
 /***/ }),
 /* 43 */,
-/* 44 */,
+/* 44 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+	props: ['saved', 'recipe_id'],
+	methods: {
+		save: function save() {
+			var _this = this;
+
+			var data = {
+				id: this.recipe_id,
+				_token: session_token
+			};
+			this.$http.post(save_recipe_url, data).then(function (response) {
+				if (response.body.success) {
+					_this.saved = response.body.saved; // send back a saved variable
+					// will be true if recipe was saved
+					// will be false if recipe was unsaved
+				}
+			});
+		}
+	}
+});
+
+/***/ }),
 /* 45 */,
-/* 46 */,
-/* 47 */,
+/* 46 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var Component = __webpack_require__(8)(
+  /* script */
+  __webpack_require__(44),
+  /* template */
+  __webpack_require__(47),
+  /* scopeId */
+  null,
+  /* cssModules */
+  null
+)
+Component.options.__file = "C:\\Users\\Porsche Tech\\Documents\\recipe\\resources\\assets\\js\\components\\SaveIcon.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] SaveIcon.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-1bc27210", Component.options)
+  } else {
+    hotAPI.reload("data-v-1bc27210", Component.options)
+  }
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 47 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('i', {
+    staticClass: "fa pull-right save-icon",
+    class: (_vm.saved) ? 'fa-heart' : 'fa-heart-o',
+    on: {
+      "click": function($event) {
+        _vm.save()
+      }
+    }
+  })
+},staticRenderFns: []}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-1bc27210", module.exports)
+  }
+}
+
+/***/ }),
 /* 48 */,
 /* 49 */,
 /* 50 */,
@@ -43186,7 +43273,11 @@ if (false) {
 /* 58 */,
 /* 59 */,
 /* 60 */,
-/* 61 */
+/* 61 */,
+/* 62 */,
+/* 63 */,
+/* 64 */,
+/* 65 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -43195,9 +43286,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__mixins_ingredients_js__ = __webpack_require__(38);
 __webpack_require__(11);
 
-Vue.component('progress-bar', __webpack_require__(67));
+Vue.component('progress-bar', __webpack_require__(70));
 Vue.component('ingredient-list-item', __webpack_require__(41));
-Vue.component('save-icon', __webpack_require__(68));
+Vue.component('save-icon', __webpack_require__(46));
 
 
 
@@ -43272,10 +43363,10 @@ var results = new Vue({
 });
 
 /***/ }),
-/* 62 */,
-/* 63 */,
-/* 64 */,
-/* 65 */
+/* 66 */,
+/* 67 */,
+/* 68 */,
+/* 69 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -43305,47 +43396,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 66 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
-//
-//
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-	props: ['saved', 'recipe_id'],
-	methods: {
-		save: function save() {
-			var _this = this;
-
-			var data = {
-				id: this.recipe_id,
-				_token: session_token
-			};
-			this.$http.post(save_recipe_url, data).then(function (response) {
-				if (response.body.success) {
-					_this.saved = response.body.saved; // send back a saved variable
-					// will be true if recipe was saved
-					// will be false if recipe was unsaved
-				}
-			});
-		}
-	}
-});
-
-/***/ }),
-/* 67 */
+/* 70 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var Component = __webpack_require__(9)(
+var Component = __webpack_require__(8)(
   /* script */
-  __webpack_require__(65),
+  __webpack_require__(69),
   /* template */
-  __webpack_require__(70),
+  __webpack_require__(71),
   /* scopeId */
   null,
   /* cssModules */
@@ -43372,64 +43430,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 68 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var Component = __webpack_require__(9)(
-  /* script */
-  __webpack_require__(66),
-  /* template */
-  __webpack_require__(69),
-  /* scopeId */
-  null,
-  /* cssModules */
-  null
-)
-Component.options.__file = "C:\\Users\\Porsche Tech\\Documents\\recipe\\resources\\assets\\js\\components\\SaveIcon.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
-if (Component.options.functional) {console.error("[vue-loader] SaveIcon.vue: functional components are not supported with templates, they should use render functions.")}
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-1bc27210", Component.options)
-  } else {
-    hotAPI.reload("data-v-1bc27210", Component.options)
-  }
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 69 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('i', {
-    staticClass: "fa pull-right save-icon",
-    class: (_vm.saved) ? 'fa-heart' : 'fa-heart-o',
-    on: {
-      "click": function($event) {
-        _vm.save()
-      }
-    }
-  })
-},staticRenderFns: []}
-module.exports.render._withStripped = true
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-1bc27210", module.exports)
-  }
-}
-
-/***/ }),
-/* 70 */
+/* 71 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -43459,16 +43460,17 @@ if (false) {
 }
 
 /***/ }),
-/* 71 */,
 /* 72 */,
 /* 73 */,
 /* 74 */,
 /* 75 */,
 /* 76 */,
-/* 77 */
+/* 77 */,
+/* 78 */,
+/* 79 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(61);
+module.exports = __webpack_require__(65);
 
 
 /***/ })

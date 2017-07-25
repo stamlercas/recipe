@@ -9,10 +9,12 @@
 <div id="recipe">
 	<div class="row">
 		<div class="col-md-4" style=";margin-top:22px;">
-			<img :src="recipe.images.hostedLargeUrl" class="img img-respsonsive" :alt="recipe.name + ' image'" />
+			<img :src="recipe.images.hostedLargeUrl" class="img img-responsive" :alt="recipe.name + ' image'" />
 		</div>
-		<div class="col-md-6">
-			<h1 style="margin-bottom:0;">@{{ recipe.name }}</h1>
+		<div class="col-md-7">
+			<h1 style="margin-bottom:0;">@{{ recipe.name }}
+				<save-icon :recipe_id="recipe.id" :saved="recipe.saved"></save-icon>
+			</h1>
 			<div>
 				Provided by 
 				<a :href="recipe.sourceSiteUrl" target="_blank">
@@ -75,6 +77,7 @@
 
 	var inventory_add_url = "{{ route('inventory.add') }}";
 	var inventory_delete_url = "{{ route('inventory.delete', ['inventory_id' => '']) }}" + "/";
+	var save_recipe_url = "{{ route('recipe.save') }}";
 
 	var session_token = "{{ Session::token() }}";
 </script>
