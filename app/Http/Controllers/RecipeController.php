@@ -92,6 +92,8 @@ class RecipeController extends Controller
                         $obj->recipes()->attach($id);
             }
             $result->ingredients = $temp;
+
+            $result->saved = (Auth::user()->recipes_saved()->find($result->id)) ? true : false;
         }
         return view('search.results', ['results' => $results, 
             'users_ingredients' => Auth::user()->ingredients()->get()]);
@@ -115,12 +117,16 @@ class RecipeController extends Controller
             $r->logo = $recipe->attribution->logo;
 
             // flavors
-            $r->salty = $recipe->flavors->Salty;
-            $r->meaty = $recipe->flavors->Meaty;
-            $r->piquant = $recipe->flavors->Piquant;
-            $r->bitter = $recipe->flavors->Bitter;
-            $r->sour = $recipe->flavors->Sour;
-            $r->sweet = $recipe->flavors->Sweet;
+            if (isset($recipe->flavors)) {
+                if (isset($recipe->flavors->Salty)) {   // if one isn't set, none will
+                    $r->salty = $recipe->flavors->Salty;
+                    $r->meaty = $recipe->flavors->Meaty;
+                    $r->piquant = $recipe->flavors->Piquant;
+                    $r->bitter = $recipe->flavors->Bitter;
+                    $r->sour = $recipe->flavors->Sour;
+                    $r->sweet = $recipe->flavors->Sweet;
+                }
+            }
 
             // images are nullable fields
             if (isset($recipe->images[0]->hostedLargeUrl))
@@ -208,6 +214,20 @@ class RecipeController extends Controller
         return view('recipe.made', ['ingredients' => Recipe::find($request['id'])->ingredients()->get(),
                                    'users_ingredients' => Auth::user()->ingredients()->get()
                                    ]);
+    }
+
+    public function save(Request $request) {
+        $this->validate($request, [
+            'id' => 'required'
+        ]);
+
+        if (Auth::user()->recipes_saved()->find($request['id'])) {
+            Auth::user()->recipes_saved()->detach($request['id']);
+            return response()->json(['success' => true, 'saved' => false]);
+        } else {
+            Auth::user()->recipes_saved()->attach($request['id']);
+            return response()->json(['success' => true, 'saved' => true]);
+        }
     }
 
     protected function append($request, $table, $parameter)

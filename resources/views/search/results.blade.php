@@ -21,6 +21,7 @@ Results
 	    				</a>
 						<h5 class="list-title">
 							<a :href="'{{ route('recipe.get', ['inventory_id' => ''])  }}/' + result.id">@{{ result.recipeName }}</a>
+							<save-icon :recipe_id="result.id" :saved="result.saved"></save-icon>
 						</h5>
 						<div style="clear:both;"></div>
 						<div class="ingredient-list">
@@ -67,6 +68,7 @@ Results
   		var users_ingredients = {!! json_encode($users_ingredients) !!};
   		var inventory_add_url = "{{ route('inventory.add') }}";
   		var inventory_delete_url = "{{ route('inventory.delete', ['inventory_id' => ''])  }}" + "/";
+  		var save_recipe_url = "{{ route('recipe.save') }}";
   		var session_token = "{{ Session::token() }}";
   	</script>
   	<script src="{{ asset('js/results.js') }}"></script>

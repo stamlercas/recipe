@@ -98,6 +98,11 @@ Route::post('/recipe/made', [
     'as' => 'recipe.made'
 ]);
 
+Route::post('/recipe/save', [
+    'uses' => 'RecipeController@save',
+    'as' => 'recipe.save'
+]);
+
 Route::get('/search', [
     'uses' => 'RecipeController@index',
     'as' => 'search.index',

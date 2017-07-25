@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 74);
+/******/ 	return __webpack_require__(__webpack_require__.s = 77);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -43195,8 +43195,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__mixins_ingredients_js__ = __webpack_require__(38);
 __webpack_require__(11);
 
-Vue.component('progress-bar', __webpack_require__(66));
+Vue.component('progress-bar', __webpack_require__(67));
 Vue.component('ingredient-list-item', __webpack_require__(41));
+Vue.component('save-icon', __webpack_require__(68));
 
 
 
@@ -43305,13 +43306,46 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /***/ }),
 /* 66 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+	props: ['saved', 'recipe_id'],
+	methods: {
+		save: function save() {
+			var _this = this;
+
+			var data = {
+				id: this.recipe_id,
+				_token: session_token
+			};
+			this.$http.post(save_recipe_url, data).then(function (response) {
+				if (response.body.success) {
+					_this.saved = response.body.saved; // send back a saved variable
+					// will be true if recipe was saved
+					// will be false if recipe was unsaved
+				}
+			});
+		}
+	}
+});
+
+/***/ }),
+/* 67 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var Component = __webpack_require__(9)(
   /* script */
   __webpack_require__(65),
   /* template */
-  __webpack_require__(67),
+  __webpack_require__(70),
   /* scopeId */
   null,
   /* cssModules */
@@ -43338,7 +43372,64 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 67 */
+/* 68 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var Component = __webpack_require__(9)(
+  /* script */
+  __webpack_require__(66),
+  /* template */
+  __webpack_require__(69),
+  /* scopeId */
+  null,
+  /* cssModules */
+  null
+)
+Component.options.__file = "C:\\Users\\Porsche Tech\\Documents\\recipe\\resources\\assets\\js\\components\\SaveIcon.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] SaveIcon.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-1bc27210", Component.options)
+  } else {
+    hotAPI.reload("data-v-1bc27210", Component.options)
+  }
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 69 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('i', {
+    staticClass: "fa pull-right save-icon",
+    class: (_vm.saved) ? 'fa-heart' : 'fa-heart-o',
+    on: {
+      "click": function($event) {
+        _vm.save()
+      }
+    }
+  })
+},staticRenderFns: []}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-1bc27210", module.exports)
+  }
+}
+
+/***/ }),
+/* 70 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -43368,13 +43459,13 @@ if (false) {
 }
 
 /***/ }),
-/* 68 */,
-/* 69 */,
-/* 70 */,
 /* 71 */,
 /* 72 */,
 /* 73 */,
-/* 74 */
+/* 74 */,
+/* 75 */,
+/* 76 */,
+/* 77 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__(61);

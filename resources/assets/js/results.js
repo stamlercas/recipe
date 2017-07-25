@@ -2,6 +2,7 @@ require ('./app');
 
 Vue.component('progress-bar', require('./components/ProgressBar.vue'));
 Vue.component('ingredient-list-item', require('./components/IngredientListItem.vue'));
+Vue.component('save-icon', require('./components/SaveIcon.vue'));
 
 import { ActionBus } from './bus/action-bus.js';
 

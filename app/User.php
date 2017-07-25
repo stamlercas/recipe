@@ -59,4 +59,8 @@ class User extends Authenticatable
     public function recipes_made() {
         return $this->belongsToMany('Recipr\Recipe', 'recipes_made')->withTimestamps();
     }
+
+    public function recipes_saved() {
+        return $this->belongsToMany('Recipr\Recipe', 'recipes_saved')->withTimestamps();
+    }
 }

@@ -41,4 +41,8 @@ class Recipe extends Model
     public function users_made() {
         return $this->belongsToMany('Recipr\User', 'recipes_made')->withTimestamps();
     }
+
+    public function users_saved() {
+        return $this->belongsToMany('Recipr\User', 'recipes_saved')->withTimestamps();
+    }
 }
