@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 82);
+/******/ 	return __webpack_require__(__webpack_require__.s = 84);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -42989,126 +42989,60 @@ module.exports = function(module) {
 /* (ignored) */
 
 /***/ }),
-/* 37 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(9);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ActionBus; });
-
-var ActionBus = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a();
-
-/***/ }),
-/* 38 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony default export */ __webpack_exports__["a"] = ({
-    methods: {
-        addItem: function addItem(ingredient) {
-            var data = {
-                id: ingredient.id,
-                _token: session_token
-            };
-            return this.$http.post(inventory_add_url, data).then(function (response) {
-                return response.body.success;
-            });
-        },
-        deleteItem: function deleteItem(ingredient) {
-            return this.$http.get(inventory_delete_url + ingredient.id).then(function (response) {
-                return response.body.success;
-            });
-        },
-        searchIngredients: function searchIngredients(query) {
-            //TODO: MAKE WORK
-            if (query === '' || query === null) {
-                return false;
-            }
-            var data = {
-                query: query,
-                _token: session_token
-            };
-            return this.$http.post(inventory_search_url, data).then(function (response) {
-                return response.body;
-            });
-        }
-    }
-});
-
-/***/ }),
+/* 37 */,
+/* 38 */,
 /* 39 */,
-/* 40 */
+/* 40 */,
+/* 41 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__bus_action_bus_js__ = __webpack_require__(37);
 //
 //
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-	props: ['ingredient', 'users_ingredients', 'showWhenHave'],
-	data: function data() {
-		return {
-			show: true
-		};
-	},
-	created: function created() {
-		if (this.showWhenHave == false) if (this.hasIngredient) this.show = false;
-	},
+	props: ['saved', 'recipe_id'],
 	methods: {
-		fireAction: function fireAction(action) {
-			if (this.inDB) __WEBPACK_IMPORTED_MODULE_0__bus_action_bus_js__["a" /* ActionBus */].$emit("list-action", action);
-		}
-	},
-	computed: {
-		hasIngredient: function hasIngredient() {
-			for (var i = 0; i < this.users_ingredients.length; i++) {
-				if (this.ingredient.description === this.users_ingredients[i].description) return true;
-			}return false;
-		},
-		inDB: function inDB() {
-			if (this.ingredient.id == null) return false;
-			return true;
+		save: function save() {
+			var _this = this;
+
+			var data = {
+				id: this.recipe_id,
+				_token: session_token
+			};
+			this.$http.post(save_recipe_url, data).then(function (response) {
+				if (response.body.success) {
+					_this.saved = response.body.saved; // send back a saved variable
+					// will be true if recipe was saved
+					// will be false if recipe was unsaved
+				}
+			});
 		}
 	}
 });
 
 /***/ }),
-/* 41 */,
-/* 42 */
+/* 42 */,
+/* 43 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var Component = __webpack_require__(8)(
   /* script */
-  __webpack_require__(40),
+  __webpack_require__(41),
   /* template */
-  __webpack_require__(44),
+  __webpack_require__(45),
   /* scopeId */
   null,
   /* cssModules */
   null
 )
-Component.options.__file = "C:\\Users\\Porsche Tech\\Documents\\recipe\\resources\\assets\\js\\components\\IngredientListItem.vue"
+Component.options.__file = "C:\\Users\\Porsche Tech\\Documents\\recipe\\resources\\assets\\js\\components\\SaveIcon.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
-if (Component.options.functional) {console.error("[vue-loader] IngredientListItem.vue: functional components are not supported with templates, they should use render functions.")}
+if (Component.options.functional) {console.error("[vue-loader] SaveIcon.vue: functional components are not supported with templates, they should use render functions.")}
 
 /* hot reload */
 if (false) {(function () {
@@ -43117,9 +43051,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-0d2446a4", Component.options)
+    hotAPI.createRecord("data-v-1bc27210", Component.options)
   } else {
-    hotAPI.reload("data-v-0d2446a4", Component.options)
+    hotAPI.reload("data-v-1bc27210", Component.options)
   }
 })()}
 
@@ -43127,50 +43061,30 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 43 */,
-/* 44 */
+/* 44 */,
+/* 45 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return (_vm.show) ? _c('li', {
-    class: _vm.hasIngredient != false ? 'strong' : ''
-  }, [(!_vm.hasIngredient) ? _c('i', {
-    staticClass: "action-icon fa fa-plus",
-    class: _vm.inDB ? '' : 'disabled-action',
+  return _c('i', {
+    staticClass: "fa pull-right save-icon",
+    class: (_vm.saved) ? 'fa-heart' : 'fa-heart-o',
     on: {
       "click": function($event) {
-        _vm.fireAction({
-          action: 'add-item',
-          data: _vm.ingredient
-        })
+        _vm.save()
       }
     }
-  }, [_vm._v("\n      \t\t\t \n  \t\t\t")]) : _vm._e(), _vm._v("\n  \t\t\t" + _vm._s(_vm.ingredient.description) + "\n      \t\t"), (_vm.hasIngredient != false) ? _c('span', {
-    staticClass: "list-action pull-right bg-danger",
-    on: {
-      "click": function($event) {
-        _vm.fireAction({
-          action: 'delete-item',
-          data: _vm.ingredient
-        })
-      }
-    }
-  }, [_c('span', {
-    staticClass: "hidden-xs"
-  }, [_vm._v("Don't have this?")]), _vm._v(" "), _c('i', {
-    staticClass: "fa fa-times"
-  })]) : _vm._e()]) : _vm._e()
+  })
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-0d2446a4", module.exports)
+     require("vue-hot-reload-api").rerender("data-v-1bc27210", module.exports)
   }
 }
 
 /***/ }),
-/* 45 */,
 /* 46 */,
 /* 47 */,
 /* 48 */,
@@ -43189,70 +43103,150 @@ if (false) {
 /* 61 */,
 /* 62 */,
 /* 63 */,
-/* 64 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/* 64 */,
+/* 65 */,
+/* 66 */
+/***/ (function(module, exports, __webpack_require__) {
 
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__bus_action_bus_js__ = __webpack_require__(37);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__mixins_ingredients_js__ = __webpack_require__(38);
 __webpack_require__(10);
 
-Vue.component('ingredient-list-item', __webpack_require__(42));
+Vue.component('recipe-media-object', __webpack_require__(73));
 
-
-
-
-
-
-var recipe_made = new Vue({
-    el: '#recipe-made',
-    mixins: [__WEBPACK_IMPORTED_MODULE_1__mixins_ingredients_js__["a" /* default */], __WEBPACK_IMPORTED_MODULE_1__mixins_ingredients_js__["a" /* default */]],
+var saved = new Vue({
+    el: '#saved',
     data: {
-        ingredients: [],
-        users_ingredients: []
+        saved_recipes: []
     },
     created: function created() {
-        this.ingredients = ingredients.matches;
-        this.users_ingredients = users_ingredients;
-
-        __WEBPACK_IMPORTED_MODULE_0__bus_action_bus_js__["a" /* ActionBus */].$on('list-action', this.fireAction);
-    },
-    methods: {
-        fireAction: function fireAction(data) {
-            var _this = this;
-
-            switch (data.action) {
-                case 'add-item':
-                    this.addItem(data.data).then(function (value) {
-                        if (value) _this.users_ingredients.unshift(data.data);
-                    });
-                    break;
-                case 'delete-item':
-                    this.deleteItem(data.data).then(function (value) {
-                        for (var i = 0; i < _this.users_ingredients.length; i++) {
-                            if (data.data.id == _this.users_ingredients[i].id) {
-                                console.log(i);
-                                _this.users_ingredients.splice(i, 1);
-                            }
-                        }
-                    });
-            }
-        }
+        this.saved_recipes = saved_recipes;
     }
 });
 
 /***/ }),
-/* 65 */,
-/* 66 */,
 /* 67 */,
 /* 68 */,
 /* 69 */,
 /* 70 */,
-/* 71 */,
+/* 71 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+Vue.component('save-icon', __webpack_require__(43));
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+	props: ['recipe'],
+	computed: {
+		recipe_url: function (_recipe_url) {
+			function recipe_url() {
+				return _recipe_url.apply(this, arguments);
+			}
+
+			recipe_url.toString = function () {
+				return _recipe_url.toString();
+			};
+
+			return recipe_url;
+		}(function () {
+			return recipe_url;
+		})
+	}
+});
+
+/***/ }),
 /* 72 */,
-/* 73 */,
-/* 74 */,
+/* 73 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var Component = __webpack_require__(8)(
+  /* script */
+  __webpack_require__(71),
+  /* template */
+  __webpack_require__(74),
+  /* scopeId */
+  null,
+  /* cssModules */
+  null
+)
+Component.options.__file = "C:\\Users\\Porsche Tech\\Documents\\recipe\\resources\\assets\\js\\components\\RecipeMediaObject.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] RecipeMediaObject.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-31087163", Component.options)
+  } else {
+    hotAPI.reload("data-v-31087163", Component.options)
+  }
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 74 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "media"
+  }, [_c('div', {
+    staticClass: "media-left"
+  }, [_c('a', {
+    attrs: {
+      "href": _vm.recipe_url + '/' + _vm.recipe.id
+    }
+  }, [_c('img', {
+    staticClass: "media-object",
+    attrs: {
+      "src": _vm.recipe.images.hostedSmallUrl,
+      "alt": _vm.recipe.name
+    }
+  })])]), _vm._v(" "), _c('div', {
+    staticClass: "media-body"
+  }, [_c('h4', {
+    staticClass: "media-heading"
+  }, [_c('a', {
+    attrs: {
+      "href": _vm.recipe_url + '/' + _vm.recipe.id
+    }
+  }, [_vm._v(_vm._s(_vm.recipe.name))]), _vm._v(" "), _c('save-icon', {
+    attrs: {
+      "recipe_id": _vm.recipe.id,
+      "saved": _vm.recipe.saved
+    }
+  })], 1)])])
+},staticRenderFns: []}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-31087163", module.exports)
+  }
+}
+
+/***/ }),
 /* 75 */,
 /* 76 */,
 /* 77 */,
@@ -43260,10 +43254,12 @@ var recipe_made = new Vue({
 /* 79 */,
 /* 80 */,
 /* 81 */,
-/* 82 */
+/* 82 */,
+/* 83 */,
+/* 84 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(64);
+module.exports = __webpack_require__(66);
 
 
 /***/ })

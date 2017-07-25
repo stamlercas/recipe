@@ -123,6 +123,19 @@ nav ul li a {
   color: $brand-success;
 }
 
+/* ALWAYS INLINE PILLS */
+@media (max-width: 768px) {
+  .nav-justified > li {
+    display: table-cell;
+    width: 1%;
+  }
+  .nav-justified > li > a  {
+    border-bottom: 0px !important;
+    border-radius: 4px 4px 0 0 !important;
+    margin-bottom: 0 !important;
+  }
+}
+
 /*************************
 NAVBAR FIXED SIDE OVERRIDE
 *************************/

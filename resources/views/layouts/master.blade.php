@@ -25,7 +25,7 @@
                     @yield('content')
                 </div>
             @else
-                <div class="container-fluid">
+                <div class="container-fluid" style="overflow-x:hidden;">
                     <div class="row">
                         <div class="col-sm-3 col-lg-2">
                             @include('includes.nav')

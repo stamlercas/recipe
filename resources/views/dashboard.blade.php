@@ -8,8 +8,10 @@
     <ul class="nav nav-pills nav-justified">
         <li class="active"><a data-toggle="pill" href="#home">Home</a></li>
         <li><a data-toggle="pill" href="#menu1">Trending</a></li>
+        <!--
         <li><a data-toggle="pill" href="#menu2">Menu 2</a></li>
         <li><a data-toggle="pill" href="#menu3">Menu 3</a></li>
+        -->
       </ul>
       <div id="dashboard">
           <div class="tab-content" style="margin-top:10px;">
@@ -29,9 +31,14 @@
                 <div class="row">
                   <div class="col-sm-6 col-md-4" v-for="recipe in trending">
                     <div class="thumbnail">
-                      <img :src="recipe.images.hostedLargeUrl" :alt="recipe.name + ' image'" />
+                      <a :href="'{{ route('recipe.get', ['inventory_id' => ''])  }}/' + recipe.id">
+                        <img :src="recipe.images.hostedLargeUrl" :alt="recipe.name + ' image'" />
+                      </a>
                       <div class="caption">
-                        <h3>@{{ recipe.name }}
+                        <h3>
+                          <a :href="'{{ route('recipe.get', ['inventory_id' => ''])  }}/' + recipe.id">
+                            @{{ recipe.name }}
+                          </a>
                         <save-icon :recipe_id="recipe.id" :saved="recipe.saved"></save-icon></h3>
                         <p><a :href="'{{ route('recipe.get', ['inventory_id' => ''])  }}/' + recipe.id" 
                             class="btn btn-primary" role="button">View</a>

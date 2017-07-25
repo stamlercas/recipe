@@ -6,7 +6,7 @@
 
 @section('content')
 	<div id="settings">
-	<h1>{{ $user->username }}</h1>
+	<h1>{{ $user->username }} <small><a href="{{ route('user.saved', ['username' => Auth::user()->username]) }}">saved</a></small></h1>
 	<br />
 		<form class="form-horizontal" action="{{ route('settings.update') }}" method="post">
 			{{ csrf_field() }}

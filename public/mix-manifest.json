@@ -10,5 +10,6 @@
   "/js/grocer_list.js": "/js/grocer_list.js",
   "/js/grocery_list.js": "/js/grocery_list.js",
   "/js/recipe_made.js": "/js/recipe_made.js",
-  "/js/dashboard.js": "/js/dashboard.js"
+  "/js/dashboard.js": "/js/dashboard.js",
+  "/js/saved.js": "/js/saved.js"
 }

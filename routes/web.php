@@ -27,6 +27,12 @@ Auth::routes();
 
 //Route::get('/home', 'HomeController@index')->name('home');
 
+Route::get('/{username}/saved', [
+    'uses' => 'UserController@saved',
+    'as' => 'user.saved',
+    'middleware' => 'auth'
+]);
+
 Route::get('/dashboard', [
     'uses' => 'DashboardController@getDashboard',
     'as' => 'dashboard',

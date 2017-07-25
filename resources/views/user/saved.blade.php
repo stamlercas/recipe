@@ -1,16 +1,23 @@
 @extends ('layouts.master')
 
 @section('title')
-    Search
+    {{ Auth::user()->username }} Saved
 @endsection
 
 @section('content')
-    <div id="search">
-        <h1>Saved</h1>
-        
+    <div id="saved">
+        <h1>Saved Recipes</h1>
+        <div>
+        	<recipe-media-object v-for="recipe in saved_recipes" :recipe="recipe"></recipe-media-object>
+        </div>
     </div>
 
     <script>
+    	var saved_recipes = {!! json_encode($saved_recipes) !!};
+
+    	var recipe_url = "{{ route('recipe.get', ['recipe_id' => '']) }}"; 
+    	var save_recipe_url = "{{ route('recipe.save') }}";
+    	var session_token = "{{ Session::token() }}";
     </script>
-    <script src="{{ asset('js/search.js') }}"></script>
+    <script src="{{ asset('js/saved.js') }}"></script>
 @endsection
