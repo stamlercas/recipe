@@ -31,10 +31,12 @@ class DashboardController extends Controller
             FROM 
                 (SELECT recipe_id, COUNT(recipe_id) AS `num` 
                     FROM recipes_made 
+                    WHERE created_at >= NOW() - INTERVAL 7 day
                     GROUP BY recipe_id 
                     UNION ALL 
                     SELECT recipe_id, COUNT(recipe_id) AS `num` 
                     FROM recipes_saved 
+                    WHERE created_at >= NOW() - INTERVAL 7 day
                     GROUP BY recipe_id) AS T 
                 GROUP BY recipe_id 
                 ORDER BY SUM(num)

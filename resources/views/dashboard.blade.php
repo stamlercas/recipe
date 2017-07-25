@@ -33,14 +33,6 @@
                       <div class="caption">
                         <h3>@{{ recipe.name }}
                         <save-icon :recipe_id="recipe.id" :saved="recipe.saved"></save-icon></h3>
-                        <p>
-                            <div class="attributes" v-for="(value, key) in recipe.attributes">
-                                <strong>@{{ key }}:</strong>
-                                <ul class="list-unstyled">
-                                    <li v-for="v in value">@{{ v }}</li>
-                                </ul>
-                            </div>
-                        </p>
                         <p><a :href="'{{ route('recipe.get', ['inventory_id' => ''])  }}/' + recipe.id" 
                             class="btn btn-primary" role="button">View</a>
                       </div>
