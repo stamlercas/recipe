@@ -26,3 +26,6 @@ from the project directory.
 - [ ] 1. Rename InventoryController to PantryController
 - [ ] 2. Save recipes
 - [ ] 3. Recommendation Engine
+- [ ] 4. Ability to share pantries with other users
+- [ ] 5. Multiple pantries (warning: will be extensive)
+- [ ] 6. Share grocery lists
