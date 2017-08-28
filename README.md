@@ -30,3 +30,4 @@ from the project directory.
 - [ ] 5. Multiple pantries (warning: will be extensive)
 - [ ] 6. Share grocery lists
 - [x] 7. Trending
+- [ ] 8. Calendar/Meal Planning
