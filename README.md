@@ -31,3 +31,4 @@ from the project directory.
 - [ ] 6. Share grocery lists
 - [x] 7. Trending
 - [ ] 8. Calendar/Meal Planning
+- [ ] 9. Activity/Overview Screen (swap settings for that)
