@@ -1,7 +1,7 @@
 # recipe
 
 ## Setup
-Rename "env.example" to ".env"
+Copy "env.example" and rename the copied file to ".env"
 
 Change the database settings in the .env file
 
