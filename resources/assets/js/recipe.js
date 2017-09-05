@@ -2,6 +2,7 @@ require ('./app');
 
 Vue.component('ingredient-list-item', require('./components/IngredientListItem.vue'));
 Vue.component('save-icon', require('./components/SaveIcon.vue'));
+Vue.component('nutrition-table', require('./components/Table.vue'));
 
 import { ActionBus } from './bus/action-bus.js';
 
@@ -12,11 +13,33 @@ const recipe_app = new Vue({
     mixins: [addItem],
     data: {
     	recipe: {},
-    	users_ingredients: []
+    	users_ingredients: [],
+        nutrientColumns: [
+            {
+                name: 'description',
+                alias: 'Description'
+            },
+            {
+                name: 'value',
+                alias: 'Value'
+            },
+            {
+                name: 'unit.plural',
+                alias: 'Unit'
+            }
+        ]
     },
     created: function() {
         this.recipe = recipe;
         this.users_ingredients = users_ingredients;
+
+        // filter nutrition estimates to cut down on space
+        var nutrition = recipe.nutritionEstimates;
+        recipe.nutritionEstimates = [];
+        for (var i = 0; i < nutrition.length; i++) {
+            if (nutrition[i].value != 0 && (nutrition[i].attribute != "ENERC_KJ" && nutrition[i].attribute != "FAT_KCAL"))
+                recipe.nutritionEstimates.push(nutrition[i]);
+        }
 
         ActionBus.$on('list-action', this.fireAction);
     },

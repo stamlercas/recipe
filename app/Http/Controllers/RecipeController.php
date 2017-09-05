@@ -282,10 +282,11 @@ class RecipeController extends Controller
         $r->flavors->Sour = $recipe->sour;
         $r->flavors->Sweet = $recipe->sweet;
 
-        $nutrition_estimate = new \stdClass();
-        $nutrition_estimate->unit = new \stdClass();
+        
         $r->nutritionEstimates = array();   // get template and clear array to fill with data from db
         foreach($recipe->nutrition_estimates()->get() as $estimate) {
+            $nutrition_estimate = new \stdClass();
+            $nutrition_estimate->unit = new \stdClass();
             $nutrition_estimate->attribute = $estimate->attribute;
             $nutrition_estimate->description = $estimate->description;
             $nutrition_estimate->value = $estimate->value;

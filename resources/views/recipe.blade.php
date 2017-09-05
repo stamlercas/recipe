@@ -23,25 +23,44 @@
 			</div>
 		</div>
 	</div>
-	<h2>Ingredients</h2>
+	<h2>Ingredients <small>@{{ recipe.yield }}</small></h2>
 	<div class="row" style="margin-bottom:10px;">
 		<div class="col-sm-4" style="padding:5px;" v-for="ingredient in recipe.ingredientLines">@{{ ingredient }}</div>
 	</div>
-	<div v-if="recipe.ingredients.length > 0">
-		<h4>You still need:
-			<span class="pull-right" data-target="#ingredient-list" data-toggle="collapse">
-				<i class="fa fa-caret-square-o-down" aria-hidden="true"></i>
-			</span>
-		</h4>
-		<hr />
-		<div class="row" id="ingredient-list">
-			<div class="col-md-4">
-				<ul class="list-unstyled" v-for="ingredient in recipe.ingredients">
-					<ingredient-list-item :ingredient="ingredient" :users_ingredients="users_ingredients" :show-when-have="false"></ingredient-list-item>
-				</ul>
+
+	<div class="row">
+		<div class="col-sm-6" v-if="recipe.ingredients.length > 0">
+			<h4>You still need:
+				<span class="pull-right" data-target="#ingredient-list" data-toggle="collapse">
+					<i class="fa fa-caret-square-o-down" aria-hidden="true"></i>
+				</span>
+			</h4>
+			<hr />
+			<div class="row" id="ingredient-list">
+				<div class="col-md-4">
+					<ul class="list-unstyled" v-for="ingredient in recipe.ingredients">
+						<ingredient-list-item :ingredient="ingredient" :users_ingredients="users_ingredients" :show-when-have="false"></ingredient-list-item>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="col-sm-6">
+			<h4>Nutrition Facts
+				<span class="pull-right" data-target="#nutrition-list" data-toggle="collapse">
+					<i class="fa fa-caret-square-o-down" aria-hidden="true"></i>
+				</span>
+			</h4>
+			<hr />
+			<div class="row" id="nutrition-list">
+				<nutrition-table 
+			  		:data="recipe.nutritionEstimates" 
+			  		:columns="nutrientColumns">
+	  			</nutrition-table>
 			</div>
 		</div>
 	</div>
+
+
 	<div class="row">
 		<div class="col-md-3">
 			<a role="button" class="btn btn-primary btn-block" :href="recipe.source.sourceRecipeUrl" target="_blank">

@@ -10,7 +10,7 @@
             </thead>
             <tbody>
                 <tr v-for="(row, index) in sortedTable" v-if="inbound(index)">
-                    <td v-for="column in columns">{{ row[column.name] }}</td>
+                    <td v-for="column in columns">{{ getValue(row, column.name) }}</td>
                     <td v-if="actions != null">
                     	<i class="action-icon fa fa-lg" style="padding-right:5px;" v-for="action in actions" :class="action.icon" @click="fireAction({action: action.name, data: row})"></i>
                     </td>
@@ -86,13 +86,17 @@ export default {
 			fireAction: function(action) {
 				ActionBus.$emit("table-action", action);
 			},
-			getValue: function(row, index) {
-				/*
-				console.log(key);
-				for (var i = 0; i < this.columns.length; i++)
-					if (this.columns[i].name == key)
-						return row[key];
-						*/
+			getValue: function(row, name) {
+				var array = name.split(".")
+
+				var value = '';
+				value = row[array[0]];
+				if (array.length > 1) {
+					for (var i = 1; i < array.length; i++) {
+						value = value[array[i]];
+					}
+				}
+				return value;
 			},
 			paginateCallBack: function(page) {
 				if (this.paginate)
