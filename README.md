@@ -33,4 +33,4 @@ from the project directory.
 - [ ] 8. Calendar/Meal Planning
 - [ ] 9. Activity/Overview Screen (swap settings for that)
 - [ ] 10. Redirect to HTTPS
-- [ ] 11. Modify diets to only select one at a time
+- [x] 11. Modify diets to only select one at a time
