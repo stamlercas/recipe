@@ -66,13 +66,11 @@ class SettingsController extends Controller
             }
         }
         */
-        // updating allergies
+        // updating diet
         $diets = Diet::get();
         foreach ($diets as $diet) {
-            if ($request[$diet->id] && !$user->diets()->find($diet->id)) {
+            if ($request['diet'] == $diet->id) {
                 $diet->users()->attach($user->id);
-            } else if ($request[$diet->id] && $user->diets()->find($diet->id)) {
-                ;
             } else {
                 $diet->users()->detach($user->id);
             }

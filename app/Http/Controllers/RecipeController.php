@@ -65,7 +65,7 @@ class RecipeController extends Controller
         $url .= $this->append($request, Allergy::get(), 'allowedAllergy[]');
         $url .= $this->append($request, Course::get(), 'allowedCourse[]');
         $url .= $this->append($request, Cuisine::get(), 'allowedCuisine[]');
-        $url .= $this->append($request, Diet::get(), 'allowedDiet[]');
+        $url .= "&allowedDiet[]=" . urlencode(Diet::find($request['diet'])->searchValue);
         $url .= $this->append($request, Holiday::get(), 'allowedHoliday[]');
 
         //return response()->json(['data' => $url]);

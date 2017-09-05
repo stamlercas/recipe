@@ -44,7 +44,7 @@
 		  <div class="form-group">
 		    <label for="allergies" class="col-sm-1 control-label">Diets</label>
 		    <div class="col-sm-10 form-inline">
-		    	<diet-checkbox class="search-checkbox" v-for="diet in diets" :item="diet.longDescription" :name="diet.id" :checked="hasDiet(diet)"></diet-checkbox>
+		    	<diet-radio class="search-checkbox" v-for="diet in diets" :item="diet.longDescription" :name="'diet'" :value="diet.id" :checked="hasDiet(diet)"></diet-radio>
 		    </div>
 		  </div>
 		  <div class="form-group">

@@ -35,7 +35,7 @@
     						</span>
 						</h3>
 		        		<div class="form-inline navbar-collapse collapse" id="diet">
-						    <diet-checkbox class="search-checkbox" v-for="diet in diets" :item="diet.longDescription" :name="diet.id" :checked="hasDiet(diet)"></diet-checkbox>
+						    <diet-radio class="search-checkbox" v-for="diet in diets" :item="diet.longDescription" :name="'diet'" :value="diet.id" :checked="hasDiet(diet)"></diet-radoi>
 					  	</div>
 				  	</div>
 				  	<div class="form-group">

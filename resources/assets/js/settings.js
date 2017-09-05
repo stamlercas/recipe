@@ -1,7 +1,7 @@
 require ('./app');
 
 Vue.component('allergy-checkbox', require('./components/Checkbox.vue'));
-Vue.component('diet-checkbox', require('./components/Checkbox.vue'));
+Vue.component('diet-radio', require('./components/RadioButton.vue'));
 
 const settings = new Vue({
     el: '#settings',
