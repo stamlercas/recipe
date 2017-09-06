@@ -1,5 +1,6 @@
 <template>
 	<div style="padding:10px" class="form-inline">
+		<input type="hidden" :name="'nutrients[' + index + '][units]'" :value="nutrient_attribute.units" />
 		<input type="hidden" :name="'nutrients[' + index + '][description]'" :value="nutrient_attribute.description" />
 		<input type="hidden" :name="'nutrients[' + index + '][id]'" :value="nutrient_attribute.id" />
 		<div class="form-group">
@@ -7,12 +8,13 @@
 		</div>
 		<div class="form-group">
 			<span>Min</span>
-			<input type="number" :name="'nutrients[' + index + '][min]'" :value="nutrient_attribute.min" />
+			<input type="number" step="any" :name="'nutrients[' + index + '][min]'" :value="nutrient_attribute.min" />
 		</div>
 		<div class="form-group">
 			<span>Max</span>
-			<input type="number" :name="'nutrients[' + index + '][max]'" :value="nutrient_attribute.max" />
+			<input type="number" step="any" :name="'nutrients[' + index + '][max]'" :value="nutrient_attribute.max" />
 		</div>
+		<div>{{nutrient_attribute.untis}}</div>
 	</div>
 </template>
 

@@ -7,7 +7,7 @@
 @section('content')
 	<div class="vertical-center" style="width:100%;">
 		
-		<div class="row">
+		<div class="row" style="color:#eee;">
 			<div class="col-sm-offset-3 col-sm-6">
 				<div class="row">
 					<h1 class="text-center">Welcome to {{ config('app.name') }}!</h1>

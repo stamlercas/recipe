@@ -34,4 +34,8 @@ class RecipeSearch extends Model
     {
         return $this->belongsToMany('Recipr\Holiday', 'recipe_searches_holidays');
     }
+
+    public function nutrition_attributes() {
+        return $this->belongsToMany('Recipr\NutritionAttribute', 'recipe_searches_nutrition_attributes');
+    }
 }

@@ -25,7 +25,7 @@ const search = new Vue({
         nutrients: [],
         nutrient_inputs: [],
         selectedNutrient: null,
-        old: []
+        old: null
     },
     created: function() {
         this.allergies = allergies;
@@ -40,10 +40,11 @@ const search = new Vue({
         this.old = old;
 
         console.log(nutrient_inputs);
+        console.log(this.old);
     },
     methods: {
         hasAllergy: function(allergy) {
-            if (this.old == null)
+            if (this.old.length != 0)
                 return this.old[allergy.id];       //check to see if search was made before, input those values
 
             for (var i = 0; i < this.users_allergies.length; i++) {
@@ -53,8 +54,8 @@ const search = new Vue({
             return false;
         },
         hasDiet: function(diet) {
-            if (this.old != null)
-                return this.old[diet.id];
+            if (this.old.length != 0)
+                return this.old['diet'] == diet.id;
 
             for (var i = 0; i < this.users_diets.length; i++) {
                 if (diet.id == this.users_diets[i].id)

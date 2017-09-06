@@ -19,12 +19,13 @@
         
         <title>@yield('title')</title>
     </head>
-    <body>
             @if ( Illuminate\Support\Facades\Route::getFacadeRoot()->current()->uri() == '/' )
+                <body class="landing-page-bg">
                 <div class="container">
                     @yield('content')
                 </div>
             @else
+                <body>
                 <div class="container-fluid" style="overflow-x:hidden;">
                     <div class="row">
                         <div class="col-sm-3 col-lg-2">

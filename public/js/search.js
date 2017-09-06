@@ -43681,7 +43681,7 @@ var search = new Vue({
         nutrients: [],
         nutrient_inputs: [],
         selectedNutrient: null,
-        old: []
+        old: null
     },
     created: function created() {
         this.allergies = allergies;
@@ -43696,10 +43696,11 @@ var search = new Vue({
         this.old = old;
 
         console.log(nutrient_inputs);
+        console.log(this.old);
     },
     methods: {
         hasAllergy: function hasAllergy(allergy) {
-            if (this.old == null) return this.old[allergy.id]; //check to see if search was made before, input those values
+            if (this.old.length != 0) return this.old[allergy.id]; //check to see if search was made before, input those values
 
             for (var i = 0; i < this.users_allergies.length; i++) {
                 if (allergy.id == this.users_allergies[i].id) return true;
@@ -43707,7 +43708,7 @@ var search = new Vue({
             return false;
         },
         hasDiet: function hasDiet(diet) {
-            if (this.old != null) return this.old[diet.id];
+            if (this.old.length != 0) return this.old['diet'] == diet.id;
 
             for (var i = 0; i < this.users_diets.length; i++) {
                 if (diet.id == this.users_diets[i].id) return true;
@@ -43731,6 +43732,8 @@ var search = new Vue({
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
 //
 //
 //
@@ -43807,6 +43810,14 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_c('input', {
     attrs: {
       "type": "hidden",
+      "name": 'nutrients[' + _vm.index + '][units]'
+    },
+    domProps: {
+      "value": _vm.nutrient_attribute.units
+    }
+  }), _vm._v(" "), _c('input', {
+    attrs: {
+      "type": "hidden",
       "name": 'nutrients[' + _vm.index + '][description]'
     },
     domProps: {
@@ -43827,6 +43838,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_c('span', [_vm._v("Min")]), _vm._v(" "), _c('input', {
     attrs: {
       "type": "number",
+      "step": "any",
       "name": 'nutrients[' + _vm.index + '][min]'
     },
     domProps: {
@@ -43837,12 +43849,13 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_c('span', [_vm._v("Max")]), _vm._v(" "), _c('input', {
     attrs: {
       "type": "number",
+      "step": "any",
       "name": 'nutrients[' + _vm.index + '][max]'
     },
     domProps: {
       "value": _vm.nutrient_attribute.max
     }
-  })])])
+  })]), _vm._v(" "), _c('div', [_vm._v(_vm._s(_vm.nutrient_attribute.untis))])])
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {

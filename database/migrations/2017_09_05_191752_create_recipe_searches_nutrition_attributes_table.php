@@ -17,8 +17,8 @@ class CreateRecipeSearchesNutritionAttributesTable extends Migration
             $table->increments('id');
             $table->integer('recipe_search_id');
             $table->integer('nutrition_attribute_id');
-            $table->string('type');
-            $table->string('value');
+            $table->integer('min')->nullable();
+            $table->integer('max')->nullable();
         });
     }
 
