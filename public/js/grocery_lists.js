@@ -43509,7 +43509,7 @@ Vue.component('paginate', __WEBPACK_IMPORTED_MODULE_1_vuejs_paginate___default.a
 			return data;
 		},
 		pages: function pages() {
-			return this.sortedTable.length / this.pageLength;
+			return Math.ceil(this.sortedTable.length / this.pageLength);
 		}
 	},
 	methods: {

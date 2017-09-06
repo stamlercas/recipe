@@ -72,7 +72,7 @@ export default {
 			  return data;
 			},
 			pages: function() {
-				return this.sortedTable.length / this.pageLength;
+				return Math.ceil(this.sortedTable.length / this.pageLength);
 			}
 		},
 		methods: {
