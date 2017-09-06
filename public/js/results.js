@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 89);
+/******/ 	return __webpack_require__(__webpack_require__.s = 92);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -43688,7 +43688,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__mixins_ingredients_js__ = __webpack_require__(38);
 __webpack_require__(10);
 
-Vue.component('progress-bar', __webpack_require__(78));
+Vue.component('progress-bar', __webpack_require__(80));
 Vue.component('ingredient-list-item', __webpack_require__(43));
 Vue.component('save-icon', __webpack_require__(44));
 
@@ -43769,7 +43769,8 @@ var results = new Vue({
 /* 73 */,
 /* 74 */,
 /* 75 */,
-/* 76 */
+/* 76 */,
+/* 77 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -43799,15 +43800,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 77 */,
-/* 78 */
+/* 78 */,
+/* 79 */,
+/* 80 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var Component = __webpack_require__(2)(
   /* script */
-  __webpack_require__(76),
+  __webpack_require__(77),
   /* template */
-  __webpack_require__(81),
+  __webpack_require__(83),
   /* scopeId */
   null,
   /* cssModules */
@@ -43834,9 +43836,9 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 79 */,
-/* 80 */,
-/* 81 */
+/* 81 */,
+/* 82 */,
+/* 83 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -43866,14 +43868,15 @@ if (false) {
 }
 
 /***/ }),
-/* 82 */,
-/* 83 */,
 /* 84 */,
 /* 85 */,
 /* 86 */,
 /* 87 */,
 /* 88 */,
-/* 89 */
+/* 89 */,
+/* 90 */,
+/* 91 */,
+/* 92 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__(71);

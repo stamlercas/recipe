@@ -7,6 +7,15 @@
 @section('content')
     <div id="search">
         <h1>Search</h1>
+        @if ($errors->any())
+        	<div clas="alert alert-danger">
+        		<ul class="list-unstyled">
+        			@foreach($errors->all() as $error)
+        				<li>{{ $error }}</li>
+    				@endforeach
+        		</ul>
+        	</div>
+    	@endif
         <form method="post" action="{{ route('search.results') }}">
         	{{ csrf_field() }}
 	        <div class="row">
@@ -14,7 +23,7 @@
 			        <div class="row">
 						<div class="col-md-10 col-md-offset-1">
 							<div class="form-group">
-							    <input type="keywords" name="query" class="form-control" id="keywords" placeholder="Keywords">
+							    <input type="keywords" name="query" class="form-control" id="keywords" placeholder="Keywords" value="{{ old('query') }}">
 						  	</div>
 						</div>
 					</div>
@@ -45,7 +54,7 @@
     						</span>
 					  	</h3>
 		        		<div class="form-inline navbar-collapse collapse" id="cuisine">
-						    <cuisine-checkbox class="search-checkbox" v-for="cuisine in cuisines" :item="cuisine.name" :name="cuisine.id"></cuisine-checkbox>
+						    <cuisine-checkbox class="search-checkbox" v-for="cuisine in cuisines" :item="cuisine.name" :name="cuisine.id" :checked="old[cuisine.id]"></cuisine-checkbox>
 					  	</div>
 				  	</div>
 				  	<div class="form-group">
@@ -55,7 +64,7 @@
     						</span>
 					  	</h3>
 		        		<div class="form-inline navbar-collapse collapse" id="course">
-						    <course-checkbox class="search-checkbox" v-for="course in courses" :item="course.name" :name="course.id"></course-checkbox>
+						    <course-checkbox class="search-checkbox" v-for="course in courses" :item="course.name" :name="course.id" :checked="old[course.id]"></course-checkbox>
 					  	</div>
 				  	</div>
 				  	<div class="form-group">
@@ -65,8 +74,34 @@
     						</span>
 					  	</h3>
 		        		<div class="form-inline navbar-collapse collapse" id="holiday">
-						    <holiday-checkbox class="search-checkbox" v-for="holiday in holidays" :item="holiday.name" :name="holiday.id"></holiday-checkbox>
+						    <holiday-checkbox class="search-checkbox" v-for="holiday in holidays" :item="holiday.name" :name="holiday.id" :checked="old[holiday.id]"></holiday-checkbox>
 					  	</div>
+				  	</div>
+				  	<div class="form-group">
+				  		<h3>Nutrition
+				  			<span class="pull-right visible-xs" data-target="#nutrition" data-toggle="collapse">
+        						<i class="fa fa-caret-square-o-down" aria-hidden="true"></i>
+    						</span>
+						</h3>
+						<div class="form-inline navbar-collapse collapse" id="nutrition">
+							<div v-for="(item, index) in nutrient_inputs">
+								<span class="nutrient-close-btn" @click="removeNutrient(index)"><i class="fa fa-2x fa-times"></i></span>
+								<nutrient-input :nutrient_attribute="item" :index="index"></nutrient-input>
+								<div style="clear:both;"></div>
+							</div>
+							<div class="row" style="margin-top:15px;">
+								<div class="col-md-8">
+									<div class="input-group">
+										<select class="form-control" v-model="selectedNutrient">
+											<option v-for="n in nutrients" :value="n" :disabled="nutrient_inputs.indexOf(n) != -1">@{{ n.description }}</option>
+										</select>
+										<span class="input-group-btn">
+											<a class="btn btn-success" role="button" @click="addNutrient(selectedNutrient)">Add Nutrient</a>
+										</span>
+									</div>
+								</div>
+							</div>
+						</div>
 				  	</div>
 			  	</div>
 			  	<div class="row">
@@ -86,6 +121,9 @@
     	var cuisines = {!! json_encode($cuisines) !!};
     	var courses = {!! json_encode($courses) !!};
     	var holidays = {!! json_encode($holidays) !!};
+    	var nutrients = {!! json_encode($nutrients) !!};
+    	var nutrient_inputs = {!! json_encode(old('nutrients')) !!};
+    	var old = {!! json_encode(old()) !!};
     </script>
     <script src="{{ asset('js/search.js') }}"></script>
 @endsection

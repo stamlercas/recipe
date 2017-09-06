@@ -89,6 +89,15 @@ nav ul li a {
     color:#333;
 }
 
+.nutrient-close-btn { 
+  float: left;
+  border: 1px solid;
+  border-radius: 4px;
+  padding: 0 3px 0 3px;
+  margin-right: 5px;
+  cursor: pointer;
+}
+
 .save-icon {
   color: $brand-primary;
   cursor: pointer;

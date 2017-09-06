@@ -23,7 +23,7 @@
 			</div>
 		</div>
 	</div>
-	<h2>Ingredients <small>@{{ recipe.yield }}</small></h2>
+	<h2>Ingredients <small v-if="recipe.yield != null">Yield: @{{ recipe.yield }}</small></h2>
 	<div class="row" style="margin-bottom:10px;">
 		<div class="col-sm-4" style="padding:5px;" v-for="ingredient in recipe.ingredientLines">@{{ ingredient }}</div>
 	</div>

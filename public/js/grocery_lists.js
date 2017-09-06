@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 85);
+/******/ 	return __webpack_require__(__webpack_require__.s = 88);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -43860,7 +43860,10 @@ var grocery_lists_app = new Vue({
 /* 82 */,
 /* 83 */,
 /* 84 */,
-/* 85 */
+/* 85 */,
+/* 86 */,
+/* 87 */,
+/* 88 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__(67);

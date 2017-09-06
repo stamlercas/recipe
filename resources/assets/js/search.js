@@ -5,6 +5,7 @@ Vue.component('diet-radio', require('./components/RadioButton.vue'));
 Vue.component('cuisine-checkbox', require('./components/Checkbox.vue'));
 Vue.component('course-checkbox', require('./components/Checkbox.vue'));
 Vue.component('holiday-checkbox', require('./components/Checkbox.vue'));
+Vue.component('nutrient-input', require('./components/NutrientInput.vue'));
 
 const search = new Vue({
     el: '#search',
@@ -20,7 +21,11 @@ const search = new Vue({
         holidays: [
         ],
         users_allergies: [],
-        users_diets: []
+        users_diets: [],
+        nutrients: [],
+        nutrient_inputs: [],
+        selectedNutrient: null,
+        old: []
     },
     created: function() {
         this.allergies = allergies;
@@ -30,9 +35,17 @@ const search = new Vue({
         this.cuisines = cuisines;
         this.courses = courses;
         this.holidays = holidays;
+        this.nutrients = nutrients;
+        this.nutrient_inputs = (nutrient_inputs) == null ? [] : nutrient_inputs;
+        this.old = old;
+
+        console.log(nutrient_inputs);
     },
     methods: {
         hasAllergy: function(allergy) {
+            if (this.old == null)
+                return this.old[allergy.id];       //check to see if search was made before, input those values
+
             for (var i = 0; i < this.users_allergies.length; i++) {
                 if (allergy.id == this.users_allergies[i].id)
                     return true;
@@ -40,11 +53,21 @@ const search = new Vue({
             return false;
         },
         hasDiet: function(diet) {
+            if (this.old != null)
+                return this.old[diet.id];
+
             for (var i = 0; i < this.users_diets.length; i++) {
                 if (diet.id == this.users_diets[i].id)
                     return true;
             }
             return false;
+        },
+        addNutrient: function(nutrient) {
+            if (nutrient != null)
+                this.nutrient_inputs.push(nutrient);
+        },
+        removeNutrient: function(index) {
+            this.nutrient_inputs.splice(index, 1);
         }
     }
 });

@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 92);
+/******/ 	return __webpack_require__(__webpack_require__.s = 95);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -43713,7 +43713,10 @@ var settings = new Vue({
 /* 89 */,
 /* 90 */,
 /* 91 */,
-/* 92 */
+/* 92 */,
+/* 93 */,
+/* 94 */,
+/* 95 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__(74);

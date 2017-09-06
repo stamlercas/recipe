@@ -12,6 +12,7 @@ use Recipr\RecipeSearch;
 use Recipr\Recipe;
 use Recipr\Ingredient;
 use Recipr\IngredientLine;
+use Recipr\NutritionAttribute;
 use Recipr\NutritionEstimate;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -39,12 +40,20 @@ class RecipeController extends Controller
             'users_diets' => Auth::user()->diets()->get(),
             'cuisines' => Cuisine::get(),
             'courses' => Course::get(),
-            'holidays' => Holiday::get()
+            'holidays' => Holiday::get(),
+            'nutrients' => NutritionAttribute::get()
         ]);
     }
 
     public function search(Request $request)
     {
+        $request->flash();
+        $this->validate($request, [
+            'nutrients.*.id' => 'required'/*,
+            'nutrients.*.min' => 'numeric',     // todo: make validation so it has to be a number, but it is not required
+            'nutrients.*.max' => 'numeric' */
+        ]);
+
         //return response()->json(['data' => $request[str_replace("_", ' ', 'course-Main_Dishes')]]);
         // entering search info into database
         $recipe_search = new RecipeSearch();

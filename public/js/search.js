@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 91);
+/******/ 	return __webpack_require__(__webpack_require__.s = 94);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -43666,6 +43666,7 @@ Vue.component('diet-radio', __webpack_require__(59));
 Vue.component('cuisine-checkbox', __webpack_require__(49));
 Vue.component('course-checkbox', __webpack_require__(49));
 Vue.component('holiday-checkbox', __webpack_require__(49));
+Vue.component('nutrient-input', __webpack_require__(79));
 
 var search = new Vue({
     el: '#search',
@@ -43676,7 +43677,11 @@ var search = new Vue({
         courses: [],
         holidays: [],
         users_allergies: [],
-        users_diets: []
+        users_diets: [],
+        nutrients: [],
+        nutrient_inputs: [],
+        selectedNutrient: null,
+        old: []
     },
     created: function created() {
         this.allergies = allergies;
@@ -43686,19 +43691,34 @@ var search = new Vue({
         this.cuisines = cuisines;
         this.courses = courses;
         this.holidays = holidays;
+        this.nutrients = nutrients;
+        this.nutrient_inputs = nutrient_inputs == null ? [] : nutrient_inputs;
+        this.old = old;
+
+        console.log(nutrient_inputs);
     },
     methods: {
         hasAllergy: function hasAllergy(allergy) {
+            if (this.old == null) return this.old[allergy.id]; //check to see if search was made before, input those values
+
             for (var i = 0; i < this.users_allergies.length; i++) {
                 if (allergy.id == this.users_allergies[i].id) return true;
             }
             return false;
         },
         hasDiet: function hasDiet(diet) {
+            if (this.old != null) return this.old[diet.id];
+
             for (var i = 0; i < this.users_diets.length; i++) {
                 if (diet.id == this.users_diets[i].id) return true;
             }
             return false;
+        },
+        addNutrient: function addNutrient(nutrient) {
+            if (nutrient != null) this.nutrient_inputs.push(nutrient);
+        },
+        removeNutrient: function removeNutrient(index) {
+            this.nutrient_inputs.splice(index, 1);
         }
     }
 });
@@ -43706,22 +43726,143 @@ var search = new Vue({
 /***/ }),
 /* 74 */,
 /* 75 */,
-/* 76 */,
+/* 76 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+   props: ['nutrient_attribute', 'index']
+});
+
+/***/ }),
 /* 77 */,
 /* 78 */,
-/* 79 */,
+/* 79 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var Component = __webpack_require__(2)(
+  /* script */
+  __webpack_require__(76),
+  /* template */
+  __webpack_require__(84),
+  /* scopeId */
+  null,
+  /* cssModules */
+  null
+)
+Component.options.__file = "C:\\Users\\Chris\\recipe\\resources\\assets\\js\\components\\NutrientInput.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] NutrientInput.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-ebe5589e", Component.options)
+  } else {
+    hotAPI.reload("data-v-ebe5589e", Component.options)
+  }
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
 /* 80 */,
 /* 81 */,
 /* 82 */,
 /* 83 */,
-/* 84 */,
+/* 84 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "form-inline",
+    staticStyle: {
+      "padding": "10px"
+    }
+  }, [_c('input', {
+    attrs: {
+      "type": "hidden",
+      "name": 'nutrients[' + _vm.index + '][description]'
+    },
+    domProps: {
+      "value": _vm.nutrient_attribute.description
+    }
+  }), _vm._v(" "), _c('input', {
+    attrs: {
+      "type": "hidden",
+      "name": 'nutrients[' + _vm.index + '][id]'
+    },
+    domProps: {
+      "value": _vm.nutrient_attribute.id
+    }
+  }), _vm._v(" "), _c('div', {
+    staticClass: "form-group"
+  }, [_c('label', [_vm._v(_vm._s(_vm.nutrient_attribute.description))])]), _vm._v(" "), _c('div', {
+    staticClass: "form-group"
+  }, [_c('span', [_vm._v("Min")]), _vm._v(" "), _c('input', {
+    attrs: {
+      "type": "number",
+      "name": 'nutrients[' + _vm.index + '][min]'
+    },
+    domProps: {
+      "value": _vm.nutrient_attribute.min
+    }
+  })]), _vm._v(" "), _c('div', {
+    staticClass: "form-group"
+  }, [_c('span', [_vm._v("Max")]), _vm._v(" "), _c('input', {
+    attrs: {
+      "type": "number",
+      "name": 'nutrients[' + _vm.index + '][max]'
+    },
+    domProps: {
+      "value": _vm.nutrient_attribute.max
+    }
+  })])])
+},staticRenderFns: []}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-ebe5589e", module.exports)
+  }
+}
+
+/***/ }),
 /* 85 */,
 /* 86 */,
 /* 87 */,
 /* 88 */,
 /* 89 */,
 /* 90 */,
-/* 91 */
+/* 91 */,
+/* 92 */,
+/* 93 */,
+/* 94 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__(73);

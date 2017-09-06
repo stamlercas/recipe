@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 90);
+/******/ 	return __webpack_require__(__webpack_require__.s = 93);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -43512,7 +43512,7 @@ if (false) {
 
 __webpack_require__(10);
 
-Vue.component('recipe-media-object', __webpack_require__(79));
+Vue.component('recipe-media-object', __webpack_require__(81));
 
 var saved = new Vue({
     el: '#saved',
@@ -43529,7 +43529,8 @@ var saved = new Vue({
 /* 74 */,
 /* 75 */,
 /* 76 */,
-/* 77 */
+/* 77 */,
+/* 78 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -43572,15 +43573,16 @@ Vue.component('save-icon', __webpack_require__(44));
 });
 
 /***/ }),
-/* 78 */,
-/* 79 */
+/* 79 */,
+/* 80 */,
+/* 81 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var Component = __webpack_require__(2)(
   /* script */
-  __webpack_require__(77),
+  __webpack_require__(78),
   /* template */
-  __webpack_require__(80),
+  __webpack_require__(82),
   /* scopeId */
   null,
   /* cssModules */
@@ -43607,7 +43609,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 80 */
+/* 82 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -43649,8 +43651,6 @@ if (false) {
 }
 
 /***/ }),
-/* 81 */,
-/* 82 */,
 /* 83 */,
 /* 84 */,
 /* 85 */,
@@ -43658,7 +43658,10 @@ if (false) {
 /* 87 */,
 /* 88 */,
 /* 89 */,
-/* 90 */
+/* 90 */,
+/* 91 */,
+/* 92 */,
+/* 93 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__(72);
