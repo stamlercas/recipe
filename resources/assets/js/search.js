@@ -31,6 +31,7 @@ const search = new Vue({
         this.allergies = allergies;
         this.users_allergies = users_allergies;
         this.diets = diets;
+        this.diets.push({ id: 'none', longDescription: 'None' });   // for someone who wants to choose no diet
         this.users_diets = users_diets;
         this.cuisines = cuisines;
         this.courses = courses;

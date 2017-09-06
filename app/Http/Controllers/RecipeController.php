@@ -75,22 +75,26 @@ class RecipeController extends Controller
         $url .= $this->append($request, Allergy::get(), 'allowedAllergy[]');
         $url .= $this->append($request, Course::get(), 'allowedCourse[]');
         $url .= $this->append($request, Cuisine::get(), 'allowedCuisine[]');
-        $url .= "&allowedDiet[]=" . urlencode(Diet::find($request['diet'])->searchValue);
+        if ($request['diet'] != 'none') {
+            $url .= "&allowedDiet[]=" . urlencode(Diet::find($request['diet'])->searchValue);
+        }
         $url .= $this->append($request, Holiday::get(), 'allowedHoliday[]');
 
         // TODO: append nutrition attribute values
-        foreach($request['nutrients'] as $nutrient) {
-            $pivot_data = array();      // for saving pivot data at intersect (ex: min, max)
-            $nutrition_attribute = NutritionAttribute::find($nutrient['id']);
-            if (is_numeric($nutrient['min'])) {   // checking min
-                $url.= "&nutrition." . $nutrition_attribute->value . ".min=" . $nutrient['min'];
-                $pivot_data['min'] = $nutrient['min'];
+        if (isset($request['nutrients'])) {
+            foreach($request['nutrients'] as $nutrient) {
+                $pivot_data = array();      // for saving pivot data at intersect (ex: min, max)
+                $nutrition_attribute = NutritionAttribute::find($nutrient['id']);
+                if (is_numeric($nutrient['min'])) {   // checking min
+                    $url.= "&nutrition." . $nutrition_attribute->value . ".min=" . $nutrient['min'];
+                    $pivot_data['min'] = $nutrient['min'];
+                }
+                if (is_numeric($nutrient['max'])) {   // checking min
+                    $url.= "&nutrition." . $nutrition_attribute->value . ".max=" . $nutrient['max'];
+                    $pivot_data['max'] = $nutrient['max'];
+                }
+                $recipe_search->nutrition_attributes()->save($nutrition_attribute, $pivot_data);
             }
-            if (is_numeric($nutrient['max'])) {   // checking min
-                $url.= "&nutrition." . $nutrition_attribute->value . ".max=" . $nutrient['max'];
-                $pivot_data['max'] = $nutrient['max'];
-            }
-            $recipe_search->nutrition_attributes()->save($nutrition_attribute, $pivot_data);
         }
 
         // return response()->json(['data' => $url]);
