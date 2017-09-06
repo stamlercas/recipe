@@ -34,3 +34,4 @@ from the project directory.
 - [ ] 9. Activity/Overview Screen (swap settings for that)
 - [ ] 10. Redirect to HTTPS
 - [x] 11. Modify diets to only select one at a time
+- [x] 12. Add nutrition attributes to search form
