@@ -29,12 +29,12 @@ class DashboardController extends Controller
     {
         $recipe_ids = DB::select(DB::raw("SELECT recipe_id
             FROM 
-                (SELECT recipe_id, COUNT(recipe_id) AS `num` 
+                (SELECT recipe_id, COUNT(recipe_id) * 3 AS `num` 
                     FROM recipes_made 
                     WHERE created_at >= NOW() - INTERVAL 7 day
                     GROUP BY recipe_id 
                     UNION ALL 
-                    SELECT recipe_id, COUNT(recipe_id) AS `num` 
+                    SELECT recipe_id, COUNT(recipe_id) * 2 AS `num` 
                     FROM recipes_saved 
                     WHERE created_at >= NOW() - INTERVAL 7 day
                     GROUP BY recipe_id
