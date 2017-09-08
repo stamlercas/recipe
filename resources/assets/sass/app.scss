@@ -17,6 +17,10 @@
 // vue modal
 @import "vue-modal";
 
+body {
+  background-color:#f5f5f5;
+}
+
 nav ul li a {
 	text-align:center;
 }
@@ -27,7 +31,7 @@ nav ul li a {
 }
 
 .active-nav {
-  background-color:#fff;
+  background-color:#f5f5f5;
 }
 
 .attributes ul li {
@@ -52,6 +56,18 @@ nav ul li a {
 .disabled-action {
     color: $gray-lighter;
     cursor: not-allowed;
+}
+
+.frame {
+  box-shadow: 0 1px 3px 0 rgba(0,0,0,.2), 0 1px 1px 0 rgba(0,0,0,.14), 0 2px 1px -1px rgba(0,0,0,.12);
+  background-color:#fff;
+  padding:10px;
+  margin:15px 15px 15px 0px;
+  border-radius:5px;
+}
+
+.frame .thumbnail {
+  border-color: transparent;
 }
 
 .home-bg {
@@ -149,6 +165,13 @@ nav ul li a {
     border-bottom: 0px !important;
     border-radius: 4px 4px 0 0 !important;
     margin-bottom: 0 !important;
+  }
+}
+
+/* frames have no margin on mobile */
+@media (max-width: 768px) {
+  .frame {
+    margin:0px 0px 15px 0px;
   }
 }
 

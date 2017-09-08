@@ -36,12 +36,12 @@
                 </div>
               </div>
               <div class="navbar-header hidden-xs">
-                <a class="navbar-brand text-center" href="./">Recipr</a>
+                <a class="navbar-brand text-center" href="./">Rec<i class="fa fa-spoon"></i>pr</a>
               </div>
               <div class="collapse navbar-collapse" id="collapse">
                 <ul class="nav navbar-nav" id="sidebar-nav">
                 <li>
-                    <a href="{{ route('home') }}">
+                    <a href="{{ route('dashboard') }}">
                       <i class="fa fa-home fa-5x"></i>
                     </a>
                   </li>
@@ -107,12 +107,3 @@
               </div>
             </div>
           </nav>
-          <script src="{{ asset('js/app.js') }}"></script>
-          <script>
-            $(document).ready( function() {
-              for(var i = 0; i < $("#sidebar-nav li").length; i++) {
-                if ( "{{ Request::fullUrl() }}" === $("#sidebar-nav li:eq(" + i + ") a").attr("href") )
-                  $("#sidebar-nav li:eq(" + i + ")").addClass("active-nav");
-              }
-            });
-          </script>

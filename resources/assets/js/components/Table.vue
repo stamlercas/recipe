@@ -36,14 +36,16 @@ export default {
 			'actions',
 			'showHeading',
 			'paginate',	// if true show pages
+			'defaultSortKey'
 		],
 		data () {
 			var sortOrders = {}
 			this.columns.forEach(function (key) {
 			  sortOrders[key.name] = 1
 			});
+			console.log(this.defaultSortKey);
 			return {
-			  sortKey: '',
+			  sortKey: '', //(this.defaultSortKey == null || this.defaultSortKey == undefined) ? '' : defaultSortKey,
 			  sortOrders: sortOrders,
 			  pageLength: 10,
 			  page: 1

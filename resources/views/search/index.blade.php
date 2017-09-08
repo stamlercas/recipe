@@ -6,7 +6,7 @@
 
 @section('content')
     <div id="search">
-        <h1>Search</h1>
+        <h1> </h1>
         @if ($errors->any())
         	<div clas="alert alert-danger">
         		<ul class="list-unstyled">
@@ -16,7 +16,7 @@
         		</ul>
         	</div>
     	@endif
-        <form method="post" action="{{ route('search.results') }}">
+        <form class="frame" style="padding-top:10px;" method="post" action="{{ route('search.results') }}">
         	{{ csrf_field() }}
 	        <div class="row">
 	        	<div class="col-md-8 col-md-offset-2">
@@ -104,7 +104,7 @@
 						</div>
 				  	</div>
 			  	</div>
-			  	<div class="row">
+			  	<div class="container-fluid row">
 			  		<div class="col-md-4 col-md-offset-6">
 			  			<button class="btn btn-primary btn-block" type="submit">Search</button>
 			  		</div>

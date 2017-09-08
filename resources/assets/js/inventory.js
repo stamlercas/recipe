@@ -28,7 +28,7 @@ const homepage = new Vue({
     			alias: 'Name'
 			},
 			{
-				name: 'created_at',
+				name: 'pivot.created_at',
 				alias: 'Date Added'
 			}
     	],

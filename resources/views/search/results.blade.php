@@ -8,10 +8,10 @@ Results
 	<div id="results">
 		<h1>
 			Search Results
-			<button class="btn-default btn pull-right" type="submit" @click="results = sort(results, 'percentageOfIngredients')">Update</button>
+			<button class="btn-primary btn pull-right" type="submit" @click="results = sort(results, 'percentageOfIngredients')">Update</button>
 		</h1>
 		<div class="list-group">
-		  <div v-for="result in results" class="list-group-item">
+		  <div class="frame" v-for="result in results" class="list-group-item">
 		    <div class="list-group-item-heading">
 		    	<div class="container-fluid">
 		    		<div class="row">

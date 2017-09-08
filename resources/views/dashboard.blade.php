@@ -30,6 +30,7 @@
             <div id="menu1" class="tab-pane">
                 <div class="row">
                   <div class="col-sm-6 col-md-4" v-for="recipe in trending">
+                    <div class="frame">
                     <div class="thumbnail">
                       <a :href="'{{ route('recipe.get', ['inventory_id' => ''])  }}/' + recipe.id">
                         <img :src="recipe.images.hostedLargeUrl" :alt="recipe.name + ' image'" />
@@ -41,11 +42,12 @@
                           </a>
                         <save-icon :recipe_id="recipe.id" :saved="recipe.saved"></save-icon></h3>
                         <p><a :href="'{{ route('recipe.get', ['inventory_id' => ''])  }}/' + recipe.id" 
-                            class="btn btn-primary" role="button">View</a>
+                            class="btn btn-primary" role="button">View</a></p>
                       </div>
                     </div>
                   </div>
                 </div>
+              </div>
             </div>
             <div id="menu2" class="tab-pane">
               <h3>Menu 2</h3>

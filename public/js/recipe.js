@@ -43593,14 +43593,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 Vue.component('paginate', __WEBPACK_IMPORTED_MODULE_1_vuejs_paginate___default.a);
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-	props: ['data', 'columns', 'filterKey', 'actions', 'showHeading', 'paginate'],
+	props: ['data', 'columns', 'filterKey', 'actions', 'showHeading', 'paginate', // if true show pages
+	'defaultSortKey'],
 	data: function data() {
 		var sortOrders = {};
 		this.columns.forEach(function (key) {
 			sortOrders[key.name] = 1;
 		});
+		console.log(this.defaultSortKey);
 		return {
-			sortKey: '',
+			sortKey: '', //(this.defaultSortKey == null || this.defaultSortKey == undefined) ? '' : defaultSortKey,
 			sortOrders: sortOrders,
 			pageLength: 10,
 			page: 1
@@ -43927,7 +43929,7 @@ var recipe_app = new Vue({
         var nutrition = recipe.nutritionEstimates;
         recipe.nutritionEstimates = [];
         for (var i = 0; i < nutrition.length; i++) {
-            if (nutrition[i].value != 0 && nutrition[i].attribute != "ENERC_KJ" && nutrition[i].attribute != "FAT_KCAL") recipe.nutritionEstimates.push(nutrition[i]);
+            if (nutrition[i].value != 0 && nutrition[i].attribute != "ENERC_KJ" && nutrition[i].description != "16:0" && nutrition[i].description != "16:1 undifferentiated" && nutrition[i].description != "18:0" && nutrition[i].description != "18:1 undifferentiated" && nutrition[i].description != "18:2 undifferentiated" && nutrition[i].description != "18:3 undifferentiated" && nutrition[i].description != "Water" && nutrition[i].description != "Phytosterols" && nutrition[i].description != "Folate, DFE" && nutrition[i].description != "Phosphorus, P" && nutrition[i].description != "Magnesium, Mg" && nutrition[i].description != "Choline, total" && nutrition[i].description != "Ash" && nutrition[i].description != "Ash" && nutrition[i].attribute != "FAT_KCAL") recipe.nutritionEstimates.push(nutrition[i]);
         }
 
         __WEBPACK_IMPORTED_MODULE_0__bus_action_bus_js__["a" /* ActionBus */].$on('list-action', this.fireAction);

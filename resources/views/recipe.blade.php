@@ -7,7 +7,7 @@
 @section('content')
 
 <div id="recipe">
-	<div class="row">
+	<div class="frame row">
 		<div class="col-md-4" style=";margin-top:22px;">
 			<img :src="recipe.images.hostedLargeUrl" class="img img-responsive" :alt="recipe.name + ' image'" />
 		</div>
@@ -23,13 +23,16 @@
 			</div>
 		</div>
 	</div>
+	<div class="frame">
 	<h2>Ingredients <small v-if="recipe.yield != null">Yield: @{{ recipe.yield }}</small></h2>
-	<div class="row" style="margin-bottom:10px;">
-		<div class="col-sm-4" style="padding:5px;" v-for="ingredient in recipe.ingredientLines">@{{ ingredient }}</div>
+		<div class="container-fluid row" style="margin-bottom:10px;">
+			<div class="col-sm-4" style="padding:5px;" v-for="ingredient in recipe.ingredientLines">@{{ ingredient }}</div>
+		</div>
 	</div>
 
 	<div class="row">
 		<div class="col-sm-6" v-if="recipe.ingredients.length > 0">
+			<div class="frame">
 			<h4>You still need:
 				<span class="pull-right" data-target="#ingredient-list" data-toggle="collapse">
 					<i class="fa fa-caret-square-o-down" aria-hidden="true"></i>
@@ -43,25 +46,29 @@
 					</ul>
 				</div>
 			</div>
+			</div>
 		</div>
 		<div class="col-sm-6">
-			<h4>Nutrition Facts
-				<span class="pull-right" data-target="#nutrition-list" data-toggle="collapse">
-					<i class="fa fa-caret-square-o-down" aria-hidden="true"></i>
-				</span>
-			</h4>
-			<hr />
-			<div class="row" id="nutrition-list">
-				<nutrition-table 
-			  		:data="recipe.nutritionEstimates" 
-			  		:columns="nutrientColumns">
-	  			</nutrition-table>
+			<div class="frame">
+				<h4>Nutrition Facts
+					<span class="pull-right" data-target="#nutrition-list" data-toggle="collapse">
+						<i class="fa fa-caret-square-o-down" aria-hidden="true"></i>
+					</span>
+				</h4>
+				<hr />
+				<div id="nutrition-list">
+					<nutrition-table 
+				  		:data="recipe.nutritionEstimates" 
+				  		:columns="nutrientColumns"
+				  		:default-sort-key="'description'">
+		  			</nutrition-table>
+				</div>
 			</div>
 		</div>
 	</div>
 
 
-	<div class="row">
+	<div class="frame row" style="padding-top:20px;">
 		<div class="col-md-3">
 			<a role="button" class="btn btn-primary btn-block" :href="recipe.source.sourceRecipeUrl" target="_blank">
 				Directions

@@ -8,7 +8,7 @@
     <div id="saved">
         <h1>Saved Recipes</h1>
         <div>
-        	<recipe-media-object v-for="recipe in saved_recipes" :recipe="recipe"></recipe-media-object>
+        	<recipe-media-object class="frame" v-for="recipe in saved_recipes" :recipe="recipe"></recipe-media-object>
         </div>
     </div>
 

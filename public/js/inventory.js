@@ -43508,14 +43508,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 Vue.component('paginate', __WEBPACK_IMPORTED_MODULE_1_vuejs_paginate___default.a);
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-	props: ['data', 'columns', 'filterKey', 'actions', 'showHeading', 'paginate'],
+	props: ['data', 'columns', 'filterKey', 'actions', 'showHeading', 'paginate', // if true show pages
+	'defaultSortKey'],
 	data: function data() {
 		var sortOrders = {};
 		this.columns.forEach(function (key) {
 			sortOrders[key.name] = 1;
 		});
+		console.log(this.defaultSortKey);
 		return {
-			sortKey: '',
+			sortKey: '', //(this.defaultSortKey == null || this.defaultSortKey == undefined) ? '' : defaultSortKey,
 			sortOrders: sortOrders,
 			pageLength: 10,
 			page: 1
@@ -43819,7 +43821,7 @@ var homepage = new Vue({
             name: 'description',
             alias: 'Name'
         }, {
-            name: 'created_at',
+            name: 'pivot.created_at',
             alias: 'Date Added'
         }],
         actions: [

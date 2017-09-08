@@ -36,6 +36,14 @@
                         </div>
                     </div>
                 </div>
+              <script>
+                $(document).ready( function() {
+                  for(var i = 0; i < $("#sidebar-nav li").length; i++) {
+                    if ( "{{ Request::fullUrl() }}" === $("#sidebar-nav li:eq(" + i + ") a").attr("href") )
+                      $("#sidebar-nav li:eq(" + i + ")").addClass("active-nav");
+                  }
+                });
+              </script>
             @endif
         @include('includes.footer')
     </body>

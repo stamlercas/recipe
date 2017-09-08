@@ -26,7 +26,7 @@ Grocery Lists
 				</form>
 			</div>
 		</div>
-		<grocery-list-table 
+		<grocery-list-table class="frame"
 			:data="grocery_lists" 
 			:columns="columns"
 			:actions="actions">

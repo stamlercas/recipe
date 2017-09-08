@@ -37,7 +37,23 @@ const recipe_app = new Vue({
         var nutrition = recipe.nutritionEstimates;
         recipe.nutritionEstimates = [];
         for (var i = 0; i < nutrition.length; i++) {
-            if (nutrition[i].value != 0 && (nutrition[i].attribute != "ENERC_KJ" && nutrition[i].attribute != "FAT_KCAL"))
+            if (nutrition[i].value != 0 && 
+                (nutrition[i].attribute != "ENERC_KJ" && 
+                    nutrition[i].description != "16:0" &&
+                    nutrition[i].description != "16:1 undifferentiated" &&
+                    nutrition[i].description != "18:0" &&
+                    nutrition[i].description != "18:1 undifferentiated" &&
+                    nutrition[i].description != "18:2 undifferentiated" &&
+                    nutrition[i].description != "18:3 undifferentiated" &&
+                    nutrition[i].description != "Water" &&
+                    nutrition[i].description != "Phytosterols" &&
+                    nutrition[i].description != "Folate, DFE" &&
+                    nutrition[i].description != "Phosphorus, P" &&
+                    nutrition[i].description != "Magnesium, Mg" &&
+                    nutrition[i].description != "Choline, total" &&
+                    nutrition[i].description != "Ash" &&
+                    nutrition[i].description != "Ash" &&
+                    nutrition[i].attribute != "FAT_KCAL"))
                 recipe.nutritionEstimates.push(nutrition[i]);
         }
 
