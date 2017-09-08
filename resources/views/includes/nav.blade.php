@@ -1,10 +1,10 @@
           <nav class="navbar navbar-default navbar-fixed-side">
             <div class="container">
-              <div class="navbar-header visible-xs">
+              <div class="navbar-header visible-xs" id="mobile-nav">
                 <!-- mobile bar -->
                 <div class="row mobile-navbar text-center">
                   <div class="col-xs-2 navbar-btn">
-                    <a href="{{ route('home') }}">
+                    <a href="{{ route('dashboard') }}">
                       <i class="fa fa-home fa-lg"></i>
                     </a>
                   </div>
@@ -39,7 +39,7 @@
                 <a class="navbar-brand text-center" href="./">Recipr</a>
               </div>
               <div class="collapse navbar-collapse" id="collapse">
-                <ul class="nav navbar-nav">
+                <ul class="nav navbar-nav" id="sidebar-nav">
                 <li>
                     <a href="{{ route('home') }}">
                       <i class="fa fa-home fa-5x"></i>
@@ -107,3 +107,12 @@
               </div>
             </div>
           </nav>
+          <script src="{{ asset('js/app.js') }}"></script>
+          <script>
+            $(document).ready( function() {
+              for(var i = 0; i < $("#sidebar-nav li").length; i++) {
+                if ( "{{ Request::fullUrl() }}" === $("#sidebar-nav li:eq(" + i + ") a").attr("href") )
+                  $("#sidebar-nav li:eq(" + i + ")").addClass("active-nav");
+              }
+            });
+          </script>

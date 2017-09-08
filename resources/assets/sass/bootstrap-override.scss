@@ -6,6 +6,10 @@
 	border-radius: 0;
 }
 
+.navbar {
+	border: 0;
+}
+
 .navbar-default .navbar-toggle {
   border-color:transparent;
 }
@@ -22,10 +26,6 @@
 .navbar-default .navbar-brand,
 .navbar-default .navbar-nav > li > a {
   color:#333;
-}
-
-.navbar-default .navbar-nav > li > a:hover {
-  color:#FFF;
 }
 
 .navbar-default .navbar-toggle .icon-bar {
