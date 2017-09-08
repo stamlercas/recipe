@@ -130,6 +130,7 @@ class RecipeController extends Controller
 
     public function get($recipe_id) {
         $recipe = $this->getRecipe($recipe_id);
+        Auth::user()->recipe_views()->attach($recipe_id);
         return view('recipe', ['recipe' => $recipe, 
                                 'users_ingredients' => Auth::user()->ingredients()->get(),
                                 'grocery_list' => Auth::user()->grocery_lists()
