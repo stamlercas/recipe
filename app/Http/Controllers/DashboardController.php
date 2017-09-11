@@ -44,7 +44,7 @@ class DashboardController extends Controller
                     WHERE created_at >= NOW() - INTERVAL 7 day
                     GROUP BY recipe_id) AS T 
                 GROUP BY recipe_id 
-                ORDER BY SUM(num)
+                ORDER BY SUM(num) DESC
                 LIMIT 6"));
 
         $trending = array();
