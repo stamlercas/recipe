@@ -11,7 +11,7 @@ Results
 			<button class="btn-primary btn pull-right" type="submit" @click="results = sort(results, 'percentageOfIngredients')">Update</button>
 		</h1>
 		<div class="list-group">
-		  <div class="frame" v-for="result in results" class="list-group-item">
+		  <div class="frame" v-for="(result, index) in results" v-if="inbound(index)" class="list-group-item">
 		    <div class="list-group-item-heading">
 		    	<div class="container-fluid">
 		    		<div class="row">
@@ -61,6 +61,11 @@ Results
 		    -->
 		  </div>
 	  	</div>
+	  	<div class="row">
+	  		<div class="col-sm-offset-3 col-sm-6">
+	  			<paginate v-if="paginate" :page-count="pages" :container-class="'pagination'" :click-handler="paginateCallBack"></paginate>
+  			</div>
+		</div>
   	</div>
 
   	<script>

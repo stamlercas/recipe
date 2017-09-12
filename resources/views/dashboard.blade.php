@@ -7,7 +7,7 @@
 @section('content')
     <ul class="nav nav-pills nav-justified">
         <li class="active"><a data-toggle="pill" href="#home">Home</a></li>
-        <li><a data-toggle="pill" href="#menu1">Trending</a></li>
+        <li><a data-toggle="pill" href="#trending">Trending</a></li>
         <!--
         <li><a data-toggle="pill" href="#menu2">Menu 2</a></li>
         <li><a data-toggle="pill" href="#menu3">Menu 3</a></li>
@@ -27,7 +27,7 @@
                     -->
                 </div>
             </div>
-            <div id="menu1" class="tab-pane">
+            <div id="trending" class="tab-pane">
                 <div class="row">
                   <div class="col-sm-6 col-md-4" v-for="recipe in trending">
                     <div class="frame">

@@ -38,8 +38,9 @@
                 </div>
               <script>
                 $(document).ready( function() {
+                    var url = "{{ Request::fullUrl() }}";
                   for(var i = 0; i < $("#sidebar-nav li").length; i++) {
-                    if ( "{{ Request::fullUrl() }}" === $("#sidebar-nav li:eq(" + i + ") a").attr("href") )
+                    if ( url.indexOf($("#sidebar-nav li:eq(" + i + ") a").attr("href")) != -1 )
                       $("#sidebar-nav li:eq(" + i + ")").addClass("active-nav");
                   }
                 });

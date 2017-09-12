@@ -9,13 +9,18 @@ import { ActionBus } from './bus/action-bus.js';
 import addItem from './mixins/ingredients.js';
 import deleteItem from './mixins/ingredients.js';
 
+import Paginate from 'vuejs-paginate';
+Vue.component('paginate', Paginate);
+
 const results = new Vue({
     el: '#results',
     mixins: [addItem, deleteItem],
     data: {
-    	results: [
-        ],
-        users_ingredients: []
+    	results: [],
+        users_ingredients: [],
+        page: 1,
+        paginate: true,
+        pageLength: 10
     },
     created: function() {
         this.results = search_results.matches;
@@ -72,7 +77,26 @@ const results = new Vue({
                   return (a === b ? 0 : a > b ? 1 : -1) * -1
                 });
             return list;
+        },
+        paginateCallBack: function(page) {
+            if (this.paginate) {
+                this.page = page;
+                $('html,body').scrollTop(0);
+            }
+        },
+        inbound: function(index) {
+            if (!this.paginate)
+                return true;
+            // find bounds of page and check index
+            else if ( index >= (this.page - 1) * this.pageLength 
+                && index <= ((this.page) * this.pageLength) - 1 )
+                return true;
+            return false;
         }
-
+    },
+    computed: {
+        pages: function() {
+            return Math.ceil(this.results.length / this.pageLength);
+        }
     }
 });
