@@ -5,14 +5,16 @@
 @endsection
 
 @section('content')
-    <ul class="nav nav-pills nav-justified">
-        <li class="active"><a data-toggle="pill" href="#home">Home</a></li>
-        <li><a data-toggle="pill" href="#trending">Trending</a></li>
-        <!--
-        <li><a data-toggle="pill" href="#menu2">Menu 2</a></li>
-        <li><a data-toggle="pill" href="#menu3">Menu 3</a></li>
-        -->
-      </ul>
+    <div id="dashboard-nav">
+      <ul class="nav nav-pills nav-justified nav-justified-pills">
+          <li class="active"><a data-toggle="pill" href="#home">Home</a></li>
+          <li><a data-toggle="pill" href="#trending">Trending</a></li>
+          <!--
+          <li><a data-toggle="pill" href="#menu2">Menu 2</a></li>
+          <li><a data-toggle="pill" href="#menu3">Menu 3</a></li>
+          -->
+        </ul>
+      </div>
       <div id="dashboard">
           <div class="tab-content" style="margin-top:10px;">
             <div id="home" class="tab-pane in active">

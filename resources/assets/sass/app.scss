@@ -112,6 +112,19 @@ nav ul li a {
     color:#333;
 }
 
+#dashboard-nav .nav-justified {
+  width:auto;
+}
+
+.nav-justified-pills {
+  margin-left: -15px;
+  margin-right: -15px;
+}
+
+.nav-justified-pills li a {
+  border-radius: 0;
+}
+
 .nutrient-close-btn { 
   float: left;
   border: 1px solid;
