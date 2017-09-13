@@ -45,8 +45,6 @@ class RecipeController extends Controller
         ]);
     }
 
-    public function searchView()
-
     public function search(Request $request)
     {
         //$request->flash();
