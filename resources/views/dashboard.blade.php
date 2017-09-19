@@ -31,7 +31,7 @@
             </div>
             <div id="trending" class="tab-pane">
                 <div class="row">
-                  <div class="col-sm-6 col-md-4" v-for="recipe in trending">
+                  <div class="col-lg-4" v-for="recipe in trending">
                     <div class="frame">
                     <div class="thumbnail">
                       <a :href="'{{ route('recipe.get', ['inventory_id' => ''])  }}/' + recipe.id">

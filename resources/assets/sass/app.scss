@@ -147,6 +147,10 @@ nav ul li a {
   font-weight:bold;
 }
 
+#trending .row .col-lg-4:nth-child(3n+1) {
+  clear:both;
+}
+
 .vertical-center {
   position: absolute;
   top: 50%;
