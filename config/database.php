@@ -1,4 +1,7 @@
+
 <?php
+
+mysql://bce6268a33f170:8e2b7739@us-cdbr-iron-east-05.cleardb.net/heroku_937a171e7befacc?reconnect=true
 
 return [
 
@@ -38,14 +41,13 @@ return [
             'database' => env('DB_DATABASE', database_path('database.sqlite')),
             'prefix' => '',
         ],
-        //mysql://b3fb9e9e060ad0:68dc8269@us-cdbr-iron-east-03.cleardb.net/heroku_c81d409701d73ac?reconnect=true
         'mysql' => [
             'driver' => 'mysql',
-            'host' => env('DB_HOST', 'us-cdbr-iron-east-03.cleardb.net'),
+            'host' => env('DB_HOST', env('CLEAR_DB_HOST'),
             'port' => env('DB_PORT', '3306'),
-            'database' => env('DB_DATABASE', 'heroku_c81d409701d73ac'),
-            'username' => env('DB_USERNAME', 'b3fb9e9e060ad0'),
-            'password' => env('DB_PASSWORD', '68dc8269'),
+            'database' => env('DB_DATABASE', env('CLEAR_DB_DATABASE')),
+            'username' => env('DB_USERNAME', env('CLEAR_DB_USERNAME')),
+            'password' => env('DB_PASSWORD', 'PASSWORD'),
             'unix_socket' => env('DB_SOCKET', ''),
             'charset' => 'utf8mb4',
             'collation' => 'utf8mb4_unicode_ci',
