@@ -43,7 +43,7 @@ return [
         ],
         'mysql' => [
             'driver' => 'mysql',
-            'host' => env('DB_HOST', env('CLEAR_DB_HOST'),
+            'host' => env('DB_HOST', env('CLEAR_DB_HOST')),
             'port' => env('DB_PORT', '3306'),
             'database' => env('DB_DATABASE', env('CLEAR_DB_DATABASE')),
             'username' => env('DB_USERNAME', env('CLEAR_DB_USERNAME')),
