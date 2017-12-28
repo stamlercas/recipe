@@ -6,7 +6,9 @@ export default {
     			_token: session_token
     		};
     		return this.$http.post(inventory_add_url, data).then((response) => {
-    			return response.body.success;
+                if (response.body.success)
+    		      return response.body.ingredient;
+                return false;
     		});
     	},
     	deleteItem: function(ingredient) {

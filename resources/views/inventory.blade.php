@@ -6,7 +6,7 @@
 
 @section('content')
     <div id="inventory">
-        <h1>My Pantry</h1>
+        <h1>{{Auth::user()->username}}'s Pantry</h1>
         <div class="row">
         	<div class="col-md-5 col-md-offset-1">
         		<div class="frame">
@@ -30,11 +30,20 @@
 		  	</div>
 	  		<div class="col-md-5">
 	  			<div class="frame">
-		  			<h3>Pantry</h3>
+		  			<h3>
+						<div class="row">
+						    <div class="col-md-6">
+						        Pantry
+						    </div>
+						    <div class="col-md-6 pull-right">
+						        <div class="input-group"><input type="text" id="item" placeholder="Search" class="form-control" v-model="pantrySearchField"> <span class="input-group-btn"><button type="submit" class="btn btn-success"><div><i class="fa fa-search"></i></div> <!----></button></span></div>
+						    </div>
+						</div>
+					</h3>
 		  			<pantry-table 
 		  				:data="inventory" 
 	  					:columns="columns" 
-	  					:filter-key="searchfield" 
+	  					:filter-key="pantrySearchField" 
 	  					:actions="actions"
 	  					:paginate="true">
 		  			</pantry-table>

@@ -19,6 +19,7 @@ const homepage = new Vue({
     	userID: String,
     	search: '',
     	searchfield: '',
+        pantrySearchField: '',
         searching: false,
         adding: false,
         showEditModal: false,
@@ -75,8 +76,11 @@ const homepage = new Vue({
                             return;
                         }
                 this.addItem(data.data).then( function(value) {
-                    if (value)
-                        this.inventory.unshift(data.data);
+                    console.log(value);
+                    if (value !== false) {
+                        console.log(value);
+                        this.inventory.unshift(value);
+                    }
                 });
                 this.adding = false;
     		}

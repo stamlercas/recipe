@@ -36,8 +36,11 @@ class InventoryController extends Controller
         if (!$user->ingredients()->find($ingredient->id))
         {
             $user->ingredients()->attach($ingredient->id);
+            return response()->json(['success' => true, 'ingredient' => Auth::user()->ingredients()->where('ingredient_id', $ingredient->id)->first() ], 200);
         }
-        return response()->json(['success' => true, 'ingredient' => $ingredient], 200);
+
+
+        
     }
 
     public function edit(Request $request)

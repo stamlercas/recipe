@@ -16,8 +16,8 @@
         		</ul>
         	</div>
     	@endif
-        <form class="frame" style="padding-top:10px;" method="post" action="{{ route('search.results') }}">
-        	{{ csrf_field() }}
+        <form class="frame" style="padding-top:10px;" method="get" action="{{ route('search.results') }}">
+
 	        <div class="row">
 	        	<div class="col-md-8 col-md-offset-2">
 			        <div class="row">

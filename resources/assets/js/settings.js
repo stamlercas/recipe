@@ -18,7 +18,10 @@ const settings = new Vue({
         this.users_allergies = users_allergies;
         this.diets = diets;
         this.diets.push({ id: 'none', longDescription: 'None' });   // for someone who wants to choose no diet
-        this.users_diets = users_diets;
+        if (users_diets.length === 0)
+            this.users_diets = [{ id: 'none', longDescription: 'None' }];
+        else
+            this.users_diets = users_diets;
     },
     methods: {
         hasAllergy: function(allergy) {
@@ -29,8 +32,9 @@ const settings = new Vue({
             return false;
         },
         hasDiet: function(diet) {
+            console.log(diet);
             for (var i = 0; i < this.users_diets.length; i++) {
-                if (diet.id == users_diets[i].id)
+                if (diet.id == this.users_diets[i].id)
                     return true;
             }
             return false;

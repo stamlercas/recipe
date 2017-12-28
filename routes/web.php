@@ -115,7 +115,7 @@ Route::get('/search', [
     'middleware' => 'auth'
 ]);
 
-Route::post('/search/results', [
+Route::get('/search/results', [
     'uses' => 'RecipeController@search',
     'as' => 'search.results',
     'middleware' => 'auth'
