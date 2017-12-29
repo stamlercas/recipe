@@ -99,8 +99,8 @@ class RecipeController extends Controller
         $url .= "&maxResult=50&start=0";   // bumping results so users have more to see
 
         // return response()->json(['data' => $url]);
-        $context = stream_context_create(array('http' => array('header'=>'Connection: close\r\n')));
-        $results = json_decode(file_get_contents($url, false, $context));
+        return file_get_contents($url);
+        $results = json_decode(file_get_contents($url));
 
         foreach($results->matches as $result) {
             $temp = array();
