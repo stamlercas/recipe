@@ -98,9 +98,13 @@ class RecipeController extends Controller
 
         $url .= "&maxResult=50&start=0";   // bumping results so users have more to see
 
-        // return response()->json(['data' => $url]);
-        $context = stream_context_create(array('http' => array('header'=>'Connection: close\r\n')));
-        $results = json_decode(file_get_contents($url, false, $context));
+        
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url); 
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        $results = trim(curl_exec($ch));
+        curl_close($ch);
+        $results = json_decode($results);
 
         foreach($results->matches as $result) {
             $temp = array();
@@ -147,7 +151,12 @@ class RecipeController extends Controller
         $r = Recipe::find($recipe_id);
         if (!Recipe::find($recipe_id)) {   // insert it
             $url = $this->api_url . '/recipe/' . $recipe_id . "?_app_id=" . env('APP_ID') . "&_app_key=" . env('API_KEY');
-            $recipe = json_decode(file_get_contents($url));
+
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL, $url); 
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+            $recipe = json_decode(trim(curl_exec($ch)));
+            curl_close($ch);
 
             $r = new Recipe();
 
