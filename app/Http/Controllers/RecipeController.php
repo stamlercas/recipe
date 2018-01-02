@@ -98,7 +98,8 @@ class RecipeController extends Controller
 
         $url .= "&maxResult=50&start=0";   // bumping results so users have more to see
 
-        return response()->json(['data' => file_get_contents($url)]);
+        return view('search.results', ['results' => $results, 
+            'users_ingredients' => Auth::user()->ingredients()->get()]);
         $results = json_decode(file_get_contents($url));
 
         foreach($results->matches as $result) {
