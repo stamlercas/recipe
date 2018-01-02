@@ -100,6 +100,9 @@ class RecipeController extends Controller
         
         $results = json_decode(file_get_contents($url));
         $counter = 0;
+
+        // map to reduce db calls
+        $recipes = DB::table('recipes_ingredients')->get();
         foreach($results->matches as $result) {
             $temp = array();
             $id = $result->id;
@@ -115,12 +118,18 @@ class RecipeController extends Controller
                 array_push($temp, $obj);
 
                 /*
+                // if recipe is not set into the map, add the ingredient
+                // this should work because the map is a display of the db beforehand, and should not update as we add ingredients
+                if (!isset($recipes_map[$id]) && $obj->id != null) {
+                    $obj->recipes()->attach($id);
+                }
+                */
+
                 // as well as adding the whole ingredient object to the result, we should add the ingredient to the interesect table with the recipe
-                if (count(DB::table('recipes_ingredients')->where('recipe_id', $id)->where('ingredient_id', $obj->id)->get()) == 0
+                if (count($recipes->where('recipe_id', $id)->where('ingredient_id', $obj->id)) == 0
                         && ($obj->id != null)) {
                         $obj->recipes()->attach($id);
                 }
-                */
             }
             $result->ingredients = $temp;
 
