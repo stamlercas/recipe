@@ -40,7 +40,7 @@
 			</h4>
 			<hr />
 			<div class="row" id="ingredient-list">
-				<div class="col-md-4">
+				<div style="padding-left:15px;padding-right:15px;">
 					<ul class="list-unstyled" v-for="ingredient in recipe.ingredients">
 						<ingredient-list-item :ingredient="ingredient" :users_ingredients="users_ingredients" :show-when-have="false"></ingredient-list-item>
 					</ul>

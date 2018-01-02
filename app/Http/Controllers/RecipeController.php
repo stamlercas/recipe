@@ -118,14 +118,6 @@ class RecipeController extends Controller
                 }
                 array_push($temp, $obj);
 
-                /*
-                // if recipe is not set into the map, add the ingredient
-                // this should work because the map is a display of the db beforehand, and should not update as we add ingredients
-                if (!isset($recipes_map[$id]) && $obj->id != null) {
-                    $obj->recipes()->attach($id);
-                }
-                */
-
                 // as well as adding the whole ingredient object to the result, we should add the ingredient to the interesect table with the recipe
                 if (count($recipes->where('recipe_id', $id)->where('ingredient_id', $obj->id)) == 0
                         && ($obj->id != null)) {
