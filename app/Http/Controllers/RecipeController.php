@@ -99,9 +99,7 @@ class RecipeController extends Controller
         $url .= "&maxResult=50&start=0";   // bumping results so users have more to see
         
         $results = json_decode(file_get_contents($url));
-        return view('search.results', ['results' => $results, 
-            'users_ingredients' => Auth::user()->ingredients()->get()]);
-
+        $counter = 0;
         foreach($results->matches as $result) {
             $temp = array();
             $id = $result->id;
@@ -116,10 +114,13 @@ class RecipeController extends Controller
                 }
                 array_push($temp, $obj);
 
+                /*
                 // as well as adding the whole ingredient object to the result, we should add the ingredient to the interesect table with the recipe
                 if (count(DB::table('recipes_ingredients')->where('recipe_id', $id)->where('ingredient_id', $obj->id)->get()) == 0
-                        && ($obj->id != null))
+                        && ($obj->id != null)) {
                         $obj->recipes()->attach($id);
+                }
+                */
             }
             $result->ingredients = $temp;
 
