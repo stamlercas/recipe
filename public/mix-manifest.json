@@ -12,5 +12,6 @@
   "/js/recipe_made.js": "/js/recipe_made.js",
   "/js/dashboard.js": "/js/dashboard.js",
   "/js/saved.js": "/js/saved.js",
-  "/js/activity.js": "/js/activity.js"
+  "/js/activity.js": "/js/activity.js",
+  "/js/pantry.js": "/js/pantry.js"
 }

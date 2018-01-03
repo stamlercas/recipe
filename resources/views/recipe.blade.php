@@ -101,8 +101,8 @@
 	var recipe = {!! json_encode($recipe) !!};
 	var users_ingredients = {!! json_encode($users_ingredients) !!};
 
-	var inventory_add_url = "{{ route('inventory.add') }}";
-	var inventory_delete_url = "{{ route('inventory.delete', ['inventory_id' => '']) }}" + "/";
+	var pantry_add_url = "{{ route('pantry.add') }}";
+	var pantry_delete_url = "{{ route('pantry.delete', ['pantry_id' => '']) }}" + "/";
 	var save_recipe_url = "{{ route('recipe.save') }}";
 
 	var session_token = "{{ Session::token() }}";

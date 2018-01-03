@@ -70,32 +70,32 @@ Route::post('/grocery-list/{username}/{grocery_list_slug}/close', [
     'as' => 'grocery_list.close'
 ]);
 
-Route::get('/inventory', [
-	'uses' => 'InventoryController@index',
-	'as' => 'inventory',
+Route::get('/pantry', [
+	'uses' => 'PantryController@index',
+	'as' => 'pantry',
 ]);
 
-Route::get('/inventory/delete/{inventory_id}', [
-    'uses' => 'InventoryController@delete',
-    'as' => 'inventory.delete',
+Route::get('/pantry/delete/{pantry_id}', [
+    'uses' => 'PantryController@delete',
+    'as' => 'pantry.delete',
     'middleware' => 'auth'
 ]);
 
-Route::post('/inventory/add', [
-    'uses' => 'InventoryController@add',
-    'as' => 'inventory.add',
+Route::post('/pantry/add', [
+    'uses' => 'PantryController@add',
+    'as' => 'pantry.add',
     'middleware' => 'auth'
 ]);
 
-Route::post('/inventory/edit', [
-    'uses' => 'InventoryController@edit',
-    'as' => 'inventory.edit',
+Route::post('/pantry/edit', [
+    'uses' => 'PantryController@edit',
+    'as' => 'pantry.edit',
     'middleware' => 'auth'
 ]);
 
-Route::post('/inventory/search', [
-    'uses' => 'InventoryController@search',
-    'as' => 'inventory.search',
+Route::post('/pantry/search', [
+    'uses' => 'PantryController@search',
+    'as' => 'pantry.search',
     'middleware' => 'auth'
 ]);
 

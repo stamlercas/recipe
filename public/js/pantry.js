@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 99);
+/******/ 	return __webpack_require__(__webpack_require__.s = 96);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -44409,55 +44409,31 @@ var ActionBus = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a();
 });
 
 /***/ }),
-/* 41 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/* 41 */,
+/* 42 */,
+/* 43 */,
+/* 44 */
+/***/ (function(module, exports, __webpack_require__) {
 
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
-//
-//
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-	props: ['saved', 'recipe_id'],
-	methods: {
-		save: function save() {
-			var _this = this;
-
-			var data = {
-				id: this.recipe_id,
-				_token: session_token
-			};
-			this.$http.post(save_recipe_url, data).then(function (response) {
-				if (response.body.success) {
-					_this.saved = response.body.saved; // send back a saved variable
-					// will be true if recipe was saved
-					// will be false if recipe was unsaved
-				}
-			});
-		}
-	}
-});
+!function(e,t){ true?module.exports=t():"function"==typeof define&&define.amd?define([],t):"object"==typeof exports?exports.VuejsPaginate=t():e.VuejsPaginate=t()}(this,function(){return function(e){function t(s){if(n[s])return n[s].exports;var a=n[s]={exports:{},id:s,loaded:!1};return e[s].call(a.exports,a,a.exports,t),a.loaded=!0,a.exports}var n={};return t.m=e,t.c=n,t.p="",t(0)}([function(e,t,n){"use strict";function s(e){return e&&e.__esModule?e:{default:e}}var a=n(1),i=s(a);e.exports=i.default},function(e,t,n){n(2);var s=n(6)(n(7),n(8),"data-v-82963a40",null);e.exports=s.exports},function(e,t,n){var s=n(3);"string"==typeof s&&(s=[[e.id,s,""]]);n(5)(s,{});s.locals&&(e.exports=s.locals)},function(e,t,n){t=e.exports=n(4)(),t.push([e.id,"a[data-v-82963a40]{cursor:pointer}",""])},function(e,t){e.exports=function(){var e=[];return e.toString=function(){for(var e=[],t=0;t<this.length;t++){var n=this[t];n[2]?e.push("@media "+n[2]+"{"+n[1]+"}"):e.push(n[1])}return e.join("")},e.i=function(t,n){"string"==typeof t&&(t=[[null,t,""]]);for(var s={},a=0;a<this.length;a++){var i=this[a][0];"number"==typeof i&&(s[i]=!0)}for(a=0;a<t.length;a++){var r=t[a];"number"==typeof r[0]&&s[r[0]]||(n&&!r[2]?r[2]=n:n&&(r[2]="("+r[2]+") and ("+n+")"),e.push(r))}},e}},function(e,t,n){function s(e,t){for(var n=0;n<e.length;n++){var s=e[n],a=u[s.id];if(a){a.refs++;for(var i=0;i<a.parts.length;i++)a.parts[i](s.parts[i]);for(;i<s.parts.length;i++)a.parts.push(l(s.parts[i],t))}else{for(var r=[],i=0;i<s.parts.length;i++)r.push(l(s.parts[i],t));u[s.id]={id:s.id,refs:1,parts:r}}}}function a(e){for(var t=[],n={},s=0;s<e.length;s++){var a=e[s],i=a[0],r=a[1],o=a[2],l=a[3],c={css:r,media:o,sourceMap:l};n[i]?n[i].parts.push(c):t.push(n[i]={id:i,parts:[c]})}return t}function i(e,t){var n=g(),s=C[C.length-1];if("top"===e.insertAt)s?s.nextSibling?n.insertBefore(t,s.nextSibling):n.appendChild(t):n.insertBefore(t,n.firstChild),C.push(t);else{if("bottom"!==e.insertAt)throw new Error("Invalid value for parameter 'insertAt'. Must be 'top' or 'bottom'.");n.appendChild(t)}}function r(e){e.parentNode.removeChild(e);var t=C.indexOf(e);t>=0&&C.splice(t,1)}function o(e){var t=document.createElement("style");return t.type="text/css",i(e,t),t}function l(e,t){var n,s,a;if(t.singleton){var i=v++;n=h||(h=o(t)),s=c.bind(null,n,i,!1),a=c.bind(null,n,i,!0)}else n=o(t),s=d.bind(null,n),a=function(){r(n)};return s(e),function(t){if(t){if(t.css===e.css&&t.media===e.media&&t.sourceMap===e.sourceMap)return;s(e=t)}else a()}}function c(e,t,n,s){var a=n?"":s.css;if(e.styleSheet)e.styleSheet.cssText=x(t,a);else{var i=document.createTextNode(a),r=e.childNodes;r[t]&&e.removeChild(r[t]),r.length?e.insertBefore(i,r[t]):e.appendChild(i)}}function d(e,t){var n=t.css,s=t.media,a=t.sourceMap;if(s&&e.setAttribute("media",s),a&&(n+="\n/*# sourceURL="+a.sources[0]+" */",n+="\n/*# sourceMappingURL=data:application/json;base64,"+btoa(unescape(encodeURIComponent(JSON.stringify(a))))+" */"),e.styleSheet)e.styleSheet.cssText=n;else{for(;e.firstChild;)e.removeChild(e.firstChild);e.appendChild(document.createTextNode(n))}}var u={},p=function(e){var t;return function(){return"undefined"==typeof t&&(t=e.apply(this,arguments)),t}},f=p(function(){return/msie [6-9]\b/.test(window.navigator.userAgent.toLowerCase())}),g=p(function(){return document.head||document.getElementsByTagName("head")[0]}),h=null,v=0,C=[];e.exports=function(e,t){t=t||{},"undefined"==typeof t.singleton&&(t.singleton=f()),"undefined"==typeof t.insertAt&&(t.insertAt="bottom");var n=a(e);return s(n,t),function(e){for(var i=[],r=0;r<n.length;r++){var o=n[r],l=u[o.id];l.refs--,i.push(l)}if(e){var c=a(e);s(c,t)}for(var r=0;r<i.length;r++){var l=i[r];if(0===l.refs){for(var d=0;d<l.parts.length;d++)l.parts[d]();delete u[l.id]}}}};var x=function(){var e=[];return function(t,n){return e[t]=n,e.filter(Boolean).join("\n")}}()},function(e,t){e.exports=function(e,t,n,s){var a,i=e=e||{},r=typeof e.default;"object"!==r&&"function"!==r||(a=e,i=e.default);var o="function"==typeof i?i.options:i;if(t&&(o.render=t.render,o.staticRenderFns=t.staticRenderFns),n&&(o._scopeId=n),s){var l=o.computed||(o.computed={});Object.keys(s).forEach(function(e){var t=s[e];l[e]=function(){return t}})}return{esModule:a,exports:i,options:o}}},function(e,t){"use strict";Object.defineProperty(t,"__esModule",{value:!0}),t.default={props:{pageCount:{type:Number,required:!0},initialPage:{type:Number,default:0},forcePage:{type:Number},clickHandler:{type:Function,default:function(){}},pageRange:{type:Number,default:3},marginPages:{type:Number,default:1},prevText:{type:String,default:"Prev"},nextText:{type:String,default:"Next"},containerClass:{type:String},pageClass:{type:String},pageLinkClass:{type:String},prevClass:{type:String},prevLinkClass:{type:String},nextClass:{type:String},nextLinkClass:{type:String},activeClass:{type:String,default:"active"},disabledClass:{type:String,default:"disabled"},noLiSurround:{type:Boolean,default:!1}},data:function(){return{selected:this.initialPage}},beforeUpdate:function(){void 0!==this.forcePage&&this.forcePage!==this.selected&&(this.selected=this.forcePage)},computed:{pages:function(){var e=this,t={};if(this.pageCount<=this.pageRange)for(var n=0;n<this.pageCount;n++){var s={index:n,content:n+1,selected:n===this.selected};t[n]=s}else{var a=this.pageRange/2,i=this.pageRange-a;this.selected<a?(a=this.selected,i=this.pageRange-a):this.selected>this.pageCount-this.pageRange/2&&(i=this.pageCount-this.selected,a=this.pageRange-i);for(var r=function(n){var s={index:n,content:n+1,selected:n===e.selected};t[n]=s},o=function(e){var n={content:"...",disabled:!0};t[e]=n},l=0;l<this.marginPages;l++)r(l);var c=0;this.selected-this.pageRange>0&&(c=this.selected-this.pageRange);var d=this.pageCount;this.selected+this.pageRange<this.pageCount&&(d=this.selected+this.pageRange);for(var u=c;u<=d&&u<=this.pageCount-1;u++)r(u);c>this.marginPages&&o(c-1),d+1<this.pageCount-this.marginPages&&o(d+1);for(var p=this.pageCount-1;p>=this.pageCount-this.marginPages;p--)r(p)}return t}},methods:{handlePageSelected:function(e){this.selected!==e&&(this.selected=e,this.clickHandler(this.selected+1))},prevPage:function(){this.selected<=0||(this.selected--,this.clickHandler(this.selected+1))},nextPage:function(){this.selected>=this.pageCount-1||(this.selected++,this.clickHandler(this.selected+1))},firstPageSelected:function(){return 0===this.selected},lastPageSelected:function(){return this.selected===this.pageCount-1||0===this.pageCount}}}},function(e,t){e.exports={render:function(){var e=this,t=e.$createElement,n=e._self._c||t;return e.noLiSurround?n("div",{class:e.containerClass},[n("a",{class:[e.prevLinkClass,e.firstPageSelected()?e.disabledClass:""],attrs:{tabindex:"0"},on:{click:function(t){e.prevPage()},keyup:function(t){return"button"in t||!e._k(t.keyCode,"enter",13)?void e.prevPage():null}}},[e._t("prevContent",[e._v(e._s(e.prevText))])],2),e._v(" "),e._l(e.pages,function(t){return[t.disabled?n("a",{class:[e.pageLinkClass,t.selected?e.activeClass:"",t.disabled?e.disabledClass:""],attrs:{tabindex:"0"}},[e._v(e._s(t.content))]):n("a",{class:[e.pageLinkClass,t.selected?e.activeClass:"",t.disabled?e.disabledClass:""],attrs:{tabindex:"0"},on:{click:function(n){e.handlePageSelected(t.index)},keyup:function(n){return"button"in n||!e._k(n.keyCode,"enter",13)?void e.handlePageSelected(t.index):null}}},[e._v("\n      "+e._s(t.content)+"\n    ")])]}),e._v(" "),n("a",{class:[e.nextLinkClass,e.lastPageSelected()?e.disabledClass:""],attrs:{tabindex:"0"},on:{click:function(t){e.nextPage()},keyup:function(t){return"button"in t||!e._k(t.keyCode,"enter",13)?void e.nextPage():null}}},[e._t("nextContent",[e._v(e._s(e.nextText))])],2)],2):n("ul",{class:e.containerClass},[n("li",{class:[e.prevClass,e.firstPageSelected()?e.disabledClass:""]},[n("a",{class:e.prevLinkClass,attrs:{tabindex:"0"},on:{click:function(t){e.prevPage()},keyup:function(t){return"button"in t||!e._k(t.keyCode,"enter",13)?void e.prevPage():null}}},[e._t("prevContent",[e._v(e._s(e.prevText))])],2)]),e._v(" "),e._l(e.pages,function(t){return n("li",{class:[e.pageClass,t.selected?e.activeClass:"",t.disabled?e.disabledClass:""]},[t.disabled?n("a",{class:e.pageLinkClass,attrs:{tabindex:"0"}},[e._v(e._s(t.content))]):n("a",{class:e.pageLinkClass,attrs:{tabindex:"0"},on:{click:function(n){e.handlePageSelected(t.index)},keyup:function(n){return"button"in n||!e._k(n.keyCode,"enter",13)?void e.handlePageSelected(t.index):null}}},[e._v(e._s(t.content))])])}),e._v(" "),n("li",{class:[e.nextClass,e.lastPageSelected()?e.disabledClass:""]},[n("a",{class:e.nextLinkClass,attrs:{tabindex:"0"},on:{click:function(t){e.nextPage()},keyup:function(t){return"button"in t||!e._k(t.keyCode,"enter",13)?void e.nextPage():null}}},[e._t("nextContent",[e._v(e._s(e.nextText))])],2)])],2)},staticRenderFns:[]}}])});
 
 /***/ }),
-/* 42 */
+/* 45 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var Component = __webpack_require__(3)(
   /* script */
-  __webpack_require__(41),
+  __webpack_require__(47),
   /* template */
-  __webpack_require__(43),
+  __webpack_require__(50),
   /* scopeId */
   null,
   /* cssModules */
   null
 )
-Component.options.__file = "C:\\Users\\Chris\\recipe\\resources\\assets\\js\\components\\SaveIcon.vue"
+Component.options.__file = "C:\\Users\\Chris\\recipe\\resources\\assets\\js\\components\\Table.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
-if (Component.options.functional) {console.error("[vue-loader] SaveIcon.vue: functional components are not supported with templates, they should use render functions.")}
+if (Component.options.functional) {console.error("[vue-loader] Table.vue: functional components are not supported with templates, they should use render functions.")}
 
 /* hot reload */
 if (false) {(function () {
@@ -44466,9 +44442,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-1bc27210", Component.options)
+    hotAPI.createRecord("data-v-6e58d048", Component.options)
   } else {
-    hotAPI.reload("data-v-1bc27210", Component.options)
+    hotAPI.reload("data-v-6e58d048", Component.options)
   }
 })()}
 
@@ -44476,37 +44452,189 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 43 */
+/* 46 */,
+/* 47 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__bus_action_bus_js__ = __webpack_require__(39);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuejs_paginate__ = __webpack_require__(44);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuejs_paginate___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_vuejs_paginate__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+
+
+Vue.component('paginate', __WEBPACK_IMPORTED_MODULE_1_vuejs_paginate___default.a);
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+	props: ['data', 'columns', 'filterKey', 'actions', 'showHeading', 'paginate', // if true show pages
+	'defaultSortKey'],
+	data: function data() {
+		var sortOrders = {};
+		this.columns.forEach(function (key) {
+			sortOrders[key.name] = 1;
+		});
+		console.log(this.defaultSortKey);
+		return {
+			sortKey: '', //(this.defaultSortKey == null || this.defaultSortKey == undefined) ? '' : defaultSortKey,
+			sortOrders: sortOrders,
+			pageLength: 10,
+			page: 1
+		};
+	},
+
+	computed: {
+		sortedTable: function sortedTable() {
+			var sortKey = this.sortKey;
+			var filterKey = this.filterKey && this.filterKey.toLowerCase();
+			var order = this.sortOrders[sortKey] || 1;
+			var data = this.data;
+			if (filterKey) {
+				data = data.filter(function (row) {
+					return Object.keys(row).some(function (key) {
+						return String(row[key]).toLowerCase().indexOf(filterKey) > -1;
+					});
+				});
+			}
+			if (sortKey) {
+				data = data.slice().sort(function (a, b) {
+					a = a[sortKey];
+					b = b[sortKey];
+					return (a === b ? 0 : a > b ? 1 : -1) * order;
+				});
+			}
+			return data;
+		},
+		pages: function pages() {
+			return Math.ceil(this.sortedTable.length / this.pageLength);
+		}
+	},
+	methods: {
+		sortBy: function sortBy(key) {
+			this.sortKey = key;
+			this.sortOrders[key] = this.sortOrders[key] * -1;
+		},
+		tableHeading: function tableHeading(key) {
+			return this.sortKey == key ? 'active' : '';
+		},
+		fireAction: function fireAction(action) {
+			__WEBPACK_IMPORTED_MODULE_0__bus_action_bus_js__["a" /* ActionBus */].$emit("table-action", action);
+		},
+		getValue: function getValue(row, name) {
+			var array = name.split(".");
+
+			var value = '';
+			value = row[array[0]];
+			if (array.length > 1) {
+				for (var i = 1; i < array.length; i++) {
+					value = value[array[i]];
+				}
+			}
+			return value;
+		},
+		paginateCallBack: function paginateCallBack(page) {
+			if (this.paginate) this.page = page;
+		},
+		inbound: function inbound(index) {
+			if (!this.paginate) return true;
+			// find bounds of page and check index
+			else if (index >= (this.page - 1) * this.pageLength && index <= this.page * this.pageLength - 1) return true;
+			return false;
+		}
+	}
+});
+
+/***/ }),
+/* 48 */,
+/* 49 */,
+/* 50 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('i', {
-    staticClass: "fa pull-right save-icon",
-    class: (_vm.saved) ? 'fa-heart' : 'fa-heart-o',
-    on: {
-      "click": function($event) {
-        _vm.save()
+  return _c('div', {
+    staticClass: "table-responsive"
+  }, [_c('table', {
+    staticClass: "table table-striped"
+  }, [(_vm.showHeading != false) ? _c('thead', [_c('tr', [_vm._l((_vm.columns), function(column) {
+    return _c('th', {
+      class: _vm.tableHeading(column.name),
+      attrs: {
+        "title": column.alias
+      },
+      on: {
+        "click": function($event) {
+          _vm.sortBy(column.name)
+        }
       }
+    }, [_vm._v(_vm._s(column.alias))])
+  }), _vm._v(" "), (_vm.actions != null) ? _c('th') : _vm._e()], 2)]) : _vm._e(), _vm._v(" "), _c('tbody', _vm._l((_vm.sortedTable), function(row, index) {
+    return (_vm.inbound(index)) ? _c('tr', [_vm._l((_vm.columns), function(column) {
+      return _c('td', [_vm._v(_vm._s(_vm.getValue(row, column.name)))])
+    }), _vm._v(" "), (_vm.actions != null) ? _c('td', _vm._l((_vm.actions), function(action) {
+      return _c('i', {
+        staticClass: "action-icon fa fa-lg",
+        class: action.icon,
+        staticStyle: {
+          "padding-right": "5px"
+        },
+        on: {
+          "click": function($event) {
+            _vm.fireAction({
+              action: action.name,
+              data: row
+            })
+          }
+        }
+      })
+    })) : _vm._e()], 2) : _vm._e()
+  }))]), _vm._v(" "), (_vm.paginate) ? _c('paginate', {
+    attrs: {
+      "page-count": _vm.pages,
+      "container-class": 'pagination',
+      "click-handler": _vm.paginateCallBack
     }
-  })
+  }) : _vm._e()], 1)
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-1bc27210", module.exports)
+     require("vue-hot-reload-api").rerender("data-v-6e58d048", module.exports)
   }
 }
 
 /***/ }),
-/* 44 */
-/***/ (function(module, exports, __webpack_require__) {
-
-!function(e,t){ true?module.exports=t():"function"==typeof define&&define.amd?define([],t):"object"==typeof exports?exports.VuejsPaginate=t():e.VuejsPaginate=t()}(this,function(){return function(e){function t(s){if(n[s])return n[s].exports;var a=n[s]={exports:{},id:s,loaded:!1};return e[s].call(a.exports,a,a.exports,t),a.loaded=!0,a.exports}var n={};return t.m=e,t.c=n,t.p="",t(0)}([function(e,t,n){"use strict";function s(e){return e&&e.__esModule?e:{default:e}}var a=n(1),i=s(a);e.exports=i.default},function(e,t,n){n(2);var s=n(6)(n(7),n(8),"data-v-82963a40",null);e.exports=s.exports},function(e,t,n){var s=n(3);"string"==typeof s&&(s=[[e.id,s,""]]);n(5)(s,{});s.locals&&(e.exports=s.locals)},function(e,t,n){t=e.exports=n(4)(),t.push([e.id,"a[data-v-82963a40]{cursor:pointer}",""])},function(e,t){e.exports=function(){var e=[];return e.toString=function(){for(var e=[],t=0;t<this.length;t++){var n=this[t];n[2]?e.push("@media "+n[2]+"{"+n[1]+"}"):e.push(n[1])}return e.join("")},e.i=function(t,n){"string"==typeof t&&(t=[[null,t,""]]);for(var s={},a=0;a<this.length;a++){var i=this[a][0];"number"==typeof i&&(s[i]=!0)}for(a=0;a<t.length;a++){var r=t[a];"number"==typeof r[0]&&s[r[0]]||(n&&!r[2]?r[2]=n:n&&(r[2]="("+r[2]+") and ("+n+")"),e.push(r))}},e}},function(e,t,n){function s(e,t){for(var n=0;n<e.length;n++){var s=e[n],a=u[s.id];if(a){a.refs++;for(var i=0;i<a.parts.length;i++)a.parts[i](s.parts[i]);for(;i<s.parts.length;i++)a.parts.push(l(s.parts[i],t))}else{for(var r=[],i=0;i<s.parts.length;i++)r.push(l(s.parts[i],t));u[s.id]={id:s.id,refs:1,parts:r}}}}function a(e){for(var t=[],n={},s=0;s<e.length;s++){var a=e[s],i=a[0],r=a[1],o=a[2],l=a[3],c={css:r,media:o,sourceMap:l};n[i]?n[i].parts.push(c):t.push(n[i]={id:i,parts:[c]})}return t}function i(e,t){var n=g(),s=C[C.length-1];if("top"===e.insertAt)s?s.nextSibling?n.insertBefore(t,s.nextSibling):n.appendChild(t):n.insertBefore(t,n.firstChild),C.push(t);else{if("bottom"!==e.insertAt)throw new Error("Invalid value for parameter 'insertAt'. Must be 'top' or 'bottom'.");n.appendChild(t)}}function r(e){e.parentNode.removeChild(e);var t=C.indexOf(e);t>=0&&C.splice(t,1)}function o(e){var t=document.createElement("style");return t.type="text/css",i(e,t),t}function l(e,t){var n,s,a;if(t.singleton){var i=v++;n=h||(h=o(t)),s=c.bind(null,n,i,!1),a=c.bind(null,n,i,!0)}else n=o(t),s=d.bind(null,n),a=function(){r(n)};return s(e),function(t){if(t){if(t.css===e.css&&t.media===e.media&&t.sourceMap===e.sourceMap)return;s(e=t)}else a()}}function c(e,t,n,s){var a=n?"":s.css;if(e.styleSheet)e.styleSheet.cssText=x(t,a);else{var i=document.createTextNode(a),r=e.childNodes;r[t]&&e.removeChild(r[t]),r.length?e.insertBefore(i,r[t]):e.appendChild(i)}}function d(e,t){var n=t.css,s=t.media,a=t.sourceMap;if(s&&e.setAttribute("media",s),a&&(n+="\n/*# sourceURL="+a.sources[0]+" */",n+="\n/*# sourceMappingURL=data:application/json;base64,"+btoa(unescape(encodeURIComponent(JSON.stringify(a))))+" */"),e.styleSheet)e.styleSheet.cssText=n;else{for(;e.firstChild;)e.removeChild(e.firstChild);e.appendChild(document.createTextNode(n))}}var u={},p=function(e){var t;return function(){return"undefined"==typeof t&&(t=e.apply(this,arguments)),t}},f=p(function(){return/msie [6-9]\b/.test(window.navigator.userAgent.toLowerCase())}),g=p(function(){return document.head||document.getElementsByTagName("head")[0]}),h=null,v=0,C=[];e.exports=function(e,t){t=t||{},"undefined"==typeof t.singleton&&(t.singleton=f()),"undefined"==typeof t.insertAt&&(t.insertAt="bottom");var n=a(e);return s(n,t),function(e){for(var i=[],r=0;r<n.length;r++){var o=n[r],l=u[o.id];l.refs--,i.push(l)}if(e){var c=a(e);s(c,t)}for(var r=0;r<i.length;r++){var l=i[r];if(0===l.refs){for(var d=0;d<l.parts.length;d++)l.parts[d]();delete u[l.id]}}}};var x=function(){var e=[];return function(t,n){return e[t]=n,e.filter(Boolean).join("\n")}}()},function(e,t){e.exports=function(e,t,n,s){var a,i=e=e||{},r=typeof e.default;"object"!==r&&"function"!==r||(a=e,i=e.default);var o="function"==typeof i?i.options:i;if(t&&(o.render=t.render,o.staticRenderFns=t.staticRenderFns),n&&(o._scopeId=n),s){var l=o.computed||(o.computed={});Object.keys(s).forEach(function(e){var t=s[e];l[e]=function(){return t}})}return{esModule:a,exports:i,options:o}}},function(e,t){"use strict";Object.defineProperty(t,"__esModule",{value:!0}),t.default={props:{pageCount:{type:Number,required:!0},initialPage:{type:Number,default:0},forcePage:{type:Number},clickHandler:{type:Function,default:function(){}},pageRange:{type:Number,default:3},marginPages:{type:Number,default:1},prevText:{type:String,default:"Prev"},nextText:{type:String,default:"Next"},containerClass:{type:String},pageClass:{type:String},pageLinkClass:{type:String},prevClass:{type:String},prevLinkClass:{type:String},nextClass:{type:String},nextLinkClass:{type:String},activeClass:{type:String,default:"active"},disabledClass:{type:String,default:"disabled"},noLiSurround:{type:Boolean,default:!1}},data:function(){return{selected:this.initialPage}},beforeUpdate:function(){void 0!==this.forcePage&&this.forcePage!==this.selected&&(this.selected=this.forcePage)},computed:{pages:function(){var e=this,t={};if(this.pageCount<=this.pageRange)for(var n=0;n<this.pageCount;n++){var s={index:n,content:n+1,selected:n===this.selected};t[n]=s}else{var a=this.pageRange/2,i=this.pageRange-a;this.selected<a?(a=this.selected,i=this.pageRange-a):this.selected>this.pageCount-this.pageRange/2&&(i=this.pageCount-this.selected,a=this.pageRange-i);for(var r=function(n){var s={index:n,content:n+1,selected:n===e.selected};t[n]=s},o=function(e){var n={content:"...",disabled:!0};t[e]=n},l=0;l<this.marginPages;l++)r(l);var c=0;this.selected-this.pageRange>0&&(c=this.selected-this.pageRange);var d=this.pageCount;this.selected+this.pageRange<this.pageCount&&(d=this.selected+this.pageRange);for(var u=c;u<=d&&u<=this.pageCount-1;u++)r(u);c>this.marginPages&&o(c-1),d+1<this.pageCount-this.marginPages&&o(d+1);for(var p=this.pageCount-1;p>=this.pageCount-this.marginPages;p--)r(p)}return t}},methods:{handlePageSelected:function(e){this.selected!==e&&(this.selected=e,this.clickHandler(this.selected+1))},prevPage:function(){this.selected<=0||(this.selected--,this.clickHandler(this.selected+1))},nextPage:function(){this.selected>=this.pageCount-1||(this.selected++,this.clickHandler(this.selected+1))},firstPageSelected:function(){return 0===this.selected},lastPageSelected:function(){return this.selected===this.pageCount-1||0===this.pageCount}}}},function(e,t){e.exports={render:function(){var e=this,t=e.$createElement,n=e._self._c||t;return e.noLiSurround?n("div",{class:e.containerClass},[n("a",{class:[e.prevLinkClass,e.firstPageSelected()?e.disabledClass:""],attrs:{tabindex:"0"},on:{click:function(t){e.prevPage()},keyup:function(t){return"button"in t||!e._k(t.keyCode,"enter",13)?void e.prevPage():null}}},[e._t("prevContent",[e._v(e._s(e.prevText))])],2),e._v(" "),e._l(e.pages,function(t){return[t.disabled?n("a",{class:[e.pageLinkClass,t.selected?e.activeClass:"",t.disabled?e.disabledClass:""],attrs:{tabindex:"0"}},[e._v(e._s(t.content))]):n("a",{class:[e.pageLinkClass,t.selected?e.activeClass:"",t.disabled?e.disabledClass:""],attrs:{tabindex:"0"},on:{click:function(n){e.handlePageSelected(t.index)},keyup:function(n){return"button"in n||!e._k(n.keyCode,"enter",13)?void e.handlePageSelected(t.index):null}}},[e._v("\n      "+e._s(t.content)+"\n    ")])]}),e._v(" "),n("a",{class:[e.nextLinkClass,e.lastPageSelected()?e.disabledClass:""],attrs:{tabindex:"0"},on:{click:function(t){e.nextPage()},keyup:function(t){return"button"in t||!e._k(t.keyCode,"enter",13)?void e.nextPage():null}}},[e._t("nextContent",[e._v(e._s(e.nextText))])],2)],2):n("ul",{class:e.containerClass},[n("li",{class:[e.prevClass,e.firstPageSelected()?e.disabledClass:""]},[n("a",{class:e.prevLinkClass,attrs:{tabindex:"0"},on:{click:function(t){e.prevPage()},keyup:function(t){return"button"in t||!e._k(t.keyCode,"enter",13)?void e.prevPage():null}}},[e._t("prevContent",[e._v(e._s(e.prevText))])],2)]),e._v(" "),e._l(e.pages,function(t){return n("li",{class:[e.pageClass,t.selected?e.activeClass:"",t.disabled?e.disabledClass:""]},[t.disabled?n("a",{class:e.pageLinkClass,attrs:{tabindex:"0"}},[e._v(e._s(t.content))]):n("a",{class:e.pageLinkClass,attrs:{tabindex:"0"},on:{click:function(n){e.handlePageSelected(t.index)},keyup:function(n){return"button"in n||!e._k(n.keyCode,"enter",13)?void e.handlePageSelected(t.index):null}}},[e._v(e._s(t.content))])])}),e._v(" "),n("li",{class:[e.nextClass,e.lastPageSelected()?e.disabledClass:""]},[n("a",{class:e.nextLinkClass,attrs:{tabindex:"0"},on:{click:function(t){e.nextPage()},keyup:function(t){return"button"in t||!e._k(t.keyCode,"enter",13)?void e.nextPage():null}}},[e._t("nextContent",[e._v(e._s(e.nextText))])],2)])],2)},staticRenderFns:[]}}])});
-
-/***/ }),
-/* 45 */,
-/* 46 */
+/* 51 */,
+/* 52 */,
+/* 53 */,
+/* 54 */,
+/* 55 */,
+/* 56 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -44529,54 +44657,48 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-	props: ['ingredient', 'users_ingredients', 'showWhenHave'],
-	data: function data() {
-		return {
-			show: true
-		};
-	},
-	created: function created() {
-		if (this.showWhenHave == false) if (this.hasIngredient) this.show = false;
-	},
-	methods: {
-		fireAction: function fireAction(action) {
-			if (this.inDB) __WEBPACK_IMPORTED_MODULE_0__bus_action_bus_js__["a" /* ActionBus */].$emit("list-action", action);
-		}
-	},
-	computed: {
-		hasIngredient: function hasIngredient() {
-			for (var i = 0; i < this.users_ingredients.length; i++) {
-				if (this.ingredient.description === this.users_ingredients[i].description) return true;
-			}return false;
-		},
-		inDB: function inDB() {
-			if (this.ingredient.id == null) return false;
-			return true;
-		}
-	}
+	//template: require('../templates/Modal.html'),
+	props: []
 });
 
 /***/ }),
-/* 47 */,
-/* 48 */
+/* 57 */,
+/* 58 */,
+/* 59 */,
+/* 60 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var Component = __webpack_require__(3)(
   /* script */
-  __webpack_require__(46),
+  __webpack_require__(56),
   /* template */
-  __webpack_require__(49),
+  __webpack_require__(63),
   /* scopeId */
   null,
   /* cssModules */
   null
 )
-Component.options.__file = "C:\\Users\\Chris\\recipe\\resources\\assets\\js\\components\\IngredientListItem.vue"
+Component.options.__file = "C:\\Users\\Chris\\recipe\\resources\\assets\\js\\components\\Modal.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
-if (Component.options.functional) {console.error("[vue-loader] IngredientListItem.vue: functional components are not supported with templates, they should use render functions.")}
+if (Component.options.functional) {console.error("[vue-loader] Modal.vue: functional components are not supported with templates, they should use render functions.")}
 
 /* hot reload */
 if (false) {(function () {
@@ -44585,9 +44707,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-0d2446a4", Component.options)
+    hotAPI.createRecord("data-v-7ea2618a", Component.options)
   } else {
-    hotAPI.reload("data-v-0d2446a4", Component.options)
+    hotAPI.reload("data-v-7ea2618a", Component.options)
   }
 })()}
 
@@ -44595,62 +44717,46 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 49 */
+/* 61 */,
+/* 62 */,
+/* 63 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return (_vm.show) ? _c('li', {
-    class: _vm.hasIngredient != false ? 'strong' : ''
-  }, [(!_vm.hasIngredient) ? _c('i', {
-    staticClass: "action-icon fa fa-plus",
-    class: _vm.inDB ? '' : 'disabled-action',
+  return _c('transition', {
+    attrs: {
+      "name": "modal"
+    }
+  }, [_c('div', {
+    staticClass: "modal-mask"
+  }, [_c('div', {
+    staticClass: "modal-wrapper"
+  }, [_c('div', {
+    staticClass: "modal-container"
+  }, [_c('div', {
+    staticClass: "modal-header"
+  }, [_vm._t("header", [_vm._v("\n            default header\n          ")])], 2), _vm._v(" "), _c('div', {
+    staticClass: "modal-body"
+  }, [_vm._t("body", [_vm._v("\n            default body\n          ")])], 2), _vm._v(" "), _c('div', {
+    staticClass: "modal-footer"
+  }, [_vm._t("footer", [_vm._v("\n            default footer\n            "), _c('button', {
+    staticClass: "modal-default-button",
     on: {
       "click": function($event) {
-        _vm.fireAction({
-          action: 'add-item',
-          data: _vm.ingredient
-        })
+        _vm.$emit('close')
       }
     }
-  }, [_vm._v("\n      \t\t\t \n  \t\t\t")]) : _vm._e(), _vm._v("\n  \t\t\t" + _vm._s(_vm.ingredient.description) + "\n      \t\t"), (_vm.hasIngredient != false) ? _c('span', {
-    staticClass: "list-action pull-right bg-danger",
-    on: {
-      "click": function($event) {
-        _vm.fireAction({
-          action: 'delete-item',
-          data: _vm.ingredient
-        })
-      }
-    }
-  }, [_c('span', {
-    staticClass: "hidden-xs"
-  }, [_vm._v("Don't have this?")]), _vm._v(" "), _c('i', {
-    staticClass: "fa fa-times"
-  })]) : _vm._e()]) : _vm._e()
+  }, [_vm._v("\n              OK\n            ")])])], 2)])])])])
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-0d2446a4", module.exports)
+     require("vue-hot-reload-api").rerender("data-v-7ea2618a", module.exports)
   }
 }
 
 /***/ }),
-/* 50 */,
-/* 51 */,
-/* 52 */,
-/* 53 */,
-/* 54 */,
-/* 55 */,
-/* 56 */,
-/* 57 */,
-/* 58 */,
-/* 59 */,
-/* 60 */,
-/* 61 */,
-/* 62 */,
-/* 63 */,
 /* 64 */,
 /* 65 */,
 /* 66 */,
@@ -44658,238 +44764,145 @@ if (false) {
 /* 68 */,
 /* 69 */,
 /* 70 */,
-/* 71 */,
-/* 72 */,
-/* 73 */,
-/* 74 */
+/* 71 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__bus_action_bus_js__ = __webpack_require__(39);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__mixins_ingredients_js__ = __webpack_require__(40);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vuejs_paginate__ = __webpack_require__(44);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vuejs_paginate___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_vuejs_paginate__);
 __webpack_require__(11);
 
-Vue.component('progress-bar', __webpack_require__(85));
-Vue.component('ingredient-list-item', __webpack_require__(48));
-Vue.component('save-icon', __webpack_require__(42));
+Vue.component('pantry-table', __webpack_require__(45));
+Vue.component('edit-modal', __webpack_require__(60));
+Vue.component('search-results-table', __webpack_require__(45));
+// Import the EventBus.
 
 
 
 
 
-
-
-Vue.component('paginate', __WEBPACK_IMPORTED_MODULE_2_vuejs_paginate___default.a);
-
-var results = new Vue({
-    el: '#results',
+var homepage = new Vue({
+    el: '#pantry',
     mixins: [__WEBPACK_IMPORTED_MODULE_1__mixins_ingredients_js__["a" /* default */], __WEBPACK_IMPORTED_MODULE_1__mixins_ingredients_js__["a" /* default */]],
     data: {
-        results: [],
-        users_ingredients: [],
-        page: 1,
-        paginate: true,
-        pageLength: 10
+        pantry: [],
+        searchResults: [],
+        userID: String,
+        search: '',
+        searchfield: '',
+        pantrySearchField: '',
+        searching: false,
+        adding: false,
+        showEditModal: false,
+        columns: [{
+            name: 'description',
+            alias: 'Name'
+        }, {
+            name: 'pivot.created_at',
+            alias: 'Date Added'
+        }],
+        actions: [
+        /* { name: 'edit-item', icon: 'fa-pencil-square-o', class: 'edit-icon' }, */
+        { name: 'delete-item', icon: 'fa-times', class: 'delete-icon' }],
+        resultsColumns: [{
+            name: 'description',
+            alias: 'Name'
+        }],
+        resultsActions: [{ name: 'add-item', icon: 'fa-plus', class: 'add-icon' }]
     },
     created: function created() {
-        this.results = search_results.matches;
-        this.users_ingredients = users_ingredients;
+        this.pantry = pantry;
 
-        for (var i = 0; i < this.results.length; i++) {
-            this.numberOfIngredients(this.results[i]);
-            this.percentageOfIngredients(this.results[i]);
-        }
-
-        this.results = this.sort(this.results, 'percentageOfIngredients');
-        __WEBPACK_IMPORTED_MODULE_0__bus_action_bus_js__["a" /* ActionBus */].$on('list-action', this.fireAction);
+        __WEBPACK_IMPORTED_MODULE_0__bus_action_bus_js__["a" /* ActionBus */].$on('table-action', this.fireAction);
+        __WEBPACK_IMPORTED_MODULE_0__bus_action_bus_js__["a" /* ActionBus */].$on('edit-action', this.editAction);
     },
     methods: {
-        timeInMinutes: function timeInMinutes(seconds) {
-            return seconds / 60;
-        },
         fireAction: function fireAction(data) {
             var _this = this;
 
             switch (data.action) {
-                case 'add-item':
-                    this.addItem(data.data).then(function (value) {
-                        if (value) _this.users_ingredients.unshift(data.data);
-                    });
-                    break;
                 case 'delete-item':
-                    this.deleteItem(data.data).then(function (value) {
-                        for (var i = 0; i < _this.users_ingredients.length; i++) {
-                            if (data.data.id == _this.users_ingredients[i].id) {
-                                console.log(i);
-                                _this.users_ingredients.splice(i, 1);
-                            }
+                    if (confirm("Are you sure you want to delete this item?")) {
+                        this.deleteItem(data.data).then(function (value) {
+                            if (value) _this.pantry.splice(pantry.indexOf(data.data), 1);
+                        });
+                    }
+                    break;
+                case 'add-item':
+                    this.adding = true;
+
+                    //search for duplicate
+                    for (var i = 0; i < this.pantry.length; i++) {
+                        if (data.data.id == this.pantry[i].id) {
+                            alert("You already have " + data.data.description + " in your pantry.");
+                            this.adding = false;
+                            return;
+                        }
+                    }this.addItem(data.data).then(function (value) {
+                        console.log(value);
+                        if (value !== false) {
+                            console.log(value);
+                            this.pantry.unshift(value);
                         }
                     });
+                    this.adding = false;
             }
         },
-        numberOfIngredients: function numberOfIngredients(result) {
-            result.numberOfIngredients = 0;
-            for (var i = 0; i < result.ingredients.length; i++) {
-                for (var j = 0; j < this.users_ingredients.length; j++) {
-                    if (result.ingredients[i].id == this.users_ingredients[j].id) result.numberOfIngredients++;
+        searchIngredients: function searchIngredients() {
+            var _this2 = this;
+
+            this.searching = true;
+
+            if (this.searchfield === '' || this.searchfield === null) {
+                this.searchResults = [];
+                this.searching = false;
+                return;
+            }
+            var data = {
+                query: this.searchfield,
+                _token: session_token
+            };
+            this.$http.post(pantry_search_url, data).then(function (response) {
+                console.log(response.body);
+                if (response.body.success) {
+                    _this2.searchResults = response.body.results;
                 }
-            }return result.numberOfIngredients;
-        },
-        percentageOfIngredients: function percentageOfIngredients(result) {
-            result.percentageOfIngredients = this.numberOfIngredients(result) / result.ingredients.length;
-            return result.percentageOfIngredients;
-        },
-        sort: function sort(list, sortKey) {
-            list = list.slice().sort(function (a, b) {
-                a = a[sortKey];
-                b = b[sortKey];
-                return (a === b ? 0 : a > b ? 1 : -1) * -1;
+                _this2.searching = false;
             });
-            return list;
-        },
-        paginateCallBack: function paginateCallBack(page) {
-            if (this.paginate) {
-                this.page = page;
-                $('html,body').scrollTop(0);
-            }
-        },
-        inbound: function inbound(index) {
-            if (!this.paginate) return true;
-            // find bounds of page and check index
-            else if (index >= (this.page - 1) * this.pageLength && index <= this.page * this.pageLength - 1) return true;
-            return false;
-        }
-    },
-    computed: {
-        pages: function pages() {
-            return Math.ceil(this.results.length / this.pageLength);
         }
     }
 });
 
 /***/ }),
+/* 72 */,
+/* 73 */,
+/* 74 */,
 /* 75 */,
 /* 76 */,
 /* 77 */,
 /* 78 */,
 /* 79 */,
 /* 80 */,
-/* 81 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-	props: ['name', 'value'],
-	computed: {
-		progressBarClass: function progressBarClass() {
-			if (this.percentage > 80) return 'progress-bar-danger';else if (this.percentage > 60) return 'progress-bar-warning';else return 'progress-bar-success';
-		},
-		percentage: function percentage() {
-			return this.value * 100;
-		}
-	}
-});
-
-/***/ }),
+/* 81 */,
 /* 82 */,
 /* 83 */,
 /* 84 */,
-/* 85 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var Component = __webpack_require__(3)(
-  /* script */
-  __webpack_require__(81),
-  /* template */
-  __webpack_require__(89),
-  /* scopeId */
-  null,
-  /* cssModules */
-  null
-)
-Component.options.__file = "C:\\Users\\Chris\\recipe\\resources\\assets\\js\\components\\ProgressBar.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
-if (Component.options.functional) {console.error("[vue-loader] ProgressBar.vue: functional components are not supported with templates, they should use render functions.")}
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-5f1af634", Component.options)
-  } else {
-    hotAPI.reload("data-v-5f1af634", Component.options)
-  }
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
+/* 85 */,
 /* 86 */,
 /* 87 */,
 /* 88 */,
-/* 89 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('span', [_c('small', [_vm._v(_vm._s(this.name))]), _vm._v(" "), _c('div', {
-    staticClass: "progress",
-    staticStyle: {
-      "height": "5px",
-      "margin-bottom": "0"
-    }
-  }, [_c('div', {
-    staticClass: "progress-bar",
-    class: _vm.progressBarClass,
-    style: ('width:' + _vm.percentage + '%;'),
-    attrs: {
-      "role": "progressbar",
-      "aria-valuemin": "0",
-      "aria-valuemax": "100"
-    }
-  })])])
-},staticRenderFns: []}
-module.exports.render._withStripped = true
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-5f1af634", module.exports)
-  }
-}
-
-/***/ }),
+/* 89 */,
 /* 90 */,
 /* 91 */,
 /* 92 */,
 /* 93 */,
 /* 94 */,
 /* 95 */,
-/* 96 */,
-/* 97 */,
-/* 98 */,
-/* 99 */
+/* 96 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(74);
+module.exports = __webpack_require__(71);
 
 
 /***/ })

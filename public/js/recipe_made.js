@@ -44382,13 +44382,13 @@ var ActionBus = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a();
                 id: ingredient.id,
                 _token: session_token
             };
-            return this.$http.post(inventory_add_url, data).then(function (response) {
+            return this.$http.post(pantry_add_url, data).then(function (response) {
                 if (response.body.success) return response.body.ingredient;
                 return false;
             });
         },
         deleteItem: function deleteItem(ingredient) {
-            return this.$http.get(inventory_delete_url + ingredient.id).then(function (response) {
+            return this.$http.get(pantry_delete_url + ingredient.id).then(function (response) {
                 return response.body.success;
             });
         },
@@ -44401,7 +44401,7 @@ var ActionBus = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a();
                 query: query,
                 _token: session_token
             };
-            return this.$http.post(inventory_search_url, data).then(function (response) {
+            return this.$http.post(pantry_search_url, data).then(function (response) {
                 return response.body;
             });
         }

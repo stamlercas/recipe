@@ -10,10 +10,10 @@ import addItem from './mixins/ingredients.js';
 import deleteItem from './mixins/ingredients.js';
 
 const homepage = new Vue({
-    el: '#inventory',
+    el: '#pantry',
     mixins: [addItem, deleteItem],
     data: {
-    	inventory: [
+    	pantry: [
     	],
         searchResults: [],
     	userID: String,
@@ -48,8 +48,7 @@ const homepage = new Vue({
         ]
     },
     created: function() {
-    	//this.inventory = [{ item: 'carrots' }];
-    	this.inventory = inventory;
+    	this.pantry = pantry;
 
     	ActionBus.$on('table-action', this.fireAction);
         ActionBus.$on('edit-action', this.editAction);
@@ -61,7 +60,7 @@ const homepage = new Vue({
     				if (confirm("Are you sure you want to delete this item?")) {
     					this.deleteItem(data.data).then((value) => {
                             if (value)
-                                this.inventory.splice(inventory.indexOf(data.data), 1);
+                                this.pantry.splice(pantry.indexOf(data.data), 1);
                         });
 	        		}
     				break;
@@ -69,8 +68,8 @@ const homepage = new Vue({
                     this.adding = true;
 
                     //search for duplicate
-                    for (var i = 0; i < this.inventory.length; i++)
-                        if (data.data.id == this.inventory[i].id) {
+                    for (var i = 0; i < this.pantry.length; i++)
+                        if (data.data.id == this.pantry[i].id) {
                             alert("You already have " + data.data.description + " in your pantry.");
                             this.adding = false;
                             return;
@@ -79,7 +78,7 @@ const homepage = new Vue({
                     console.log(value);
                     if (value !== false) {
                         console.log(value);
-                        this.inventory.unshift(value);
+                        this.pantry.unshift(value);
                     }
                 });
                 this.adding = false;
@@ -97,7 +96,7 @@ const homepage = new Vue({
                 query: this.searchfield,
                 _token: session_token
             };
-            this.$http.post(inventory_search_url, data).then((response) => {
+            this.$http.post(pantry_search_url, data).then((response) => {
                             console.log(response.body);
                             if (response.body.success) {
                                 this.searchResults = response.body.results;

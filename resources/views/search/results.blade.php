@@ -16,11 +16,11 @@ Results
 		    	<div class="container-fluid">
 		    		<div class="row">
 		    			<div class="col-sm-6 col-md-8">
-		    			<a :href="'{{ route('recipe.get', ['inventory_id' => ''])  }}/' + result.id">
+		    			<a :href="'{{ route('recipe.get', ['pantry_id' => ''])  }}/' + result.id">
 	    			<img :src="result.imageUrlsBySize[90]" :alt="result.recipeName" class="img img-responsive list-img" />
 	    				</a>
 						<h5 class="list-title">
-							<a :href="'{{ route('recipe.get', ['inventory_id' => ''])  }}/' + result.id">@{{ result.recipeName }}</a>
+							<a :href="'{{ route('recipe.get', ['pantry_id' => ''])  }}/' + result.id">@{{ result.recipeName }}</a>
 							<save-icon :recipe_id="result.id" :saved="result.saved"></save-icon>
 						</h5>
 						<div style="clear:both;"></div>
@@ -71,8 +71,8 @@ Results
   	<script>
   		var search_results = {!! json_encode($results) !!};
   		var users_ingredients = {!! json_encode($users_ingredients) !!};
-  		var inventory_add_url = "{{ route('inventory.add') }}";
-  		var inventory_delete_url = "{{ route('inventory.delete', ['inventory_id' => ''])  }}" + "/";
+  		var pantry_add_url = "{{ route('pantry.add') }}";
+  		var pantry_delete_url = "{{ route('pantry.delete', ['pantry_id' => ''])  }}" + "/";
   		var save_recipe_url = "{{ route('recipe.save') }}";
   		var session_token = "{{ Session::token() }}";
   	</script>

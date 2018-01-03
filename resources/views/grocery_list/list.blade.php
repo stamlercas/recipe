@@ -61,10 +61,10 @@
 		var ingredients = {!! json_encode($ingredients) !!};
 		var users_ingredients = {!! json_encode($users_ingredients) !!};
 
-		var inventory_search_url = "{{ route('inventory.search') }}";
+		var pantry_search_url = "{{ route('pantry.search') }}";
 		var grocery_list_add_url = "{{ route('grocery_list.add', ['username' => Auth::user()->username, 'grocery_list_slug' => $grocery_list->slug]) }}";
-		var inventory_add_url = "{{ route('inventory.add') }}";
-		var inventory_delete_url = "{{ route('inventory.delete', ['inventory_id' => '']) }}" + "/";
+		var pantry_add_url = "{{ route('pantry.add') }}";
+		var pantry_delete_url = "{{ route('pantry.delete', ['pantry_id' => '']) }}" + "/";
 
 		var session_token = "{{ Session::token() }}";
 	</script>

@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-    <div id="inventory">
+    <div id="pantry">
         <h1>{{Auth::user()->username}}'s Pantry</h1>
         <div class="row">
         	<div class="col-md-5 col-md-offset-1">
@@ -41,7 +41,7 @@
 						</div>
 					</h3>
 		  			<pantry-table 
-		  				:data="inventory" 
+		  				:data="pantry" 
 	  					:columns="columns" 
 	  					:filter-key="pantrySearchField" 
 	  					:actions="actions"
@@ -54,12 +54,12 @@
 
 
     <script>
-    	var inventory = {!! json_encode($inventory) !!};
-    	var inventory_delete_url = "{{ route('inventory.delete', ['inventory_id' => ''])  }}" + "/";
-    	var inventory_add_url = "{{ route('inventory.add') }}";
-    	var inventory_edit_url = "{{ route('inventory.edit') }}";
-    	var inventory_search_url = "{{ route('inventory.search') }}";
+    	var pantry = {!! json_encode($pantry) !!};
+    	var pantry_delete_url = "{{ route('pantry.delete', ['pantry_id' => ''])  }}" + "/";
+    	var pantry_add_url = "{{ route('pantry.add') }}";
+    	var pantry_edit_url = "{{ route('pantry.edit') }}";
+    	var pantry_search_url = "{{ route('pantry.search') }}";
     	var session_token = "{{ Session::token() }}";
     </script>
-    <script src="{{ asset('js/inventory.js') }}"></script>
+    <script src="{{ asset('js/pantry.js') }}"></script>
 @endsection

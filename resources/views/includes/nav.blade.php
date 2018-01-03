@@ -14,7 +14,7 @@
                     </a>
                   </div>
                   <div class="col-xs-2 navbar-btn">
-                    <a href="{{ route('inventory') }}">
+                    <a href="{{ route('pantry') }}">
                       <i class="fa fa-shopping-basket fa-lg"></i>
                     </a>
                   </div>
@@ -53,7 +53,7 @@
                     </a>
                   </li>
                   <li>
-                    <a href="{{ route('inventory') }}">
+                    <a href="{{ route('pantry') }}">
                       Manage Pantry
                       <br />
                       <i class="fa fa-shopping-basket fa-5x"></i>

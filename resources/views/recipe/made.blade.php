@@ -21,8 +21,8 @@
 	var ingredients = {!! json_encode($ingredients) !!};
 	var users_ingredients = {!! json_encode($users_ingredients) !!};
 
-	var inventory_add_url = "{{ route('inventory.add') }}";
-	var inventory_delete_url = "{{ route('inventory.delete', ['inventory_id' => '']) }}" + "/";
+	var pantry_add_url = "{{ route('pantry.add') }}";
+	var pantry_delete_url = "{{ route('pantry.delete', ['pantry_id' => '']) }}" + "/";
 </script>
 <script src="{{ asset('js/recipe_made.js') }}"></script>
 @endsection

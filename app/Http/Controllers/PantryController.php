@@ -8,7 +8,7 @@ use Recipr\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class InventoryController extends Controller
+class PantryController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -22,9 +22,9 @@ class InventoryController extends Controller
 
     public function index()
     {
-        $inventory = Auth::user()->ingredients()->orderBy('created_at', 'desc')->get();
+        $pantry = Auth::user()->ingredients()->orderBy('created_at', 'desc')->get();
 
-        return view('inventory', ['inventory' => $inventory]);
+        return view('pantry', ['pantry' => $pantry]);
     }
 
     public function add(Request $request)
@@ -41,21 +41,6 @@ class InventoryController extends Controller
 
 
         
-    }
-
-    public function edit(Request $request)
-    {
-        $this->validate($request, [
-            'item' => 'required|max:20'
-        ]);
-        $item = Inventory::find($request['id']);
-        if (Auth::user() != $item->user)    //making sure users don't delete other user's posts
-        {
-            return redirect()->back();
-        }
-        $item->item = $request['item'];
-        $item->update();
-        return response()->json(['item' => $item], 200);
     }
 
     public function delete($ingredient_id)

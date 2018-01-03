@@ -5,14 +5,14 @@ export default {
     			id: ingredient.id,
     			_token: session_token
     		};
-    		return this.$http.post(inventory_add_url, data).then((response) => {
+    		return this.$http.post(pantry_add_url, data).then((response) => {
                 if (response.body.success)
     		      return response.body.ingredient;
                 return false;
     		});
     	},
     	deleteItem: function(ingredient) {
-    		return this.$http.get(inventory_delete_url + ingredient.id).then((response) => {
+    		return this.$http.get(pantry_delete_url + ingredient.id).then((response) => {
                 return response.body.success;
     		});
     	},
@@ -24,7 +24,7 @@ export default {
                 query: query,
                 _token: session_token
             };
-            return this.$http.post(inventory_search_url, data).then((response) => {
+            return this.$http.post(pantry_search_url, data).then((response) => {
                 return response.body;
             });
         }
