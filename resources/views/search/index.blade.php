@@ -106,11 +106,23 @@
 			  	</div>
 			  	<div class="container-fluid row">
 			  		<div class="col-md-4 col-md-offset-6">
-			  			<button class="btn btn-primary btn-block" type="submit">Search</button>
+			  			<button class="btn btn-primary btn-block" type="submit" @click="showModal = true;">Search</button>
 			  		</div>
 		  		</div>
 		  	</div>
 	  	</form>
+	  	<modal v-if="showModal">
+			<div slot="header"></div>
+			<div slot="body">
+				<div style="text-align:center;">
+					<i class='fa fa-spinner fa-pulse fa-5x fa-fw'></i>
+					<br /><br />
+					<p>Please Wait...</p>
+				</div>
+			</div>
+			<div slot="footer">
+			</div>
+		</modal>
     </div>
 
     <script>

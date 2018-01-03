@@ -6,6 +6,7 @@ Vue.component('cuisine-checkbox', require('./components/Checkbox.vue'));
 Vue.component('course-checkbox', require('./components/Checkbox.vue'));
 Vue.component('holiday-checkbox', require('./components/Checkbox.vue'));
 Vue.component('nutrient-input', require('./components/NutrientInput.vue'));
+Vue.component('modal', require('./components/Modal.vue'));
 
 const search = new Vue({
     el: '#search',
@@ -25,7 +26,8 @@ const search = new Vue({
         nutrients: [],
         nutrient_inputs: [],
         selectedNutrient: null,
-        old: null
+        old: null,
+        showModal: false
     },
     created: function() {
         this.allergies = allergies;
