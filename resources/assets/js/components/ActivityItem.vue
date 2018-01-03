@@ -2,7 +2,7 @@
 	<div>
 		<strong>
 			<i class="fa text-info" :class="icon"></i>&nbsp;
-			{{ item.name }} {{ action }}
+			<a class="text-info" :href="recipe_url + '/' + item.id">{{ item.name }}</a> {{ action }}
 		</strong>
 		 on {{ new Date(item.pivot.created_at).toLocaleString('en-us', { month: '2-digit', day: 'numeric', year: 'numeric'}) }}
 	</div>
@@ -35,6 +35,9 @@ export default {
 				case 'recipe_views':
 					return 'viewed';
 			}
+		},
+		recipe_url: function() {
+			return recipe_url;
 		}
 	}
 }

@@ -20,6 +20,7 @@ class UserController extends Controller
 	}
 
 	public function getActivity($username) {
+
 		$recipes_made = Auth::user()->recipes_made()->get()->map(function($item) {
 			$item->table ="recipes_made";
 			return $item;
@@ -34,7 +35,7 @@ class UserController extends Controller
 		});
 		$collection = $recipes_made->concat($recipe_views)->concat($recipes_saved)->sortByDesc(function($item, $key) {
 			return $item->pivot->created_at;
-		});
+		})->take(50);
 		return response()->view('user.activity', [
 			'activity' => $collection->values()->all()
 		]);

@@ -14,6 +14,7 @@
     </div>
 
     <script>
+        var recipe_url = "{{ route('recipe.get', ['recipe_id' => '']) }}";
     	var activity = {!! json_encode($activity) !!};
     </script>
     <script src="{{ asset('js/activity.js') }}"></script>

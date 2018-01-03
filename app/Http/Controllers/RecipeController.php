@@ -79,7 +79,6 @@ class RecipeController extends Controller
         }
         $url .= $this->append($request, Holiday::get(), 'allowedHoliday[]');
 
-        // TODO: append nutrition attribute values
         if (isset($request['nutrients'])) {
             foreach($request['nutrients'] as $nutrient) {
                 $pivot_data = array();      // for saving pivot data at intersect (ex: min, max)
@@ -103,7 +102,6 @@ class RecipeController extends Controller
 
         // map to reduce db calls
         $recipes = DB::table('recipes_ingredients')->get();
-      
         foreach($results->matches as $result) {
             $temp = array();
             $id = $result->id;
@@ -128,6 +126,7 @@ class RecipeController extends Controller
 
             $result->saved = (Auth::user()->recipes_saved()->find($result->id)) ? true : false;
         }
+
         return view('search.results', ['results' => $results, 
             'users_ingredients' => Auth::user()->ingredients()->get()]);
     }

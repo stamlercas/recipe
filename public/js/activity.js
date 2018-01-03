@@ -44544,7 +44544,20 @@ Vue.component('save-icon', __webpack_require__(42));
 				case 'recipe_views':
 					return 'viewed';
 			}
-		}
+		},
+		recipe_url: function (_recipe_url) {
+			function recipe_url() {
+				return _recipe_url.apply(this, arguments);
+			}
+
+			recipe_url.toString = function () {
+				return _recipe_url.toString();
+			};
+
+			return recipe_url;
+		}(function () {
+			return recipe_url;
+		})
 	}
 });
 
@@ -44597,7 +44610,12 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   return _c('div', [_c('strong', [_c('i', {
     staticClass: "fa text-info",
     class: _vm.icon
-  }), _vm._v(" \n\t\t" + _vm._s(_vm.item.name) + " " + _vm._s(_vm.action) + "\n\t")]), _vm._v("\n\t on " + _vm._s(new Date(_vm.item.pivot.created_at).toLocaleString('en-us', {
+  }), _vm._v(" \n\t\t"), _c('a', {
+    staticClass: "text-info",
+    attrs: {
+      "href": _vm.recipe_url + '/' + _vm.item.id
+    }
+  }, [_vm._v(_vm._s(_vm.item.name))]), _vm._v(" " + _vm._s(_vm.action) + "\n\t")]), _vm._v("\n\t on " + _vm._s(new Date(_vm.item.pivot.created_at).toLocaleString('en-us', {
     month: '2-digit',
     day: 'numeric',
     year: 'numeric'
