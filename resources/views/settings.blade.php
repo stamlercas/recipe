@@ -6,7 +6,13 @@
 
 @section('content')
 	<div class="" id="settings">
-	<h1>{{ $user->username }} <small><a href="{{ route('user.saved', ['username' => Auth::user()->username]) }}">saved</a></small></h1>
+	<h1>
+		{{ $user->username }} 
+		<small>
+			<a href="{{ route('user.saved', ['username' => Auth::user()->username]) }}">saved</a>&nbsp;
+			<a href="{{ route('user.activity', ['username' => Auth::user()->username]) }}">activity</a>
+		</small>
+	</h1>
 	<br />
 		<form class="form-horizontal" action="{{ route('settings.update') }}" method="post">
 			<div class="frame" style="padding:20px 20px 10px 20px;">

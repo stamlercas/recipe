@@ -18,4 +18,25 @@ class UserController extends Controller
 			'saved_recipes' => $formatted_saved_recipes
 		]);
 	}
+
+	public function getActivity($username) {
+		$recipes_made = Auth::user()->recipes_made()->get()->map(function($item) {
+			$item->table ="recipes_made";
+			return $item;
+		});
+		$recipe_views = Auth::user()->recipe_views()->get()->map(function($item) {
+			$item->table ="recipe_views";
+			return $item;
+		});
+		$recipes_saved = Auth::user()->recipes_saved()->get()->map(function($item) {
+			$item->table = "recipes_saved";
+			return $item;
+		});
+		$collection = $recipes_made->concat($recipe_views)->concat($recipes_saved)->sortByDesc(function($item, $key) {
+			return $item->pivot->created_at;
+		});
+		return response()->view('user.activity', [
+			'activity' => $collection->values()->all()
+		]);
+	}
 }

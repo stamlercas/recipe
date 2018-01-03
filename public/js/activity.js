@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 101);
+/******/ 	return __webpack_require__(__webpack_require__.s = 91);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -44362,9 +44362,96 @@ module.exports = function(module) {
 /***/ }),
 /* 39 */,
 /* 40 */,
-/* 41 */,
-/* 42 */,
-/* 43 */,
+/* 41 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+	props: ['saved', 'recipe_id'],
+	methods: {
+		save: function save() {
+			var _this = this;
+
+			var data = {
+				id: this.recipe_id,
+				_token: session_token
+			};
+			this.$http.post(save_recipe_url, data).then(function (response) {
+				if (response.body.success) {
+					_this.saved = response.body.saved; // send back a saved variable
+					// will be true if recipe was saved
+					// will be false if recipe was unsaved
+				}
+			});
+		}
+	}
+});
+
+/***/ }),
+/* 42 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var Component = __webpack_require__(3)(
+  /* script */
+  __webpack_require__(41),
+  /* template */
+  __webpack_require__(43),
+  /* scopeId */
+  null,
+  /* cssModules */
+  null
+)
+Component.options.__file = "C:\\Users\\Chris\\recipe\\resources\\assets\\js\\components\\SaveIcon.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] SaveIcon.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-1bc27210", Component.options)
+  } else {
+    hotAPI.reload("data-v-1bc27210", Component.options)
+  }
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 43 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('i', {
+    staticClass: "fa pull-right save-icon",
+    class: (_vm.saved) ? 'fa-heart' : 'fa-heart-o',
+    on: {
+      "click": function($event) {
+        _vm.save()
+      }
+    }
+  })
+},staticRenderFns: []}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-1bc27210", module.exports)
+  }
+}
+
+/***/ }),
 /* 44 */,
 /* 45 */,
 /* 46 */,
@@ -44372,258 +44459,40 @@ module.exports = function(module) {
 /* 48 */,
 /* 49 */,
 /* 50 */,
-/* 51 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var Component = __webpack_require__(3)(
-  /* script */
-  __webpack_require__(53),
-  /* template */
-  __webpack_require__(64),
-  /* scopeId */
-  null,
-  /* cssModules */
-  null
-)
-Component.options.__file = "C:\\Users\\Chris\\recipe\\resources\\assets\\js\\components\\Checkbox.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
-if (Component.options.functional) {console.error("[vue-loader] Checkbox.vue: functional components are not supported with templates, they should use render functions.")}
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-812aceb6", Component.options)
-  } else {
-    hotAPI.reload("data-v-812aceb6", Component.options)
-  }
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 52 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var Component = __webpack_require__(3)(
-  /* script */
-  __webpack_require__(55),
-  /* template */
-  __webpack_require__(66),
-  /* scopeId */
-  null,
-  /* cssModules */
-  null
-)
-Component.options.__file = "C:\\Users\\Chris\\recipe\\resources\\assets\\js\\components\\InputField.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
-if (Component.options.functional) {console.error("[vue-loader] InputField.vue: functional components are not supported with templates, they should use render functions.")}
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-ace6699c", Component.options)
-  } else {
-    hotAPI.reload("data-v-ace6699c", Component.options)
-  }
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 53 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
-//
-
-Vue.component('input-field', __webpack_require__(52));
-/* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['item', 'checked', 'name', 'value', 'type']
-});
-
-/***/ }),
+/* 51 */,
+/* 52 */,
+/* 53 */,
 /* 54 */,
-/* 55 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-	props: ['item', 'checked', 'name', 'value', 'type'],
-	computed: {
-		isChecked: function isChecked() {
-			if (this.checked) return true;
-			return false;
-		},
-		id: function id() {
-			return this.name == null ? this.item : this.name;
-		}
-	}
-});
-
-/***/ }),
+/* 55 */,
 /* 56 */,
-/* 57 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
-//
-
-Vue.component('input-field', __webpack_require__(52));
-/* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['item', 'checked', 'name', 'value', 'type']
-});
-
-/***/ }),
+/* 57 */,
 /* 58 */,
 /* 59 */,
 /* 60 */,
-/* 61 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var Component = __webpack_require__(3)(
-  /* script */
-  __webpack_require__(57),
-  /* template */
-  __webpack_require__(65),
-  /* scopeId */
-  null,
-  /* cssModules */
-  null
-)
-Component.options.__file = "C:\\Users\\Chris\\recipe\\resources\\assets\\js\\components\\RadioButton.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
-if (Component.options.functional) {console.error("[vue-loader] RadioButton.vue: functional components are not supported with templates, they should use render functions.")}
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-89a419ca", Component.options)
-  } else {
-    hotAPI.reload("data-v-89a419ca", Component.options)
-  }
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
+/* 61 */,
 /* 62 */,
 /* 63 */,
-/* 64 */
+/* 64 */,
+/* 65 */,
+/* 66 */,
+/* 67 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('input-field', {
-    attrs: {
-      "type": 'checkbox',
-      "item": _vm.item,
-      "name": _vm.name,
-      "checked": _vm.checked,
-      "value": _vm.value
-    }
-  })
-},staticRenderFns: []}
-module.exports.render._withStripped = true
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-812aceb6", module.exports)
-  }
-}
+__webpack_require__(11);
 
-/***/ }),
-/* 65 */
-/***/ (function(module, exports, __webpack_require__) {
+Vue.component('activity-item', __webpack_require__(83));
 
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('input-field', {
-    attrs: {
-      "type": 'radio',
-      "item": _vm.item,
-      "name": _vm.name,
-      "checked": _vm.checked,
-      "value": _vm.value
-    }
-  })
-},staticRenderFns: []}
-module.exports.render._withStripped = true
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-89a419ca", module.exports)
-  }
-}
-
-/***/ }),
-/* 66 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    class: _vm.type
-  }, [_c('label', [(_vm.type === 'checkbox') ? _c('input', {
-    attrs: {
-      "type": _vm.type,
-      "name": _vm.id
+var app = new Vue({
+    el: '#activity',
+    data: {
+        activity: []
     },
-    domProps: {
-      "checked": _vm.isChecked
+    created: function created() {
+        this.activity = activity;
     }
-  }) : _vm._e(), _vm._v(" "), (_vm.type === 'radio') ? _c('input', {
-    attrs: {
-      "type": _vm.type,
-      "name": _vm.id
-    },
-    domProps: {
-      "checked": _vm.isChecked,
-      "value": _vm.value
-    }
-  }) : _vm._e(), _vm._v("\n       " + _vm._s(_vm.item) + "\n    ")])])
-},staticRenderFns: []}
-module.exports.render._withStripped = true
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-ace6699c", module.exports)
-  }
-}
+});
 
 /***/ }),
-/* 67 */,
 /* 68 */,
 /* 69 */,
 /* 70 */,
@@ -44632,80 +44501,10 @@ if (false) {
 /* 73 */,
 /* 74 */,
 /* 75 */,
-/* 76 */
-/***/ (function(module, exports, __webpack_require__) {
-
-__webpack_require__(11);
-
-Vue.component('allergy-checkbox', __webpack_require__(51));
-Vue.component('diet-radio', __webpack_require__(61));
-Vue.component('cuisine-checkbox', __webpack_require__(51));
-Vue.component('course-checkbox', __webpack_require__(51));
-Vue.component('holiday-checkbox', __webpack_require__(51));
-Vue.component('nutrient-input', __webpack_require__(84));
-
-var search = new Vue({
-    el: '#search',
-    data: {
-        allergies: [],
-        diets: [],
-        cuisines: [],
-        courses: [],
-        holidays: [],
-        users_allergies: [],
-        users_diets: [],
-        nutrients: [],
-        nutrient_inputs: [],
-        selectedNutrient: null,
-        old: null
-    },
-    created: function created() {
-        this.allergies = allergies;
-        this.users_allergies = users_allergies;
-        this.diets = diets;
-        this.diets.push({ id: 'none', longDescription: 'None' }); // for someone who wants to choose no diet
-        if (users_diets.length === 0) this.users_diets = [{ id: 'none', longDescription: 'None' }];else this.users_diets = users_diets;
-        this.cuisines = cuisines;
-        this.courses = courses;
-        this.holidays = holidays;
-        this.nutrients = nutrients;
-        this.nutrient_inputs = nutrient_inputs == null ? [] : nutrient_inputs;
-        this.old = old;
-
-        console.log(nutrient_inputs);
-        console.log(this.old);
-    },
-    methods: {
-        hasAllergy: function hasAllergy(allergy) {
-            if (this.old.length != 0) return this.old[allergy.id]; //check to see if search was made before, input those values
-
-            for (var i = 0; i < this.users_allergies.length; i++) {
-                if (allergy.id == this.users_allergies[i].id) return true;
-            }
-            return false;
-        },
-        hasDiet: function hasDiet(diet) {
-            if (this.old.length != 0) return this.old['diet'] == diet.id;
-
-            for (var i = 0; i < this.users_diets.length; i++) {
-                if (diet.id == this.users_diets[i].id) return true;
-            }
-            return false;
-        },
-        addNutrient: function addNutrient(nutrient) {
-            if (nutrient != null) this.nutrient_inputs.push(nutrient);
-        },
-        removeNutrient: function removeNutrient(index) {
-            this.nutrient_inputs.splice(index, 1);
-        }
-    }
-});
-
-/***/ }),
+/* 76 */,
 /* 77 */,
 /* 78 */,
-/* 79 */,
-/* 80 */
+/* 79 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -44720,41 +44519,55 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+
+Vue.component('save-icon', __webpack_require__(42));
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-   props: ['nutrient_attribute', 'index']
+	props: ['item'],
+	computed: {
+		icon: function icon() {
+			switch (this.item.table) {
+				case 'recipes_made':
+					return 'fa-check text-success';
+				case 'recipes_saved':
+					return 'fa-heart text-danger';
+				case 'recipe_views':
+					return 'fa-eye text-info';
+			}
+		},
+		action: function action() {
+			switch (this.item.table) {
+				case 'recipes_made':
+					return 'made';
+				case 'recipes_saved':
+					return 'saved';
+				case 'recipe_views':
+					return 'viewed';
+			}
+		}
+	}
 });
 
 /***/ }),
+/* 80 */,
 /* 81 */,
 /* 82 */,
-/* 83 */,
-/* 84 */
+/* 83 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var Component = __webpack_require__(3)(
   /* script */
-  __webpack_require__(80),
+  __webpack_require__(79),
   /* template */
-  __webpack_require__(90),
+  __webpack_require__(88),
   /* scopeId */
   null,
   /* cssModules */
   null
 )
-Component.options.__file = "C:\\Users\\Chris\\recipe\\resources\\assets\\js\\components\\NutrientInput.vue"
+Component.options.__file = "C:\\Users\\Chris\\recipe\\resources\\assets\\js\\components\\ActivityItem.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
-if (Component.options.functional) {console.error("[vue-loader] NutrientInput.vue: functional components are not supported with templates, they should use render functions.")}
+if (Component.options.functional) {console.error("[vue-loader] ActivityItem.vue: functional components are not supported with templates, they should use render functions.")}
 
 /* hot reload */
 if (false) {(function () {
@@ -44763,9 +44576,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-ebe5589e", Component.options)
+    hotAPI.createRecord("data-v-3e4899b8", Component.options)
   } else {
-    hotAPI.reload("data-v-ebe5589e", Component.options)
+    hotAPI.reload("data-v-3e4899b8", Component.options)
   }
 })()}
 
@@ -44773,93 +44586,38 @@ module.exports = Component.exports
 
 
 /***/ }),
+/* 84 */,
 /* 85 */,
 /* 86 */,
 /* 87 */,
-/* 88 */,
-/* 89 */,
-/* 90 */
+/* 88 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "form-inline",
-    staticStyle: {
-      "padding": "10px"
-    }
-  }, [_c('input', {
-    attrs: {
-      "type": "hidden",
-      "name": 'nutrients[' + _vm.index + '][units]'
-    },
-    domProps: {
-      "value": _vm.nutrient_attribute.units
-    }
-  }), _vm._v(" "), _c('input', {
-    attrs: {
-      "type": "hidden",
-      "name": 'nutrients[' + _vm.index + '][description]'
-    },
-    domProps: {
-      "value": _vm.nutrient_attribute.description
-    }
-  }), _vm._v(" "), _c('input', {
-    attrs: {
-      "type": "hidden",
-      "name": 'nutrients[' + _vm.index + '][id]'
-    },
-    domProps: {
-      "value": _vm.nutrient_attribute.id
-    }
-  }), _vm._v(" "), _c('div', {
-    staticClass: "form-group"
-  }, [_c('label', [_vm._v(_vm._s(_vm.nutrient_attribute.description))])]), _vm._v(" "), _c('div', {
-    staticClass: "form-group"
-  }, [_c('span', [_vm._v("Min")]), _vm._v(" "), _c('input', {
-    attrs: {
-      "type": "number",
-      "step": "any",
-      "name": 'nutrients[' + _vm.index + '][min]'
-    },
-    domProps: {
-      "value": _vm.nutrient_attribute.min
-    }
-  })]), _vm._v(" "), _c('div', {
-    staticClass: "form-group"
-  }, [_c('span', [_vm._v("Max")]), _vm._v(" "), _c('input', {
-    attrs: {
-      "type": "number",
-      "step": "any",
-      "name": 'nutrients[' + _vm.index + '][max]'
-    },
-    domProps: {
-      "value": _vm.nutrient_attribute.max
-    }
-  })]), _vm._v(" "), _c('div', [_vm._v(_vm._s(_vm.nutrient_attribute.untis))])])
+  return _c('div', [_c('strong', [_c('i', {
+    staticClass: "fa text-info",
+    class: _vm.icon
+  }), _vm._v(" \n\t\t" + _vm._s(_vm.item.name) + " " + _vm._s(_vm.action) + "\n\t")]), _vm._v("\n\t on " + _vm._s(new Date(_vm.item.pivot.created_at).toLocaleString('en-us', {
+    month: '2-digit',
+    day: 'numeric',
+    year: 'numeric'
+  })) + "\n")])
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-ebe5589e", module.exports)
+     require("vue-hot-reload-api").rerender("data-v-3e4899b8", module.exports)
   }
 }
 
 /***/ }),
-/* 91 */,
-/* 92 */,
-/* 93 */,
-/* 94 */,
-/* 95 */,
-/* 96 */,
-/* 97 */,
-/* 98 */,
-/* 99 */,
-/* 100 */,
-/* 101 */
+/* 89 */,
+/* 90 */,
+/* 91 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(76);
+module.exports = __webpack_require__(67);
 
 
 /***/ })

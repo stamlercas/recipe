@@ -34,8 +34,8 @@
 		<div class="col-sm-6" v-if="recipe.ingredients.length > 0">
 			<div class="frame">
 			<h4>You still need:
-				<span class="pull-right" data-target="#ingredient-list" data-toggle="collapse">
-					<i class="fa fa-caret-square-o-down" aria-hidden="true"></i>
+				<span class="pull-right" data-toggle="collapse" data-target="#ingredient-list" aria-expanded="true">
+					<i class="fa fa-caret-square-o-down"></i>
 				</span>
 			</h4>
 			<hr />
@@ -51,8 +51,8 @@
 		<div class="col-sm-6">
 			<div class="frame">
 				<h4>Nutrition Facts
-					<span class="pull-right" data-target="#nutrition-list" data-toggle="collapse">
-						<i class="fa fa-caret-square-o-down" aria-hidden="true"></i>
+					<span class="pull-right" data-target="#nutrition-list" data-toggle="collapse" aria-expanded="true">
+						<i class="fa fa-caret-square-o-down"></i>
 					</span>
 				</h4>
 				<hr />

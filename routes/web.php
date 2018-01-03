@@ -33,6 +33,12 @@ Route::get('/{username}/saved', [
     'middleware' => 'auth'
 ]);
 
+Route::get('/{username}/activity', [
+    'uses' => 'UserController@getActivity',
+    'as' => 'user.activity',
+    'middleware' => 'auth'
+]);
+
 Route::get('/dashboard', [
     'uses' => 'DashboardController@getDashboard',
     'as' => 'dashboard',
