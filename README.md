@@ -23,7 +23,7 @@ from the project directory.
 
 ## Need Done:
 
-- [ ] 1. Refactor Inventory to Pantry
+- [x] 1. Refactor Inventory to Pantry
 - [x] 2. Save recipes
 - [ ] 3. Recommendation Engine
 - [ ] 4. Ability to share pantries with other users
